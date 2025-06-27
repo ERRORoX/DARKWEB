@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* === ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ === */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+        body {
+            min-height: 100vh;
+            min-width: 100vw;
+            background: radial-gradient(ellipse at 50% 40%, #18313a 0%, #0a151b 60%, #050a0e 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', 'Roboto Condensed', Arial, sans-serif;
+            position: relative;
+        }
+        @keyframes pageFadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes pageFadeOut {
+            to { opacity: 0; }
+        }
+        /* --- Фоновый глобус --- */
+        .bg-globe {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            opacity: 0.18;
+            filter: blur(8px);
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* --- Центральный контейнер --- */
+        .centerbox {
+            position: relative;
+            z-index: 1;
+            width: 100vw;
+            max-width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        /* --- Приветствие --- */
+        .welcome {
+            color: #cfd8dc;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            margin-bottom: 38px;
+            text-align: center;
+            opacity: 0.95;
+        }
+        /* --- Логотип: планета и паук --- */
+        .logo-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        /* --- Контейнер для паука и нити --- */
+        .spider-container {
+            position: relative;
+            height: 120px; /* Высота для анимации спуска */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2px;
+        }
+        /* --- Нить паука (белая линия) --- */
+        .spider-thread {
+            width: 2px;
+            height: 0;
+            background: linear-gradient(to bottom, #ffffff, #ffffff88);
+            transition: height 1.5s cubic-bezier(.4,1.4,.6,1);
+            position: absolute;
+            top: 0px; /* Сделали начало нити длиннее (выше) */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0 0 12px #fff, 0 0 24px #1fc3ff44; /* glow для нити */
+        }
+        /* --- Картинка планеты --- */
+        .planet-img {
+            width: 74px;
+            height: auto;
+            display: block;
+            margin: 0 auto 2px auto;
+            user-select: none;
+            -webkit-user-drag: none;
+            position: relative;
+            z-index: 3;
+        }
+        /* --- Картинка паука --- */
+        .spider-img {
+            width: 74px;
+            height: 100px;
+            display: block;
+            position: absolute;
+            top: -50px; /* Вернули паука в стандартное положение */
+            left: 50%;
+            transform: translate(-50%, 0);
+            transition: top 2s cubic-bezier(.4,1.4,.6,1), transform 0.4s;
+            user-select: none;
+            -webkit-user-drag: none;
+            z-index: 2;
+            filter: drop-shadow(0 0 12px #1fc3ff88); /* glow для паука */
+        }
+        /* --- Качание паука и нити --- */
+        .spider-swing {
+            animation: spider-swing 3.5s ease-in-out infinite alternate;
+            transform-origin: top center;
+        }
+        @keyframes spider-swing {
+            0% { transform: rotate(-0deg); }
+            50% { transform: rotate(-4deg); }
+        }
+        /* --- Главный заголовок --- */
+        .main-title {
+            font-family: 'Roboto Condensed', 'Roboto', Arial, sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 0.32em;
+            color: #f5f7fa;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 0 8px 0;
+            position: relative;
+            line-height: 1.1;
+            filter: drop-shadow(0 0 2px #fff8) drop-shadow(0 0 8px #1fc3ff22);
+            min-height: 1.2em;
+        }
+        /* --- Эффект печатающей машинки --- */
+        .typing {
+            display: inline-block;
+            border-right: 2px solid #1fc3ff;
+            white-space: pre;
+            overflow: hidden;
+            animation: blink-cursor 1s steps(1) infinite;
+        }
+        @keyframes blink-cursor {
+            0%, 100% { border-color: #1fc3ff; }
+            50% { border-color: transparent; }
+        }
+        /* --- Затемнение при переходе --- */
+        .fade-bg {
+            position: fixed;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: #050a0e;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.7s cubic-bezier(.4,1.4,.6,1);
+        }
+        .fade-bg.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        /* --- Мелкий текст под заголовком --- */
+        .onet {
+            position: absolute;
+            left: 50%;
+            top: 54%;
+            transform: translate(-50%, -50%);
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: #1fc3ff;
+            letter-spacing: 0.08em;
+            opacity: 0.95;
+            pointer-events: none;
+            z-index: 2;
+            white-space: nowrap;
+        }
+        /* --- Подзаголовок --- */
+        .subtitle {
+            color: #b0bec5;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 22px;
+            font-weight: 300;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-top: 38px;
+            text-align: center;
+            opacity: 0.92;
+        }
+        /* --- Адаптивные стили для разных экранов --- */
+        @media (max-width: 700px) {
+            .bg-globe { width: 320px; height: 320px; }
+            .spider-container { height: 60px; }
+            .spider-thread { width: 1px; }
+            .spider-img { width: 38px; height: 54px; }
+            .planet-img { width: 38px; }
+            .main-title { font-size: 28px; letter-spacing: 0.13em; }
+            .subtitle { font-size: 11px; letter-spacing: 0.09em; margin-top: 18px; }
+            .onet { font-size: 7px; top: 56%; }
+            .welcome { font-size: 8px; margin-bottom: 18px; }
+            .footer {
+                font-size: 8px;
+                bottom: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            .bg-globe { width: 280px; height: 280px; }
+            .spider-container { height: 50px; }
+            .spider-thread { width: 1px; }
+            .spider-img { width: 32px; height: 46px; }
+            .planet-img { width: 32px; }
+            .main-title { font-size: 24px; letter-spacing: 0.1em; }
+            .subtitle { font-size: 10px; letter-spacing: 0.08em; margin-top: 15px; }
+            .welcome { font-size: 7px; margin-bottom: 15px; }
+            .enter-text { font-size: 12px; margin: 15px 0 0 0; }
+            .footer { font-size: 7px; bottom: 12px; }
+        }
+        @media (max-width: 360px) {
+            .bg-globe { width: 240px; height: 240px; }
+            .spider-container { height: 45px; }
+            .spider-thread { width: 1px; }
+            .spider-img { width: 28px; height: 40px; }
+            .planet-img { width: 28px; }
+            .main-title { font-size: 20px; letter-spacing: 0.08em; }
+            .subtitle { font-size: 9px; letter-spacing: 0.07em; margin-top: 12px; }
+            .welcome { font-size: 6px; margin-bottom: 12px; }
+            .enter-text { font-size: 10px; margin: 12px 0 0 0; }
+            .footer { font-size: 6px; bottom: 10px; }
+        }
+        /* --- Кнопка ENTER --- */
+        .enter-text {
+            color: #1fc3ff;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 18px 0 0 0;
+            opacity: 0.95;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            text-shadow: 0 0 8px #1fc3ff, 0 0 16px #1fc3ff55;
+            animation: enter-glow 2.2s infinite alternate;
+            cursor: pointer;
+            user-select: none;
+        }
+        @keyframes enter-glow {
+            0% { opacity: 0.7; text-shadow: 0 0 4px #1fc3ff, 0 0 8px #1fc3ff33; }
+            50% { opacity: 1; text-shadow: 0 0 16px #1fc3ff, 0 0 32px #1fc3ff77; }
+            100% { opacity: 0.7; text-shadow: 0 0 4px #1fc3ff, 0 0 8px #1fc3ff33; }
+        }
+        /* --- Мигающий курсор в кнопке ENTER --- */
+        .enter-cursor {
+            display: inline-block;
+            font-size: 1em;
+            margin-left: 2px;
+            color: #fff;
+            text-shadow: 0 0 6px #1fc3ff, 0 0 12px #1fc3ff77;
+            animation: cursor-blink 1.8s steps(1) infinite;
+        }
+        @keyframes cursor-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        /* --- Футер --- */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #1fc3ff;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.8;
+            z-index: 10;
+        }
+        .body-map-bg {
+            position: fixed;
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background: url('images/world map.png') center center no-repeat;
+            background-size: contain;
+            opacity: 0.13;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="body-map-bg"></div>
+    <div class="bg-globe"><img src="images/map.png" style="width:100%;height:100%;opacity:0.7;filter:blur(8px);pointer-events:none;"></div>
+    <div class="bg-map"></div>
+    <!-- Затемнение для плавного перехода -->
+    <div class="fade-bg" id="fadeBg"></div>
+    <!-- Пасхалка: ACCESS GRANTED -->
+    <div class="easter-egg" id="easterEgg" style="display:none;">
+        <div class="egg-content">ACCESS GRANTED</div>
+    </div>
+    <div class="centerbox">
+        <div class="welcome">ДОБРО ПОЖАЛОВАТЬ </div>
+        <div class="logo-block">
+            <!-- Планета -->
+            <img class="planet-img" src="images/planet.png" alt="Planet" draggable="false" oncontextmenu="return false;">
+            <!-- Контейнер для паука и нити -->
+            <div class="spider-container">
+                <div class="spider-swinger">
+                    <div class="spider-thread"></div>
+                    <img class="spider-img" src="images/spider.png" alt="Spider" draggable="false" oncontextmenu="return false;">
+                </div>
+            </div>
+        </div>
+        <div class="main-title"><span id="typingTitle" class="typing"></span></div>
+        <div class="enter-text" id="enterText">ENTER<span class="enter-cursor">|</span></div>
+        <div class="subtitle">ТАМ, ГДЕ СВОБОДА НАСТОЯЩАЯ.</div>
+    </div>
+    <div class="footer">WHERE FREEDOM TRULY LIES.</div>
+    
+    <script>
+    // === ЭФФЕКТ ПЕЧАТАЮЩЕЙ МАШИНКИ ДЛЯ ЗАГОЛОВКА ===
+    const titleText = 'D A R K W E B';
+    function typeTitle() {
+        const mainTitle = document.querySelector('.main-title');
+        let old = document.getElementById('typingTitle');
+        if (old) old.remove();
+        const span = document.createElement('span');
+        span.id = 'typingTitle';
+        span.className = 'typing';
+        mainTitle.appendChild(span);
+        let i = 0;
+        function step() {
+            if (i <= titleText.length) {
+                span.textContent = titleText.slice(0, i);
+                i++;
+                setTimeout(step, 90);
+            } else {
+                span.classList.remove('typing');
+            }
+        }
+        step();
+    }
+    window.addEventListener('pageshow', typeTitle);
+    
+    // === АНИМАЦИЯ СПУСКА ПАУКА И НИТИ, ЗАТЕМ КАЧАНИЕ ===
+    window.addEventListener('DOMContentLoaded', () => {
+        const thread = document.querySelector('.spider-thread');
+        const spider = document.querySelector('.spider-img');
+        const swinger = document.querySelector('.spider-swinger');
+        if (thread && spider && swinger) {
+            // Паук и нить спускаются одновременно
+            setTimeout(() => {
+                thread.style.height = '90px';
+                spider.style.top = '40px';
+            }, 350);
+            // После спуска — качание
+            setTimeout(() => {
+                swinger.classList.add('spider-swing');
+            }, 350 + 2000); // 2s на спуск
+        }
+    });
+    
+    // === ПЛАВНОЕ ЗАТЕМНЕНИЕ ПРИ ПЕРЕХОДЕ НА РЕГИСТРАЦИЮ ===
+    function goToRegister() {
+        const fadeBg = document.getElementById('fadeBg');
+        fadeBg.classList.add('active');
+        setTimeout(() => {
+            window.location.href = 'register.html';
+        }, 700);
+    }
+    // Клик по ENTER
+    const enterText = document.getElementById('enterText');
+    if (enterText) {
+        enterText.addEventListener('click', goToRegister);
+    }
+    // Enter на клавиатуре
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            goToRegister();
+        }
+    });
+    // === ПАСХАЛКА: если ввести 'hack' ===
+    let eggBuffer = '';
+    window.addEventListener('keydown', (e) => {
+        if (e.key.length === 1 && /[a-zA-Z]/.test(e.key)) {
+            eggBuffer += e.key.toLowerCase();
+            if (eggBuffer.length > 8) eggBuffer = eggBuffer.slice(-8);
+            if (eggBuffer.endsWith('hack')) {
+                const egg = document.getElementById('easterEgg');
+                egg.style.display = 'flex';
+                setTimeout(() => { egg.style.display = 'none'; }, 2000);
+                eggBuffer = '';
+            }
+        }
+    });
+    // === ЗАЩИТА ОТ КОПИРОВАНИЯ, ПРАВОЙ КНОПКИ И ВЫДЕЛЕНИЯ ===
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('dragstart', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+    </script>
+</body>
+</html> 

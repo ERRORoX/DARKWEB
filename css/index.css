@@ -1,0 +1,404 @@
+/* Darknet Interface Styles - Inspired by "Hacker" (2016) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Condensed:wght@300;400;700;900&display=swap');
+
+/* CSS Variables for consistent theming */
+:root {
+    --bg-primary: #0a0f1a;
+    --bg-secondary: #1a1f2a;
+    --bg-glass: rgba(10, 15, 26, 0.8);
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --accent-cyan: #00ffff;
+    --accent-blue: #1fc3ff;
+    --accent-glow: #00ffff;
+    --border-color: rgba(0, 255, 255, 0.3);
+    --shadow-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+    --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.8);
+}
+
+/* Global Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', 'Roboto Condensed', monospace;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Glassmorphism Effect */
+.glass {
+    background: var(--bg-glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow-dark);
+}
+
+/* Neon Glow Effects */
+.neon-glow {
+    text-shadow: 0 0 10px var(--accent-glow);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.neon-border {
+    border: 1px solid var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Button Styles */
+.btn {
+    background: transparent;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    padding: 12px 24px;
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Input Styles */
+.input-field {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--accent-cyan);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 0 5px var(--accent-cyan);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-cyan);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
+
+/* === ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ === */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+body {
+    min-height: 100vh;
+    min-width: 100vw;
+    background: radial-gradient(ellipse at 50% 40%, #18313a 0%, #0a151b 60%, #050a0e 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', 'Roboto Condensed', Arial, sans-serif;
+    position: relative;
+}
+@keyframes pageFadeIn {
+    to { opacity: 1; }
+}
+@keyframes pageFadeOut {
+    to { opacity: 0; }
+}
+/* --- Универсальная авто-адаптация для всех экранов --- */
+/* Используем относительные единицы для плавного масштабирования */
+
+/* Фоновый глобус - адаптивный размер */
+.bg-globe {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(240px, 50vw, 700px);
+    height: clamp(240px, 50vw, 700px);
+    opacity: 0.18;
+    filter: blur(8px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Приветствие - адаптивный размер */
+.welcome {
+    color: #cfd8dc;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: clamp(6px, 1.5vw, 15px);
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: clamp(12px, 3vw, 38px);
+    text-align: center;
+    opacity: 0.95;
+}
+
+/* Планета - адаптивный размер */
+.planet-img {
+    width: clamp(28px, 6vw, 74px);
+    height: auto;
+    display: block;
+    margin: 0 auto 2px auto;
+    user-select: none;
+    -webkit-user-drag: none;
+    position: relative;
+    z-index: 3;
+}
+
+/* Контейнер паука - адаптивная высота */
+.spider-container {
+    position: relative;
+    height: clamp(45px, 10vw, 135px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2px;
+}
+.spider-swinger {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Нить паука - адаптивная толщина */
+.spider-thread {
+    width: clamp(1px, 0.2vw, 2px);
+    height: 0;
+    background: linear-gradient(to bottom, #ffffff, #ffffff88);
+    transition: height 1.5s cubic-bezier(.4,1.4,.6,1);
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    box-shadow: 0 0 12px #fff, 0 0 24px #1fc3ff44;
+}
+
+/* Паук - адаптивный размер */
+.spider-img {
+    width: clamp(28px, 6vw, 74px);
+    height: clamp(40px, 8vw, 100px);
+    display: block;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    transition: top 2s cubic-bezier(.4,1.4,.6,1), transform 0.4s;
+    user-select: none;
+    -webkit-user-drag: none;
+    z-index: 2;
+    filter: drop-shadow(0 0 12px #1fc3ff88);
+}
+/* --- Качание паука и нити --- */
+.spider-swing {
+    animation: spider-swing 3.5s ease-in-out infinite alternate;
+    transform-origin: top center;
+}
+@keyframes spider-swing {
+    0% { transform: rotate(-0deg); }
+    50% { transform: rotate(-4deg); }
+}
+
+/* Главный заголовок - адаптивный размер */
+.main-title {
+    font-family: 'Roboto Condensed', 'Roboto', Arial, sans-serif;
+    font-size: clamp(20px, 6vw, 64px);
+    font-weight: 900;
+    letter-spacing: clamp(0.08em, 0.3vw, 0.32em);
+    color: #f5f7fa;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 clamp(4px, 1vw, 8px) 0;
+    position: relative;
+    line-height: 1.1;
+    filter: drop-shadow(0 0 2px #fff8) drop-shadow(0 0 8px #1fc3ff22);
+    min-height: 1.2em;
+}
+
+/* Подзаголовок - адаптивный размер */
+.subtitle {
+    color: #b0bec5;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: clamp(9px, 2.2vw, 22px);
+    font-weight: 300;
+    letter-spacing: clamp(0.07em, 0.2vw, 0.22em);
+    text-transform: uppercase;
+    margin-top: clamp(12px, 3vw, 38px);
+    text-align: center;
+    opacity: 0.92;
+}
+
+/* Кнопка ENTER - адаптивный размер */
+.enter-text {
+    color: #1fc3ff;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: clamp(10px, 1.5vw, 15px);
+    font-weight: 700;
+    letter-spacing: clamp(0.08em, 0.15vw, 0.18em);
+    text-transform: uppercase;
+    text-align: center;
+    margin: clamp(12px, 2vw, 18px) 0 0 0;
+    opacity: 0.95;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    text-shadow: 0 0 8px #1fc3ff, 0 0 16px #1fc3ff55;
+    animation: enter-glow 2.2s infinite alternate;
+    cursor: pointer;
+    user-select: none;
+}
+@keyframes enter-glow {
+    0% { opacity: 0.7; text-shadow: 0 0 4px #1fc3ff, 0 0 8px #1fc3ff33; }
+    50% { opacity: 1; text-shadow: 0 0 16px #1fc3ff, 0 0 32px #1fc3ff77; }
+    100% { opacity: 0.7; text-shadow: 0 0 4px #1fc3ff, 0 0 8px #1fc3ff33; }
+}
+/* --- Мигающий курсор в кнопке ENTER --- */
+.enter-cursor {
+    display: inline-block;
+    font-size: 1em;
+    margin-left: 2px;
+    color: #fff;
+    text-shadow: 0 0 6px #1fc3ff, 0 0 12px #1fc3ff77;
+    animation: cursor-blink 1.8s steps(1) infinite;
+}
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Футер - адаптивный размер */
+.footer {
+    position: fixed;
+    bottom: clamp(10px, 2vw, 20px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: #1fc3ff;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: clamp(6px, 1.2vw, 12px);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    z-index: 10;
+}
+
+/* Мелкий текст - адаптивный размер */
+.onet {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    transform: translate(-50%, -50%);
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: clamp(7px, 1.3vw, 13px);
+    font-weight: 400;
+    color: #1fc3ff;
+    letter-spacing: 0.08em;
+    opacity: 0.95;
+    pointer-events: none;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.body-map-bg {
+    position: fixed;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: url('../images/world map.png') center center no-repeat;
+    background-size: contain;
+    opacity: 0.13;
+    z-index: 0;
+    pointer-events: none;
+}
+.body-web-bg {
+    position: fixed;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: url('../images/web.png') center center no-repeat;
+    background-size: cover;
+    opacity: 0.22;
+    z-index: 1;
+    pointer-events: none;
+}
+/* --- Эффект плавного появления из тени --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(.4,1.4,.6,1), transform 0.8s cubic-bezier(.4,1.4,.6,1);
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Эффект появления из тени --- */
+.fade-in-shadow {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+    filter: blur(15px) brightness(0.2);
+    transition: all 3.5s cubic-bezier(.4,1.4,.6,1);
+}
+
+.fade-in-shadow.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0) brightness(1);
+} 

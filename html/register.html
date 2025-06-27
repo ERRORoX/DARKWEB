@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">АВТОРИЗАЦИЯ</h1>
+        
+        <!-- Переключатель -->
+        <div class="toggle-container">
+            <button class="toggle-btn active" id="loginBtn">ВХОД</button>
+            <button class="toggle-btn" id="registerBtn">РЕГИСТРАЦИЯ</button>
+        </div>
+        
+        <!-- Форма входа -->
+        <div class="form-container active" id="loginForm">
+            <form id="loginFormElement">
+                <div class="form-group">
+                    <label for="loginUsername">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
+                    <input type="text" id="loginUsername" name="username" placeholder="Введите имя пользователя" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">ПАРОЛЬ</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="Введите пароль" required>
+                </div>
+                <button type="submit" class="btn">ВОЙТИ</button>
+            </form>
+        </div>
+        
+        <!-- Форма регистрации -->
+        <div class="form-container" id="registerForm">
+            <form id="registerFormElement">
+                <div class="form-group">
+                    <label for="registerUsername">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
+                    <input type="text" id="registerUsername" name="username" placeholder="Введите имя пользователя" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">EMAIL</label>
+                    <input type="email" id="registerEmail" name="email" placeholder="Введите email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">ПАРОЛЬ</label>
+                    <input type="password" id="registerPassword" name="password" placeholder="Введите пароль" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">ПОДТВЕРДИТЕ ПАРОЛЬ</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="btn">СОЗДАТЬ АККАУНТ</button>
+            </form>
+        </div>
+        
+        <a href="../index.html" class="back-link">← НАЗАД</a>
+    </div>
+    <script src="../js/register.js"></script>
+</body>
+</html> 
