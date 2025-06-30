@@ -3,60 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARKWEB - Register</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <meta name="autocomplete" content="off">
+    <title>D A R K W E B</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">АВТОРИЗАЦИЯ</h1>
-        
-        <!-- Переключатель -->
-        <div class="toggle-container">
-            <button class="toggle-btn active" id="loginBtn">ВХОД</button>
-            <button class="toggle-btn" id="registerBtn">РЕГИСТРАЦИЯ</button>
-        </div>
-        
-        <!-- Форма входа -->
-        <div class="form-container active" id="loginForm">
-            <form id="loginFormElement">
-                <div class="form-group">
-                    <label for="loginUsername">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
-                    <input type="text" id="loginUsername" name="username" placeholder="Введите имя пользователя" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">ПАРОЛЬ</label>
-                    <input type="password" id="loginPassword" name="password" placeholder="Введите пароль" required>
-                </div>
-                <button type="submit" class="btn">ВОЙТИ</button>
-            </form>
-        </div>
-        
-        <!-- Форма регистрации -->
-        <div class="form-container" id="registerForm">
-            <form id="registerFormElement">
-                <div class="form-group">
-                    <label for="registerUsername">ИМЯ ПОЛЬЗОВАТЕЛЯ</label>
-                    <input type="text" id="registerUsername" name="username" placeholder="Введите имя пользователя" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerEmail">EMAIL</label>
-                    <input type="email" id="registerEmail" name="email" placeholder="Введите email" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerPassword">ПАРОЛЬ</label>
-                    <input type="password" id="registerPassword" name="password" placeholder="Введите пароль" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">ПОДТВЕРДИТЕ ПАРОЛЬ</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required>
-                </div>
-                <button type="submit" class="btn">СОЗДАТЬ АККАУНТ</button>
-            </form>
-        </div>
-        
-        <a href="../index.html" class="back-link">← НАЗАД</a>
+    <div class="body-map-bg"></div>
+    <div class="body-web-bg"></div>
+    <div class="bg-globe">
+        <img src="../images/world map.png" style="width:100%;height:100%;opacity:0.7;filter:blur(8px);pointer-events:none;">
     </div>
+    <div class="bg-map"></div>
+    <div class="register-bg"></div>
+    <div class="register-glass">
+        <div class="register-title">D A R K W E B</div>
+        <div class="tab-switch">
+            <button class="tab-btn active" id="loginTab">Вход</button>
+            <button class="tab-btn" id="registerTab">Регистрация</button>
+        </div>
+        <div class="tab-content">
+            <form class="tab-form login-form" id="loginForm" autocomplete="off">
+                <div class="form-group">
+                    <input type="text" id="loginUsername" name="loginUsername" required autocomplete="new-password" placeholder="Имя пользователя">
+                    <div class="error-message" id="loginUsernameError"></div>
+                </div>
+                <div class="form-group password-group">
+                    <input type="password" id="loginPassword" name="loginPassword" required autocomplete="new-password" placeholder="Пароль">
+                    <button type="button" class="eye-btn" id="loginEyeBtn">
+                        <span class="eye-icon">💀</span>
+                    </button>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+                <div class="forgot-password">
+                    <a href="#" id="forgotPasswordLink">Забыли пароль?</a>
+                </div>
+                <button type="submit" class="register-btn" id="loginBtn">
+                    <span class="btn-text">Войти</span>
+                    <span class="btn-loader" id="loginBtnLoader"></span>
+                </button>
+            </form>
+            <form class="tab-form register-form" id="registerForm" autocomplete="off" style="display:none;">
+                <div class="form-group">
+                    <input type="text" id="username" name="username" required autocomplete="new-password" minlength="3" placeholder="Имя пользователя">
+                    <div class="error-message" id="usernameError"></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required autocomplete="new-password" placeholder="Электронная почта">
+                    <div class="error-message" id="emailError"></div>
+                </div>
+                <div class="form-group password-group">
+                    <input type="password" id="password" name="password" required autocomplete="new-password" minlength="8" placeholder="Пароль">
+                    <button type="button" class="eye-btn" id="passwordEyeBtn">
+                        <span class="eye-icon">💀</span>
+                    </button>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+                <div class="password-strength" id="passwordStrength" style="display: none;">
+                    <div class="strength-bar">
+                        <div class="strength-fill" id="strengthFill"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Слабый</div>
+                </div>
+                <div class="form-group password-group">
+                    <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" minlength="8" placeholder="Повторите пароль">
+                    <button type="button" class="eye-btn" id="confirmEyeBtn">
+                        <span class="eye-icon">💀</span>
+                    </button>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span class="checkmark"></span>
+                        Я принимаю <a href="#" id="termsLink">условия использования</a>
+                    </label>
+                    <div class="error-message" id="termsError"></div>
+                </div>
+                <button type="submit" class="register-btn" id="registerBtn">
+                    <span class="btn-text">Создать аккаунт</span>
+                    <span class="btn-loader" id="registerBtnLoader"></span>
+                </button>
+                <div class="tab-link">Уже есть аккаунт? <a href="#" id="toLogin">Войти</a></div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Terms Modal -->
+    <div class="modal" id="termsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Условия использования DARKWEB</h3>
+                <button class="modal-close" id="closeTerms">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="terms-section">
+                    <h4>1. О ПЛАТФОРМЕ</h4>
+                    <p>DARKWEB – это закрытая анонимная платформа для избранных. Здесь встречаются хакеры, кардеры, спамеры, продавцы фейковых документов и крипто-брокеры.</p>
+                    <p>Платформа создана для обмена услугами и информацией вне контроля закона. Доступ только по приглашениям.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h4>2. ОСНОВНЫЕ ПРИНЦИПЫ</h4>
+                    <ul>
+                        <li><strong>Анонимность:</strong> Обязательное соблюдение анонимности и конфиденциальности</li>
+                        <li><strong>Доверие:</strong> Мы не прощаем скама и раскрытия чужой личной информации</li>
+                        <li><strong>Безопасность:</strong> Использование VPN и средств защиты обязательно</li>
+                        <li><strong>Ответственность:</strong> Каждый пользователь отвечает за свои действия</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h4>3. ЗАПРЕЩЕНО</h4>
+                    <ul>
+                        <li>Скам и мошенничество в любом виде</li>
+                        <li>Раскрытие личной информации других пользователей</li>
+                        <li>Распространение вредоносного ПО без предупреждения</li>
+                        <li>Спам и реклама не по теме</li>
+                        <li>Нарушение анонимности других участников</li>
+                        <li>Попытки взлома платформы</li>
+                        <li>Продажа некачественных услуг</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h4>4. СИСТЕМА РЕПУТАЦИИ</h4>
+                    <ul>
+                        <li>Обязательные отзывы после каждой сделки</li>
+                        <li>Блэклист для скамеров и мошенников</li>
+                        <li>Система верификации продавцов</li>
+                        <li>Автоматический расчет рейтинга доверия</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h4>5. БЕЗОПАСНОСТЬ</h4>
+                    <ul>
+                        <li>Использование VPN обязательно</li>
+                        <li>Не раскрывайте реальные данные</li>
+                        <li>Используйте криптовалюты для платежей</li>
+                        <li>Проверяйте репутацию перед сделками</li>
+                        <li>Не доверяйте слепо новым пользователям</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h4>6. ОТВЕТСТВЕННОСТЬ</h4>
+                    <ul>
+                        <li>Администрация не несет ответственности за действия пользователей</li>
+                        <li>Все сделки происходят на свой страх и риск</li>
+                        <li>Платформа не является посредником в сделках</li>
+                        <li>Право на модерацию и бан остается за администрацией</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h4>7. ДОСТУП</h4>
+                    <ul>
+                        <li>Доступ только по приглашениям</li>
+                        <li>Реферальная система для приглашений</li>
+                        <li>Право на отзыв доступа в любое время</li>
+                        <li>Обязательная верификация для продавцов</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h4>8. КОНФИДЕНЦИАЛЬНОСТЬ</h4>
+                    <ul>
+                        <li>Мы не храним логи IP-адресов</li>
+                        <li>Шифрование всех личных сообщений</li>
+                        <li>Анонимные платежи через криптовалюты</li>
+                        <li>Отсутствие отслеживания пользователей</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h4>9. ИЗМЕНЕНИЯ ПРАВИЛ</h4>
+                    <p>Администрация оставляет за собой право изменять эти условия в любое время. Пользователи будут уведомлены об изменениях.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h4>10. СОГЛАСИЕ</h4>
+                    <p>Регистрируясь на платформе DARKWEB, вы подтверждаете, что:</p>
+                    <ul>
+                        <li>Прочитали и согласны с условиями использования</li>
+                        <li>Понимаете риски использования платформы</li>
+                        <li>Будете соблюдать все правила и принципы</li>
+                        <li>Не будете нарушать анонимность других пользователей</li>
+                        <li>Принимаете полную ответственность за свои действия</li>
+                    </ul>
+                </div>
+
+                <div class="terms-warning">
+                    <p><strong>⚠️ ВНИМАНИЕ:</strong> Использование платформы DARKWEB может быть связано с рисками. Действуйте осмотрительно и помните о своей безопасности.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Восстановление пароля</h3>
+                <button class="modal-close" id="closeForgotPassword">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="forgotPasswordForm">
+                    <div class="form-group">
+                        <input type="email" id="resetEmail" name="resetEmail" required autocomplete="new-password" placeholder="Введите ваш email">
+                        <div class="error-message" id="resetEmailError"></div>
+                    </div>
+                    <button type="submit" class="register-btn">
+                        <span class="btn-text">Отправить инструкции</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification-container" id="notificationContainer"></div>
     <script src="../js/register.js"></script>
 </body>
 </html> 
