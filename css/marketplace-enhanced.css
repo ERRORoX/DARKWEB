@@ -1,0 +1,420 @@
+/* Профессиональные стили для улучшенного маркетплейса */
+
+/* Модальные окна */
+.marketplace-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.marketplace-modal-content {
+    background: linear-gradient(180deg, 
+        rgba(10, 15, 26, 0.98) 0%,
+        rgba(15, 20, 35, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 255, 255, 0.2);
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.marketplace-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 255, 255, 0.05);
+}
+
+.marketplace-modal-title {
+    color: var(--accent-cyan);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.marketplace-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 24px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.marketplace-modal-close:hover {
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    transform: rotate(90deg);
+}
+
+.marketplace-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 200px;
+}
+
+.marketplace-modal-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 255, 255, 0.05);
+}
+
+.marketplace-empty {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 40px 20px;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+/* Кнопки маркетплейса */
+.marketplace-btn {
+    background: transparent;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.marketplace-btn:hover:not(:disabled) {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.marketplace-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.marketplace-btn-primary {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+}
+
+.marketplace-btn-primary:hover:not(:disabled) {
+    background: var(--accent-blue);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+.marketplace-btn-danger {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
+.marketplace-btn-danger:hover:not(:disabled) {
+    background: #ff4444;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+}
+
+.marketplace-btn-small {
+    padding: 6px 12px;
+    font-size: 11px;
+}
+
+.marketplace-action-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    color: var(--accent-cyan);
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.marketplace-action-btn:hover {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Элементы корзины */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+    transform: translateX(5px);
+}
+
+.cart-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cart-item-title {
+    color: var(--accent-cyan);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.cart-item-seller {
+    color: var(--text-secondary);
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.cart-item-price {
+    color: var(--accent-cyan);
+    font-size: 16px;
+    font-weight: 900;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+}
+
+.cart-item-remove {
+    background: transparent;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    color: #ff4444;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item-remove:hover {
+    background: rgba(255, 68, 68, 0.2);
+    border-color: #ff4444;
+    transform: scale(1.1);
+}
+
+.cart-total {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-total-label {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.cart-total-value {
+    color: var(--accent-cyan);
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Элементы избранного */
+.favorite-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.favorite-item:hover {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+    transform: translateX(5px);
+}
+
+.favorite-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.favorite-item-title {
+    color: var(--accent-cyan);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.favorite-item-seller {
+    color: var(--text-secondary);
+    font-size: 12px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.favorite-item-price {
+    color: var(--accent-cyan);
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.favorite-item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* История покупок */
+.purchase-history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.purchase-history-item:hover {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+    transform: translateX(5px);
+}
+
+.purchase-history-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.purchase-history-title {
+    color: var(--accent-cyan);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.purchase-history-seller {
+    color: var(--text-secondary);
+    font-size: 12px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.purchase-history-date {
+    color: var(--text-secondary);
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.purchase-history-price {
+    color: var(--accent-cyan);
+    font-size: 16px;
+    font-weight: 900;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+}
+
+/* Кастомный скроллбар */
+.marketplace-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.marketplace-modal-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.marketplace-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.marketplace-modal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 255, 0.5);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .marketplace-modal-content {
+        max-width: 100%;
+        max-height: 90vh;
+    }
+    
+    .marketplace-modal-footer {
+        flex-direction: column;
+    }
+    
+    .marketplace-btn {
+        width: 100%;
+    }
+    
+    .cart-item,
+    .favorite-item,
+    .purchase-history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+
+

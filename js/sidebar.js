@@ -117,26 +117,10 @@ function initSidebar() {
         }
     });
     
-    // Добавляем стили для анимации
-    if (!document.getElementById('sidebar-animations')) {
-        const style = document.createElement('style');
-        style.id = 'sidebar-animations';
-        style.textContent = `
-            @keyframes buttonPulse {
-                0%, 100% {
-                    transform: scale(1);
-                }
-                50% {
-                    transform: scale(1.1);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-    
     // Анимация спуска паука и нити в сайдбаре
     initSidebarSpiderAnimation();
 }
+
 
 // Функция инициализации анимации паука в сайдбаре (доступна глобально)
 window.initSidebarSpiderAnimation = function() {

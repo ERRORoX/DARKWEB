@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Condensed:wght@300;400;700;900&display=swap");
+@import url("notifications.css");
+@import url("search.css");
+@import url("themes.css");
+@import url("marketplace-enhanced.css");
+@import url("achievements.css");
+@import url("animations.css");
+@import url("chat-enhanced.css");
+@import url("friends.css");
+@import url("private-messages.css");
+@import url("page-transitions.css");
 
 /* CSS Variables for consistent theming */
 :root {
@@ -82,6 +92,8 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 .sidebar::before {
@@ -98,31 +110,57 @@ h1, h2, h3, h4, h5, h6 {
     z-index: 0;
 }
 
+/* Улучшенный скроллбар для сайдбара */
 .sidebar::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 .sidebar::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(10, 15, 26, 0.5);
+    border-left: 1px solid rgba(0, 255, 255, 0.1);
 }
 
 .sidebar::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, 
-        transparent,
-        rgba(0, 255, 255, 0.3),
-        rgba(0, 255, 255, 0.5),
-        rgba(0, 255, 255, 0.3),
-        transparent);
+        rgba(0, 255, 255, 0.2) 0%,
+        rgba(0, 255, 255, 0.4) 20%,
+        rgba(0, 255, 255, 0.6) 50%,
+        rgba(0, 255, 255, 0.4) 80%,
+        rgba(0, 255, 255, 0.2) 100%);
     border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.3),
+        inset 0 0 5px rgba(0, 255, 255, 0.2);
+    transition: all 0.3s ease;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, 
-        transparent,
-        rgba(0, 255, 255, 0.5),
-        rgba(0, 255, 255, 0.7),
-        rgba(0, 255, 255, 0.5),
-        transparent);
+        rgba(0, 255, 255, 0.4) 0%,
+        rgba(0, 255, 255, 0.6) 20%,
+        rgba(0, 255, 255, 0.8) 50%,
+        rgba(0, 255, 255, 0.6) 80%,
+        rgba(0, 255, 255, 0.4) 100%);
+    box-shadow: 
+        0 0 15px rgba(0, 255, 255, 0.5),
+        inset 0 0 8px rgba(0, 255, 255, 0.3);
+    border-color: rgba(0, 255, 255, 0.5);
+}
+
+.sidebar::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, 
+        rgba(0, 255, 255, 0.6) 0%,
+        rgba(0, 255, 255, 0.8) 20%,
+        rgba(31, 195, 255, 1) 50%,
+        rgba(0, 255, 255, 0.8) 80%,
+        rgba(0, 255, 255, 0.6) 100%);
+}
+
+/* Для Firefox */
+.sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 255, 255, 0.5) rgba(10, 15, 26, 0.5);
 }
 
 .sidebar-toggle-btn {
@@ -393,47 +431,99 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 1px;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    border-left: 3px solid transparent;
     margin: 2px 0;
-    border-radius: 0 6px 6px 0;
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.nav-link-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(0, 255, 255, 0.1) 0%,
+        rgba(0, 255, 255, 0.05) 50%,
+        transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.nav-link:hover .nav-link-bg,
+.nav-link.active .nav-link-bg {
+    opacity: 1;
 }
 
 .nav-link:hover {
     color: var(--accent-cyan);
-    background: rgba(0, 255, 255, 0.05);
-    border-left-color: var(--accent-cyan);
     transform: translateX(5px);
 }
 
 .nav-link:hover .nav-icon {
     transform: scale(1.15);
-    filter: drop-shadow(0 0 5px currentColor);
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
 }
 
 .nav-link.active {
     color: var(--accent-cyan);
-    background: rgba(0, 255, 255, 0.1);
-    border-left-color: var(--accent-cyan);
     text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-    box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.1);
+}
+
+.nav-link.active .nav-indicator {
+    opacity: 1;
+    width: 3px;
 }
 
 .nav-link.active .nav-icon {
-    filter: drop-shadow(0 0 10px currentColor);
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 1));
     animation: iconPulse 2s ease-in-out infinite;
 }
 
 @keyframes iconPulse {
     0%, 100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 10px currentColor);
     }
     50% {
         transform: scale(1.1);
-        filter: drop-shadow(0 0 15px currentColor);
     }
+}
+
+.nav-indicator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 60%;
+    background: var(--accent-cyan);
+    box-shadow: 0 0 10px var(--accent-cyan);
+    border-radius: 0 3px 3px 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-badge {
+    margin-left: auto;
+    background: rgba(255, 68, 68, 0.8);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(255, 68, 68, 0.6);
+    position: relative;
+    z-index: 1;
+}
+
+.nav-badge:empty {
+    display: none;
 }
 
 .nav-icon {
@@ -443,6 +533,8 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     min-width: 18px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .nav-text {
@@ -702,5 +794,33 @@ body.sidebar-open::before {
     .sidebar-close-btn {
         display: none;
     }
+}
+
+/* Настройки оформления */
+.no-animations * {
+    animation: none !important;
+    transition: none !important;
+}
+
+.compact-mode {
+    --spacing-small: 8px;
+    --spacing-medium: 12px;
+    --spacing-large: 16px;
+}
+
+.compact-mode .card,
+.compact-mode .widget-card,
+.compact-mode .stat-card {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.compact-mode .settings-section {
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.compact-mode .setting-item {
+    padding: 10px 0;
 }
 

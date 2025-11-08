@@ -77,6 +77,114 @@ document.addEventListener('DOMContentLoaded', () => {
             seller: 'ExploitDev',
             rating: '4.8/5',
             category: 'tools'
+        },
+        {
+            id: 9,
+            title: 'Tor Browser Bundle',
+            description: 'Полный комплект Tor Browser с дополнительными инструментами',
+            price: '0.08 BTC',
+            seller: 'TorPro',
+            rating: '4.9/5',
+            category: 'tools'
+        },
+        {
+            id: 10,
+            title: 'Bitcoin Mixer Service',
+            description: 'Сервис для анонимизации Bitcoin транзакций',
+            price: '0.15 BTC',
+            seller: 'MixerService',
+            rating: '4.8/5',
+            category: 'services'
+        },
+        {
+            id: 11,
+            title: 'Email Accounts Database',
+            description: 'База данных email аккаунтов различных сервисов',
+            price: '0.12 BTC',
+            seller: 'EmailHunter',
+            rating: '4.6/5',
+            category: 'data'
+        },
+        {
+            id: 12,
+            title: 'Ransomware Builder',
+            description: 'Конструктор ransomware для создания вредоносного ПО',
+            price: '0.35 BTC',
+            seller: 'RansomBuilder',
+            rating: '4.5/5',
+            category: 'tools'
+        },
+        {
+            id: 13,
+            title: 'Social Engineering Kit',
+            description: 'Набор инструментов для социальной инженерии',
+            price: '0.22 BTC',
+            seller: 'SocialEngineer',
+            rating: '4.7/5',
+            category: 'tools'
+        },
+        {
+            id: 14,
+            title: 'Proxy List Premium',
+            description: 'Список премиум прокси-серверов с высокой скоростью',
+            price: '0.09 BTC',
+            seller: 'ProxyMaster',
+            rating: '4.8/5',
+            category: 'services'
+        },
+        {
+            id: 15,
+            title: 'Cryptocurrency Wallet Stealer',
+            description: 'Инструмент для кражи криптовалютных кошельков',
+            price: '0.40 BTC',
+            seller: 'WalletStealer',
+            rating: '4.4/5',
+            category: 'tools'
+        },
+        {
+            id: 16,
+            title: 'Password Database 2024',
+            description: 'База данных утекших паролей за 2024 год',
+            price: '0.18 BTC',
+            seller: 'PasswordLeak',
+            rating: '4.7/5',
+            category: 'data'
+        },
+        {
+            id: 17,
+            title: 'Phishing Kit Builder',
+            description: 'Конструктор фишинговых страниц под заказ',
+            price: '0.28 BTC',
+            seller: 'PhishingPro',
+            rating: '4.6/5',
+            category: 'tools'
+        },
+        {
+            id: 18,
+            title: 'Anonymous Hosting',
+            description: 'Анонимный хостинг без регистрации и логирования',
+            price: '0.11 BTC',
+            seller: 'AnonymousHost',
+            rating: '4.9/5',
+            category: 'services'
+        },
+        {
+            id: 19,
+            title: 'Zero-Day Exploit',
+            description: 'Эксплойт для неизвестной уязвимости',
+            price: '0.50 BTC',
+            seller: 'ZeroDaySeller',
+            rating: '4.8/5',
+            category: 'tools'
+        },
+        {
+            id: 20,
+            title: 'Personal Data Broker',
+            description: 'Услуги по сбору персональных данных на заказ',
+            price: '0.33 BTC',
+            seller: 'DataBroker',
+            rating: '4.5/5',
+            category: 'services'
         }
     ];
     
@@ -101,7 +209,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="product-seller">Продавец: ${escapeHtml(product.seller)}</div>
                         <div class="product-rating">⭐ ${escapeHtml(product.rating)}</div>
                     </div>
-                    <button class="buy-btn" onclick="buyProduct(${product.id})">Купить</button>
+                    <div class="product-actions">
+                        <button class="buy-btn" onclick="buyProduct(${product.id})">Купить</button>
+                        <button class="favorite-btn" onclick="addToFavorites(${product.id})" title="В избранное">⭐</button>
+                        <button class="cart-btn-small" onclick="addToCart(${product.id})" title="В корзину">🛒</button>
+                    </div>
                 </div>
             `;
             productsGrid.appendChild(productCard);
@@ -151,37 +263,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Обработчик поиска
     searchInput.addEventListener('input', filterProducts);
     
-    // Функция покупки товара
+    // Сохраняем товары в localStorage для использования в других модулях
+    localStorage.setItem('marketplace_products', JSON.stringify(products));
+    
+    // Функция покупки товара (теперь добавляет в корзину)
     window.buyProduct = function(productId) {
         const product = products.find(p => p.id === productId);
         if (!product) return;
         
-        // Получаем текущего пользователя
-        const currentUser = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-        
-        if (!currentUser.username) {
-            if (confirm('Для покупки товаров необходимо войти в систему. Перейти на страницу входа?')) {
-                window.location.href = 'register.html';
+        // Используем функцию из marketplace-enhanced.js
+        if (typeof addToCart === 'function') {
+            addToCart(productId);
+        } else {
+            // Fallback если enhanced модуль не загружен
+            const currentUser = JSON.parse(localStorage.getItem('darknet_user') || '{}');
+            if (!currentUser.username) {
+                if (confirm('Для покупки товаров необходимо войти в систему. Перейти на страницу входа?')) {
+                    window.location.href = 'register.html';
+                }
+                return;
             }
-            return;
+            
+            // Сохраняем покупку
+            const purchases = JSON.parse(localStorage.getItem('darkweb_purchases') || '[]');
+            purchases.push({
+                productId: product.id,
+                productTitle: product.title,
+                price: product.price,
+                date: new Date().toISOString(),
+                buyer: currentUser.username
+            });
+            localStorage.setItem('darkweb_purchases', JSON.stringify(purchases));
+            
+            addActivity('purchase', `Покупка: ${product.title} за ${product.price}`);
+            
+            if (typeof showNotification === 'function') {
+                showNotification(`Товар "${product.title}" добавлен в корзину!`, 'success');
+            } else {
+                alert(`Товар "${product.title}" добавлен в корзину!\nЦена: ${product.price}`);
+            }
         }
-        
-        // Сохраняем покупку
-        const purchases = JSON.parse(localStorage.getItem('darkweb_purchases') || '[]');
-        purchases.push({
-            productId: product.id,
-            productTitle: product.title,
-            price: product.price,
-            date: new Date().toISOString(),
-            buyer: currentUser.username
-        });
-        localStorage.setItem('darkweb_purchases', JSON.stringify(purchases));
-        
-        // Добавляем активность
-        addActivity('purchase', `Покупка: ${product.title} за ${product.price}`);
-        
-        // Показываем уведомление
-        alert(`Товар "${product.title}" добавлен в корзину!\nЦена: ${product.price}`);
     };
     
     // Функция addActivity теперь в common.js

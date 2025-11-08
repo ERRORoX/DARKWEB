@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadStatistics();
     loadHackerStats();
     
-    // Загрузка активности
-    loadActivity();
+    // Загрузка системных логов
     loadSystemLogs();
     
     // Навигация
@@ -20,11 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Редактирование профиля
     initializeEditProfile();
     
-    // Прогресс репутации
-    updateReputationProgress();
-    
-    // Очистка активности
-    initializeClearActivity();
+    // Очистка логов
     initializeClearLogs();
     
     // Обновление системной информации
@@ -49,29 +44,6 @@ function loadUserProfile() {
     const terminalUsername = document.getElementById('terminalUsername');
     if (terminalUsername) {
         terminalUsername.textContent = user.username || 'user';
-    }
-    
-    // Обновляем репутацию
-    const reputationValue = document.getElementById('reputationValue');
-    if (reputationValue) {
-        const reputation = parseFloat(user.reputation) || 85.0;
-        reputationValue.textContent = reputation.toFixed(1) + '%';
-    }
-    
-    // Обновляем ранг
-    const rankValue = document.getElementById('rankValue');
-    if (rankValue) {
-        const rank = user.rank || 'NEWBIE';
-        rankValue.textContent = rank.toUpperCase();
-        if (rank.includes('Элитный') || rank.includes('ELITE')) {
-            rankValue.classList.add('level-elite');
-        }
-    }
-    
-    // Обновляем соединения
-    const connectionsValue = document.getElementById('connectionsValue');
-    if (connectionsValue) {
-        connectionsValue.textContent = user.connections || '1';
     }
     
     // Генерируем IP адрес (псевдо-случайный для безопасности)
@@ -319,70 +291,6 @@ function createCustomAsciiArt(name) {
 ╚${border}╝`;
 }
 
-// Загрузка активности
-function loadActivity() {
-    const activityTimeline = document.getElementById('activityTimeline');
-    if (!activityTimeline) return;
-    
-    const activities = JSON.parse(localStorage.getItem('user_activity') || '[]');
-    
-    // Если активности нет, создаем начальную
-    if (activities.length === 0) {
-        const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-        if (user.username) {
-            activities.push({
-                type: 'register',
-                text: 'System registration completed',
-                time: new Date().toISOString()
-            });
-            localStorage.setItem('user_activity', JSON.stringify(activities));
-        }
-    }
-    
-    // Отображаем активность
-    activityTimeline.innerHTML = '';
-    activities.slice(-10).reverse().forEach(activity => {
-        const activityItem = createActivityTimelineItem(activity);
-        activityTimeline.appendChild(activityItem);
-    });
-}
-
-// Создание элемента активности
-function createActivityTimelineItem(activity) {
-    const item = document.createElement('div');
-    item.className = 'activity-timeline-item';
-    
-    const time = formatTime(activity.time);
-    const text = activity.text || 'Unknown activity';
-    
-    item.innerHTML = `
-        <span class="activity-timeline-time">${time}</span>
-        <span class="activity-timeline-text">${escapeHtml(text)}</span>
-    `;
-    
-    return item;
-}
-
-// Обновление прогресса репутации
-function updateReputationProgress() {
-    const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-    const reputation = parseFloat(user.reputation) || 85.0;
-    
-    const reputationFill = document.getElementById('reputationFill');
-    const reputationValue = document.getElementById('reputationValue');
-    
-    if (reputationFill && reputationValue) {
-        reputationFill.style.width = reputation + '%';
-        reputationValue.textContent = reputation.toFixed(1) + '%';
-    }
-}
-
-// Инициализация очистки активности
-function initializeClearActivity() {
-    // Очистка активности теперь не нужна, так как нет кнопки в новом дизайне
-    // Но можно добавить через консоль команду
-}
-
 // Инициализация очистки логов
 function initializeClearLogs() {
     const clearLogsBtn = document.getElementById('clearLogsBtn');
@@ -400,20 +308,7 @@ function initializeClearLogs() {
 
 // Инициализация навигации
 function initializeNavigation() {
-    // Ссылка "Назад"
-    const backLink = document.querySelector('.back-link');
-    if (backLink) {
-        backLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            addActivity('logout', 'System logout');
-            addSystemLog('info', 'User logged out from system.');
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease-in-out';
-            setTimeout(() => {
-                window.location.href = '../index.html';
-            }, 500);
-        });
-    }
+    // Навигация теперь обрабатывается через сайдбар
 }
 
 // Инициализация редактирования профиля
@@ -536,24 +431,6 @@ setTimeout(() => {
     addEditButton();
 }, 500);
 
-// Инициализация интерактивного терминала
-initInteractiveTerminal();
-
-// Инициализация монитора системы
-initSystemMonitor();
-
-// Инициализация активных соединений
-initActiveConnections();
-
-// Инициализация инструментов хакера
-initHackerTools();
-
-// Инициализация криптовалютных кошельков
-initCryptocurrencyWallets();
-
-// Инициализация статистики атак
-initAttackStatistics();
-
 // Интерактивный терминал
 function initInteractiveTerminal() {
     const terminalInput = document.getElementById('terminalInput');
@@ -578,10 +455,6 @@ function initInteractiveTerminal() {
   date              - Show current date and time
   uptime            - Show system uptime
   stats             - Show hacker statistics
-  tools             - List available tools
-  connections       - Show active connections
-  wallets           - Show cryptocurrency wallets
-  attacks           - Show attack statistics
   edit              - Edit profile
   exit              - Exit terminal`;
         },
@@ -618,36 +491,6 @@ drwxr-xr-x  2 root root 4096 Jan 15 14:23 tools/
   Servers: ${stats.servers || 0}
   Databases: ${stats.databases || 0}
   Zero-Days: ${stats.zeroDays || 0}`;
-        },
-        'tools': () => {
-            return `Available Tools:
-  nmap - Network Scanner
-  metasploit - Exploit Framework
-  wireshark - Packet Analyzer
-  john - Password Cracker
-  sqlmap - SQL Injection Tool
-  burp - Web Security Scanner`;
-        },
-        'connections': () => {
-            const connections = JSON.parse(localStorage.getItem('active_connections') || '[]');
-            if (connections.length === 0) return 'No active connections';
-            return connections.map(c => `${c.ip}:${c.port} - ${c.status}`).join('\n');
-        },
-        'wallets': () => {
-            const wallets = JSON.parse(localStorage.getItem('crypto_wallets') || '{}');
-            return `Cryptocurrency Wallets:
-  Bitcoin: ${wallets.btc || '0.00000000'} BTC
-  Monero: ${wallets.xmr || '0.00000000'} XMR
-  Ethereum: ${wallets.eth || '0.00000000'} ETH`;
-        },
-        'attacks': () => {
-            const attacks = JSON.parse(localStorage.getItem('attack_stats') || '{}');
-            return `Attack Statistics:
-  SQL Injection: ${attacks.sql || 0}
-  XSS Attacks: ${attacks.xss || 0}
-  DDoS: ${attacks.ddos || 0}
-  Brute Force: ${attacks.brute || 0}
-  Phishing: ${attacks.phishing || 0}`;
         },
         'edit': () => {
             const modal = document.getElementById('editProfileModal');
@@ -748,188 +591,6 @@ drwxr-xr-x  2 root root 4096 Jan 15 14:23 tools/
     welcomeMsg.className = 'terminal-output-line';
     welcomeMsg.innerHTML = `<span class="output">Welcome to DARKWEB Terminal. Type 'help' for available commands.</span>`;
     terminalOutput.appendChild(welcomeMsg);
-}
-
-// Мониторинг системы
-function initSystemMonitor() {
-    updateSystemMonitor();
-    setInterval(updateSystemMonitor, 2000); // Обновление каждые 2 секунды
-}
-
-function updateSystemMonitor() {
-    // CPU
-    const cpuValue = Math.floor(Math.random() * 40) + 30; // 30-70%
-    const cpuBar = document.getElementById('cpuBar');
-    const cpuValueEl = document.getElementById('cpuValue');
-    if (cpuBar && cpuValueEl) {
-        cpuBar.style.width = cpuValue + '%';
-        cpuValueEl.textContent = cpuValue + '%';
-    }
-    
-    // RAM
-    const ramValue = Math.floor(Math.random() * 30) + 40; // 40-70%
-    const ramBar = document.getElementById('ramBar');
-    const ramValueEl = document.getElementById('ramValue');
-    if (ramBar && ramValueEl) {
-        ramBar.style.width = ramValue + '%';
-        ramValueEl.textContent = ramValue + '%';
-    }
-    
-    // Disk
-    const diskValue = Math.floor(Math.random() * 20) + 50; // 50-70%
-    const diskBar = document.getElementById('diskBar');
-    const diskValueEl = document.getElementById('diskValue');
-    if (diskBar && diskValueEl) {
-        diskBar.style.width = diskValue + '%';
-        diskValueEl.textContent = diskValue + '%';
-    }
-    
-    // Network
-    const networkValue = (Math.random() * 100).toFixed(2);
-    const networkBar = document.getElementById('networkBar');
-    const networkValueEl = document.getElementById('networkValue');
-    if (networkBar && networkValueEl) {
-        const networkPercent = Math.min(networkValue * 2, 100);
-        networkBar.style.width = networkPercent + '%';
-        networkValueEl.textContent = networkValue + ' MB/s';
-    }
-    
-    // Processes
-    const processCount = Math.floor(Math.random() * 50) + 100;
-    const processCountEl = document.getElementById('processCount');
-    if (processCountEl) {
-        processCountEl.textContent = processCount;
-    }
-    
-    // Uptime
-    const monitorUptime = document.getElementById('monitorUptime');
-    if (monitorUptime) {
-        const uptime = localStorage.getItem('system_uptime') || '0d 0h 0m';
-        monitorUptime.textContent = uptime;
-    }
-}
-
-// Активные соединения
-function initActiveConnections() {
-    updateActiveConnections();
-    setInterval(updateActiveConnections, 5000); // Обновление каждые 5 секунд
-}
-
-function updateActiveConnections() {
-    let connections = JSON.parse(localStorage.getItem('active_connections') || '[]');
-    
-    // Генерируем несколько случайных соединений, если их нет
-    if (connections.length === 0) {
-        connections = [
-            { ip: '192.168.1.100', port: 8080, status: 'established' },
-            { ip: '10.0.0.50', port: 443, status: 'established' },
-            { ip: '172.16.0.20', port: 22, status: 'pending' },
-            { ip: '192.168.1.200', port: 3306, status: 'established' }
-        ];
-        localStorage.setItem('active_connections', JSON.stringify(connections));
-    }
-    
-    // Отображаем соединения
-    const connectionsList = document.getElementById('activeConnections');
-    if (!connectionsList) return;
-    
-    connectionsList.innerHTML = '';
-    connections.forEach(conn => {
-        const item = document.createElement('div');
-        item.className = 'connection-item';
-        item.innerHTML = `
-            <div class="connection-info">
-                <span class="connection-ip">${conn.ip}</span>
-                <span class="connection-port">Port: ${conn.port}</span>
-            </div>
-            <span class="connection-status ${conn.status}">${conn.status.toUpperCase()}</span>
-        `;
-        connectionsList.appendChild(item);
-    });
-}
-
-// Инструменты хакера
-function initHackerTools() {
-    const toolItems = document.querySelectorAll('.tool-item');
-    toolItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const tool = item.getAttribute('data-tool');
-            addSystemLog('info', `Tool launched: ${tool}`);
-            showNotification(`Запуск инструмента: ${tool}`, 'info');
-            
-            // Можно добавить функционал для каждого инструмента
-            switch(tool) {
-                case 'nmap':
-                    addSystemLog('info', 'Scanning network...');
-                    break;
-                case 'metasploit':
-                    addSystemLog('info', 'Metasploit framework initialized');
-                    break;
-                case 'wireshark':
-                    addSystemLog('info', 'Packet capture started');
-                    break;
-                case 'john':
-                    addSystemLog('info', 'Password cracking session started');
-                    break;
-                case 'sqlmap':
-                    addSystemLog('info', 'SQL injection scan initiated');
-                    break;
-                case 'burp':
-                    addSystemLog('info', 'Burp Suite proxy activated');
-                    break;
-            }
-        });
-    });
-}
-
-// Криптовалютные кошельки
-function initCryptocurrencyWallets() {
-    let wallets = JSON.parse(localStorage.getItem('crypto_wallets') || '{}');
-    
-    // Инициализируем кошельки, если их нет
-    if (!wallets.btc) {
-        wallets.btc = (Math.random() * 0.5).toFixed(8);
-        wallets.xmr = (Math.random() * 10).toFixed(8);
-        wallets.eth = (Math.random() * 2).toFixed(8);
-        localStorage.setItem('crypto_wallets', JSON.stringify(wallets));
-    }
-    
-    // Обновляем отображение
-    const btcBalance = document.getElementById('btcBalance');
-    const xmrBalance = document.getElementById('xmrBalance');
-    const ethBalance = document.getElementById('ethBalance');
-    
-    if (btcBalance) btcBalance.textContent = wallets.btc + ' BTC';
-    if (xmrBalance) xmrBalance.textContent = wallets.xmr + ' XMR';
-    if (ethBalance) ethBalance.textContent = wallets.eth + ' ETH';
-}
-
-// Статистика атак
-function initAttackStatistics() {
-    let attacks = JSON.parse(localStorage.getItem('attack_stats') || '{}');
-    
-    // Инициализируем статистику, если её нет
-    if (!attacks.sql) {
-        attacks.sql = Math.floor(Math.random() * 50) + 10;
-        attacks.xss = Math.floor(Math.random() * 30) + 5;
-        attacks.ddos = Math.floor(Math.random() * 20) + 3;
-        attacks.brute = Math.floor(Math.random() * 40) + 8;
-        attacks.phishing = Math.floor(Math.random() * 25) + 5;
-        localStorage.setItem('attack_stats', JSON.stringify(attacks));
-    }
-    
-    // Обновляем отображение
-    const statSQL = document.getElementById('statSQL');
-    const statXSS = document.getElementById('statXSS');
-    const statDDoS = document.getElementById('statDDoS');
-    const statBrute = document.getElementById('statBrute');
-    const statPhishing = document.getElementById('statPhishing');
-    
-    if (statSQL) statSQL.textContent = attacks.sql;
-    if (statXSS) statXSS.textContent = attacks.xss;
-    if (statDDoS) statDDoS.textContent = attacks.ddos;
-    if (statBrute) statBrute.textContent = attacks.brute;
-    if (statPhishing) statPhishing.textContent = attacks.phishing;
 }
 
 

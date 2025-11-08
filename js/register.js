@@ -335,7 +335,7 @@ function handleFormSubmit(e) {
         hasErrors = true;
     }
     
-    if (!isValidEmail(email)) {
+    if (email && !isValidEmail(email)) {
         showFieldError(document.getElementById('email'), 'Некорректный email адрес');
         hasErrors = true;
     }
@@ -825,6 +825,7 @@ function disableAutocomplete() {
         }, 100);
     });
 }
+
 
 // Очистка формы после успешной регистрации
 function clearRegistrationForm() {

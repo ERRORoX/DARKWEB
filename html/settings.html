@@ -209,6 +209,57 @@
             </div>
             
             <div class="settings-section">
+                <h3 class="settings-title">Тема оформления</h3>
+                <div class="setting-description" style="margin-bottom: 20px;">Выберите цветовую схему интерфейса</div>
+                <div class="theme-selector" id="themeSelector">
+                    <!-- Темы будут добавлены через JavaScript -->
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 class="settings-title">Оформление</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Размер шрифта</div>
+                        <div class="setting-description">Настройте размер текста интерфейса</div>
+                    </div>
+                    <select class="select-input" id="fontSize">
+                        <option value="small">Маленький</option>
+                        <option value="medium" selected>Средний</option>
+                        <option value="large">Большой</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Анимации</div>
+                        <div class="setting-description">Включить анимации и эффекты</div>
+                    </div>
+                    <div class="toggle-switch active" id="animationsEnabled"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Фоновые частицы</div>
+                        <div class="setting-description">Анимированные частицы на фоне</div>
+                    </div>
+                    <div class="toggle-switch active" id="particlesEnabled"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Эффекты свечения</div>
+                        <div class="setting-description">Эффекты свечения для элементов</div>
+                    </div>
+                    <div class="toggle-switch active" id="glowEffects"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Плавные переходы</div>
+                        <div class="setting-description">Анимации при переходе между страницами</div>
+                    </div>
+                    <div class="toggle-switch active" id="pageTransitions"></div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
                 <h3 class="settings-title">Интерфейс</h3>
                 <div class="setting-item">
                     <div>
@@ -222,13 +273,10 @@
                 </div>
                 <div class="setting-item">
                     <div>
-                        <div class="setting-label">Тема</div>
-                        <div class="setting-description">Выберите тему оформления</div>
+                        <div class="setting-label">Компактный режим</div>
+                        <div class="setting-description">Уменьшить отступы и размеры элементов</div>
                     </div>
-                    <select class="select-input" id="theme">
-                        <option value="dark">Темная</option>
-                        <option value="light">Светлая</option>
-                    </select>
+                    <div class="toggle-switch" id="compactMode"></div>
                 </div>
             </div>
             
@@ -272,17 +320,20 @@
         </main>
     </div>
     
-    <div class="back-link">
-        <a href="profile.html">← Вернуться к профилю</a>
-    </div>
     
     <script src="../js/common.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/themes.js"></script>
+    <script src="../js/animations.js"></script>
     <script src="../js/loadSidebar.js"></script>
     <script src="../js/sidebar.js"></script>
+    <script src="../js/init.js"></script>
     <script src="../js/settings.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             await loadSidebar('settings');
+            initSettingsThemes();
         });
     </script>
 </body>

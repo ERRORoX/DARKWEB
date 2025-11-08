@@ -1,5 +1,5 @@
 // Service Worker для PWA
-const CACHE_NAME = 'darkweb-v3';
+const CACHE_NAME = 'darkweb-v4';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -8,6 +8,7 @@ const urlsToCache = [
   '/html/chat.html',
   '/html/marketplace.html',
   '/html/settings.html',
+  '/html/dashboard.html',
   '/html/sidebar.html',
   '/html/groups.html',
   '/html/personals.html',
@@ -36,15 +37,40 @@ const urlsToCache = [
   '/css/index.css',
   '/css/profile.css',
   '/css/register.css',
+  '/css/dashboard.css',
+  '/css/chat-enhanced.css',
+  '/css/marketplace-enhanced.css',
+  '/css/friends.css',
+  '/css/private-messages.css',
+  '/css/page-transitions.css',
+  '/css/animations.css',
+  '/css/achievements.css',
+  '/css/notifications.css',
+  '/css/themes.css',
+  '/css/search.css',
   '/js/index.js',
   '/js/profile.js',
   '/js/register.js',
   '/js/chat.js',
+  '/js/chat-enhanced.js',
+  '/js/chat-sounds.js',
   '/js/marketplace.js',
+  '/js/marketplace-enhanced.js',
   '/js/settings.js',
+  '/js/dashboard.js',
   '/js/common.js',
   '/js/sidebar.js',
   '/js/loadSidebar.js',
+  '/js/friends.js',
+  '/js/private-messages.js',
+  '/js/page-transitions.js',
+  '/js/error-handler.js',
+  '/js/search.js',
+  '/js/animations.js',
+  '/js/achievements.js',
+  '/js/notifications.js',
+  '/js/themes.js',
+  '/js/init.js',
   '/images/planet.png',
   '/images/spider.png',
   '/images/world map.png',
@@ -85,8 +111,63 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request)
       .then((response) => {
         // Возвращаем из кеша или делаем сетевой запрос
-        return response || fetch(event.request);
+        if (response) {
+          return response;
+        }
+        
+        // Для сетевых запросов используем стратегию "Network First"
+        return fetch(event.request)
+          .then((response) => {
+            // Проверяем валидность ответа
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+            
+            // Клонируем ответ для кеширования
+            const responseToCache = response.clone();
+            
+            // Кешируем только GET запросы
+            if (event.request.method === 'GET') {
+              caches.open(CACHE_NAME)
+                .then((cache) => {
+                  cache.put(event.request, responseToCache);
+                });
+            }
+            
+            return response;
+          })
+          .catch(() => {
+            // Если сеть недоступна, пытаемся вернуть fallback
+            if (event.request.destination === 'document') {
+              return caches.match('/index.html');
+            }
+          });
       })
+  );
+});
+
+// Push уведомления
+self.addEventListener('push', (event) => {
+  const options = {
+    body: event.data ? event.data.text() : 'Новое уведомление',
+    icon: '/images/spider.png',
+    badge: '/images/spider.png',
+    vibrate: [200, 100, 200],
+    tag: 'darkweb-notification',
+    requireInteraction: true
+  };
+  
+  event.waitUntil(
+    self.registration.showNotification('DARKWEB', options)
+  );
+});
+
+// Обработка клика по уведомлению
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  
+  event.waitUntil(
+    clients.openWindow('/')
   );
 });
 

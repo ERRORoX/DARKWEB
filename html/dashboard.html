@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="dashboard-title-section">
+                    <h1 class="dashboard-title">DASHBOARD</h1>
+                    <p class="dashboard-subtitle">Центральная панель управления</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="dashboard-action-btn" id="refreshDashboard" title="Обновить">🔄</button>
+                    <button class="dashboard-action-btn" id="exportData" title="Экспорт данных">📥</button>
+                </div>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👤</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Репутация</div>
+                        <div class="stat-value" id="reputationValue">0%</div>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" id="reputationProgress"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">💬</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Сообщений</div>
+                        <div class="stat-value" id="messagesCount">0</div>
+                        <div class="stat-change">+0 сегодня</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">🛒</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Покупок</div>
+                        <div class="stat-value" id="purchasesCount">0</div>
+                        <div class="stat-change">+0 сегодня</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-label">Достижений</div>
+                        <div class="stat-value" id="achievementsCount">0</div>
+                        <div class="stat-change">0/10 разблокировано</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Widgets Grid -->
+            <div class="widgets-grid">
+                <!-- Activity Widget -->
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Активность</h3>
+                        <button class="widget-action-btn" id="viewAllActivity">Все →</button>
+                    </div>
+                    <div class="widget-content" id="activityWidget">
+                        <div class="activity-item">
+                            <div class="activity-icon">📊</div>
+                            <div class="activity-content">
+                                <div class="activity-text">Загрузка...</div>
+                                <div class="activity-time">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Messages Widget -->
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Последние сообщения</h3>
+                        <button class="widget-action-btn" id="viewAllMessages">Все →</button>
+                    </div>
+                    <div class="widget-content" id="messagesWidget">
+                        <div class="message-item">
+                            <div class="message-icon">💬</div>
+                            <div class="message-content">
+                                <div class="message-text">Загрузка...</div>
+                                <div class="message-time">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reputation Chart Widget -->
+                <div class="widget-card widget-chart">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Репутация</h3>
+                        <select class="widget-select" id="reputationPeriod">
+                            <option value="7">7 дней</option>
+                            <option value="30" selected>30 дней</option>
+                            <option value="90">90 дней</option>
+                        </select>
+                    </div>
+                    <div class="widget-content">
+                        <canvas id="reputationChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions Widget -->
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Быстрые действия</h3>
+                    </div>
+                    <div class="widget-content">
+                        <div class="quick-actions-grid">
+                            <a href="profile.html" class="quick-action-btn">
+                                <span class="quick-action-icon">👤</span>
+                                <span class="quick-action-text">Профиль</span>
+                            </a>
+                            <a href="chat.html" class="quick-action-btn">
+                                <span class="quick-action-icon">💬</span>
+                                <span class="quick-action-text">Чат</span>
+                            </a>
+                            <a href="marketplace.html" class="quick-action-btn">
+                                <span class="quick-action-icon">🛒</span>
+                                <span class="quick-action-text">Маркетплейс</span>
+                            </a>
+                            <a href="settings.html" class="quick-action-btn">
+                                <span class="quick-action-icon">⚙️</span>
+                                <span class="quick-action-text">Настройки</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Activity Chart Widget -->
+                <div class="widget-card widget-chart">
+                    <div class="widget-header">
+                        <h3 class="widget-title">График активности</h3>
+                        <select class="widget-select" id="activityPeriod">
+                            <option value="7">7 дней</option>
+                            <option value="30" selected>30 дней</option>
+                            <option value="90">90 дней</option>
+                        </select>
+                    </div>
+                    <div class="widget-content">
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Recent Purchases Widget -->
+                <div class="widget-card">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Последние покупки</h3>
+                        <button class="widget-action-btn" id="viewAllPurchases">Все →</button>
+                    </div>
+                    <div class="widget-content" id="purchasesWidget">
+                        <div class="purchase-item">
+                            <div class="purchase-icon">🛒</div>
+                            <div class="purchase-content">
+                                <div class="purchase-text">Загрузка...</div>
+                                <div class="purchase-time">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/error-handler.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/themes.js"></script>
+    <script src="../js/achievements.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/page-transitions.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/init.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('dashboard');
+        });
+    </script>
+</body>
+</html>
+

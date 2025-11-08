@@ -1,0 +1,238 @@
+/* Профессиональные стили для улучшенного чата */
+
+/* Кнопки чата */
+.chat-emoji-btn,
+.chat-file-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    color: var(--accent-cyan);
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.chat-emoji-btn:hover,
+.chat-file-btn:hover {
+    background: rgba(0, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Эмодзи-пикер */
+.emoji-picker {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background: linear-gradient(180deg, 
+        rgba(10, 15, 26, 0.98) 0%,
+        rgba(15, 20, 35, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 255, 255, 0.2);
+    z-index: 10000;
+    display: none;
+    animation: emojiPickerSlideIn 0.3s ease;
+}
+
+.emoji-picker.active {
+    display: block;
+}
+
+@keyframes emojiPickerSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.emoji-picker-header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 255, 255, 0.05);
+}
+
+.emoji-picker-title {
+    color: var(--accent-cyan);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.emoji-picker-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 20px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.emoji-picker-close:hover {
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+}
+
+.emoji-picker-content {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.emoji-item {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emoji-item:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: scale(1.2);
+}
+
+/* Сообщения с файлами */
+.message.file-message {
+    border-left-color: rgba(255, 215, 0, 0.5);
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.message.file-message .message-content {
+    color: rgba(255, 215, 0, 1);
+}
+
+/* Реакции на сообщения */
+.reaction-menu {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: rgba(10, 15, 26, 0.95);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    gap: 5px;
+    z-index: 1000;
+    animation: reactionMenuSlideIn 0.2s ease;
+}
+
+@keyframes reactionMenuSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reaction-item {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.reaction-item:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: scale(1.2);
+}
+
+.message-reactions {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.message-reaction {
+    font-size: 16px;
+    padding: 2px 6px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.message-reaction:hover {
+    background: rgba(0, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Улучшенный контейнер ввода */
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Упоминания в сообщениях */
+.message.mentioned-message {
+    border-left-color: #ffaa00;
+    background: rgba(255, 170, 0, 0.1);
+    animation: mentionPulse 2s ease infinite;
+}
+
+@keyframes mentionPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 170, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 5px rgba(255, 170, 0, 0);
+    }
+}
+
+.mention-highlight {
+    color: #ffaa00;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255, 170, 0, 0.5);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .emoji-picker {
+        width: calc(100% - 40px);
+        right: 20px;
+        left: 20px;
+    }
+    
+    .emoji-picker-content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+

@@ -235,50 +235,10 @@
                 </div>
             </div>
             
-            <!-- Activity Timeline -->
-            <div class="system-card terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[ACTIVITY TIMELINE]</span>
-                    <span class="card-status">● TRACKING</span>
-                </div>
-                <div class="terminal-content" id="activityTimeline">
-                    <!-- Activity items will be added by JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Reputation & Rank -->
-            <div class="system-card terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[REPUTATION & RANK]</span>
-                    <span class="card-status">● VERIFIED</span>
-                </div>
-                <div class="terminal-content">
-                    <div class="reputation-display">
-                        <div class="reputation-header">
-                            <span class="reputation-label">REPUTATION:</span>
-                            <span class="reputation-value" id="reputationValue">98.7%</span>
-                        </div>
-                        <div class="reputation-bar-container">
-                            <div class="reputation-bar">
-                                <div class="reputation-fill" id="reputationFill" style="width: 98.7%"></div>
-                            </div>
-                        </div>
-                        <div class="rank-display">
-                            <span class="rank-label">RANK:</span>
-                            <span class="rank-value level-elite" id="rankValue">ELITE HACKER</span>
-                        </div>
-                        <div class="connections-display">
-                            <span class="connections-label">ACTIVE CONNECTIONS:</span>
-                            <span class="connections-value" id="connectionsValue">1,247</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Interactive Terminal -->
             <div class="system-card terminal-card interactive-terminal-card">
                 <div class="card-header">
-                    <span class="card-title">[INTERACTIVE TERMINAL]</span>
+                    <span class="card-title">[TERMINAL]</span>
                     <span class="card-status">● ACTIVE</span>
                     <button class="clear-logs-btn" id="clearTerminalBtn">CLEAR</button>
                 </div>
@@ -287,161 +247,6 @@
                     <div class="terminal-input-line">
                         <span class="terminal-prompt">root@darkweb:~$</span>
                         <input type="text" id="terminalInput" class="terminal-command-input" autocomplete="off" spellcheck="false">
-                    </div>
-                </div>
-            </div>
-            
-            <!-- System Monitor -->
-            <div class="system-card terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[SYSTEM MONITOR]</span>
-                    <span class="card-status">● RUNNING</span>
-                </div>
-                <div class="terminal-content">
-                    <div class="monitor-row">
-                        <span class="monitor-label">CPU:</span>
-                        <div class="monitor-bar">
-                            <div class="monitor-bar-fill" id="cpuBar" style="width: 0%"></div>
-                            <span class="monitor-value" id="cpuValue">0%</span>
-                        </div>
-                    </div>
-                    <div class="monitor-row">
-                        <span class="monitor-label">RAM:</span>
-                        <div class="monitor-bar">
-                            <div class="monitor-bar-fill" id="ramBar" style="width: 0%"></div>
-                            <span class="monitor-value" id="ramValue">0%</span>
-                        </div>
-                    </div>
-                    <div class="monitor-row">
-                        <span class="monitor-label">DISK:</span>
-                        <div class="monitor-bar">
-                            <div class="monitor-bar-fill" id="diskBar" style="width: 0%"></div>
-                            <span class="monitor-value" id="diskValue">0%</span>
-                        </div>
-                    </div>
-                    <div class="monitor-row">
-                        <span class="monitor-label">NETWORK:</span>
-                        <div class="monitor-bar">
-                            <div class="monitor-bar-fill" id="networkBar" style="width: 0%"></div>
-                            <span class="monitor-value" id="networkValue">0 MB/s</span>
-                        </div>
-                    </div>
-                    <div class="monitor-info">
-                        <div class="info-row">
-                            <span class="info-label">Active Processes:</span>
-                            <span class="info-value" id="processCount">0</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Uptime:</span>
-                            <span class="info-value" id="monitorUptime">0d 0h 0m</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Active Connections -->
-            <div class="system-card terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[ACTIVE CONNECTIONS]</span>
-                    <span class="card-status">● MONITORING</span>
-                </div>
-                <div class="terminal-content">
-                    <div class="connections-list" id="activeConnections">
-                        <!-- Connections will be added by JavaScript -->
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Hacker Tools -->
-            <div class="system-card terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[HACKER TOOLS]</span>
-                    <span class="card-status">● LOADED</span>
-                </div>
-                <div class="terminal-content">
-                    <div class="tools-grid">
-                        <div class="tool-item" data-tool="nmap">
-                            <span class="tool-icon">🔍</span>
-                            <span class="tool-name">NMAP</span>
-                            <span class="tool-desc">Network Scanner</span>
-                        </div>
-                        <div class="tool-item" data-tool="metasploit">
-                            <span class="tool-icon">💣</span>
-                            <span class="tool-name">Metasploit</span>
-                            <span class="tool-desc">Exploit Framework</span>
-                        </div>
-                        <div class="tool-item" data-tool="wireshark">
-                            <span class="tool-icon">📡</span>
-                            <span class="tool-name">Wireshark</span>
-                            <span class="tool-desc">Packet Analyzer</span>
-                        </div>
-                        <div class="tool-item" data-tool="john">
-                            <span class="tool-icon">🔑</span>
-                            <span class="tool-name">John The Ripper</span>
-                            <span class="tool-desc">Password Cracker</span>
-                        </div>
-                        <div class="tool-item" data-tool="sqlmap">
-                            <span class="tool-icon">🗄️</span>
-                            <span class="tool-name">SQLMap</span>
-                            <span class="tool-desc">SQL Injection</span>
-                        </div>
-                        <div class="tool-item" data-tool="burp">
-                            <span class="tool-icon">🕷️</span>
-                            <span class="tool-name">Burp Suite</span>
-                            <span class="tool-desc">Web Security</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Cryptocurrency Wallets -->
-            <div class="system-card terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[CRYPTO WALLETS]</span>
-                    <span class="card-status">● SECURED</span>
-                </div>
-                <div class="terminal-content">
-                    <div class="wallet-item">
-                        <span class="wallet-label">Bitcoin (BTC):</span>
-                        <span class="wallet-value" id="btcBalance">0.00000000 BTC</span>
-                    </div>
-                    <div class="wallet-item">
-                        <span class="wallet-label">Monero (XMR):</span>
-                        <span class="wallet-value" id="xmrBalance">0.00000000 XMR</span>
-                    </div>
-                    <div class="wallet-item">
-                        <span class="wallet-label">Ethereum (ETH):</span>
-                        <span class="wallet-value" id="ethBalance">0.00000000 ETH</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Attack Statistics -->
-            <div class="system-card terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[ATTACK STATISTICS]</span>
-                    <span class="card-status">● TRACKING</span>
-                </div>
-                <div class="terminal-content">
-                    <div class="attack-stat">
-                        <span class="attack-label">SQL Injection:</span>
-                        <span class="attack-value" id="statSQL">0</span>
-                    </div>
-                    <div class="attack-stat">
-                        <span class="attack-label">XSS Attacks:</span>
-                        <span class="attack-value" id="statXSS">0</span>
-                    </div>
-                    <div class="attack-stat">
-                        <span class="attack-label">DDoS:</span>
-                        <span class="attack-value" id="statDDoS">0</span>
-                    </div>
-                    <div class="attack-stat">
-                        <span class="attack-label">Brute Force:</span>
-                        <span class="attack-value" id="statBrute">0</span>
-                    </div>
-                    <div class="attack-stat">
-                        <span class="attack-label">Phishing:</span>
-                        <span class="attack-value" id="statPhishing">0</span>
                     </div>
                 </div>
             </div>
@@ -486,13 +291,16 @@
         </div>
     </div>
     
-    <div class="back-link">
-        <a href="../index.html">← EXIT SYSTEM</a>
-    </div>
     
     <script src="../js/common.js"></script>
+    <script src="../js/notifications.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/themes.js"></script>
+    <script src="../js/achievements.js"></script>
+    <script src="../js/animations.js"></script>
     <script src="../js/loadSidebar.js"></script>
     <script src="../js/sidebar.js"></script>
+    <script src="../js/init.js"></script>
     <script src="../js/profile.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {

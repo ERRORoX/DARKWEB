@@ -118,7 +118,7 @@ function createFallbackSidebar(activePage = '') {
     const sidebar = document.createElement('aside');
     sidebar.className = 'sidebar';
     
-    // Новый HTML сайдбара (копия из sidebar.html)
+    // Упрощенный HTML сайдбара
     sidebar.innerHTML = `<!-- Sidebar Navigation -->
     <div class="sidebar-header">
         <div class="sidebar-brand">
@@ -140,6 +140,10 @@ function createFallbackSidebar(activePage = '') {
     
     <!-- Quick Access -->
     <div class="sidebar-quick-access">
+        <a href="dashboard.html" class="quick-link" data-page="dashboard">
+            <span class="quick-icon">📊</span>
+            <span class="quick-text">Дашборд</span>
+        </a>
         <a href="profile.html" class="quick-link" data-page="profile">
             <span class="quick-icon">👤</span>
             <span class="quick-text">Профиль</span>
