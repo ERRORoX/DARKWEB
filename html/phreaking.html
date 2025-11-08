@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Фрикинг</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .phreaking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Фрикинг</h1>
+                <p class="content-subtitle">Телефонный фрикинг и телефонные системы</p>
+            </div>
+            
+            <div class="phreaking-grid" id="phreakingGrid">
+                <!-- Услуги будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('phreaking');
+            
+            const services = [
+                { id: 1, title: 'Взлом телефонной линии', description: 'Получение доступа к телефонной линии. Бесплатные звонки, перехват разговоров.', price: '0.4 BTC', type: 'Телефонные системы' },
+                { id: 2, title: 'Клонирование SIM-карты', description: 'Клонирование SIM-карты для перехвата SMS и звонков. Полный доступ к номеру.', price: '0.5 BTC', type: 'Мобильные' },
+                { id: 3, title: 'Перехват звонков', description: 'Прослушивание телефонных разговоров. Запись и мониторинг в реальном времени.', price: '0.6 BTC', type: 'Мониторинг' },
+                { id: 4, title: 'Взлом телефонных сетей', description: 'Взлом сотовых сетей. Доступ к базовым станциям, манипуляция сигналом.', price: '0.8 BTC', type: 'Сетевые' },
+                { id: 5, title: 'СМС перехват', description: 'Перехват SMS сообщений. Получение всех входящих и исходящих сообщений.', price: '0.3 BTC', type: 'Мобильные' },
+                { id: 6, title: 'Кастомный фрикинг', description: 'Индивидуальные услуги телефонного фрикинга под ваши требования.', price: '1.0 BTC', type: 'Custom' }
+            ];
+            
+            const grid = document.getElementById('phreakingGrid');
+            if (grid) {
+                services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <h3 style="color: var(--accent-cyan); font-size: 20px; font-weight: 700; margin-bottom: 10px;">${service.title}</h3>
+                        <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 10px;">📞 Тип: ${service.type}</div>
+                        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 15px;">${service.description}</p>
+                        <div style="color: var(--accent-cyan); font-size: 18px; font-weight: 900; margin-bottom: 15px;">${service.price}</div>
+                        <button class="buy-btn" onclick="buyPhreaking(${service.id})">Заказать</button>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        });
+        
+        function buyPhreaking(id) {
+            if (confirm(`Заказать услугу фрикинга #${id}?`)) {
+                showNotification('Заказ оформлен', 'success');
+            }
+        }
+    </script>
+</body>
+</html>

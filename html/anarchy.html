@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Анархия</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .anarchy-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .anarchy-section {
+            padding: 25px;
+        }
+        
+        .anarchy-section h3 {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .anarchy-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .anarchy-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .anarchy-list li {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .anarchy-list li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Анархия</h1>
+                <p class="content-subtitle">Анархические материалы и ресурсы</p>
+            </div>
+            
+            <div class="anarchy-content">
+                <div class="card anarchy-section">
+                    <h3>Философия анархизма</h3>
+                    <p>Анархизм - это политическая философия, которая выступает против всех форм иерархического принуждения и господства. Анархисты верят в свободное общество, основанное на добровольных ассоциациях и взаимопомощи.</p>
+                    <ul class="anarchy-list">
+                        <li>Отсутствие централизованной власти</li>
+                        <li>Добровольное сотрудничество</li>
+                        <li>Взаимная помощь и поддержка</li>
+                        <li>Свобода индивидуума</li>
+                    </ul>
+                </div>
+                
+                <div class="card anarchy-section">
+                    <h3>Анархические движения</h3>
+                    <p>Различные течения анархизма предлагают разные подходы к созданию свободного общества:</p>
+                    <ul class="anarchy-list">
+                        <li>Анархо-коммунизм - общественная собственность и распределение по потребностям</li>
+                        <li>Анархо-индивидуализм - максимальная свобода личности</li>
+                        <li>Анархо-синдикализм - рабочие союзы и прямая демократия</li>
+                        <li>Эко-анархизм - экологическая устойчивость и децентрализация</li>
+                    </ul>
+                </div>
+                
+                <div class="card anarchy-section">
+                    <h3>Анархические практики</h3>
+                    <p>Практические методы достижения анархических целей:</p>
+                    <ul class="anarchy-list">
+                        <li>Прямое действие - непосредственные действия без посредников</li>
+                        <li>Взаимная помощь - создание сетей поддержки</li>
+                        <li>Децентрализация - отказ от централизованных структур</li>
+                        <li>Горизонтальная организация - принятие решений на основе консенсуса</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('anarchy');
+        });
+    </script>
+</body>
+</html>

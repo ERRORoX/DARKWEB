@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Новости</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .news-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .news-item {
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+        
+        .news-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .news-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        
+        .news-content {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .news-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .news-tag {
+            padding: 5px 12px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            font-size: 12px;
+            color: var(--accent-cyan);
+        }
+        
+        .news-category {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Новости</h1>
+                <p class="content-subtitle">Последние события и обновления</p>
+            </div>
+            
+            <div class="news-container">
+                <div class="news-item card">
+                    <div class="news-header">
+                        <div>
+                            <div class="news-category">Безопасность</div>
+                            <div class="news-title">Обновление системы безопасности платформы</div>
+                        </div>
+                        <div class="news-date">2 часа назад</div>
+                    </div>
+                    <div class="news-content">
+                        Мы рады сообщить о крупном обновлении системы безопасности платформы DARKWEB. Теперь все соединения шифруются с использованием новейших алгоритмов, что обеспечивает максимальную защиту ваших данных.
+                    </div>
+                    <div class="news-tags">
+                        <span class="news-tag">Безопасность</span>
+                        <span class="news-tag">Обновление</span>
+                        <span class="news-tag">Важно</span>
+                    </div>
+                </div>
+                
+                <div class="news-item card">
+                    <div class="news-header">
+                        <div>
+                            <div class="news-category">Торговля</div>
+                            <div class="news-title">Новые продавцы на платформе</div>
+                        </div>
+                        <div class="news-date">5 часов назад</div>
+                    </div>
+                    <div class="news-content">
+                        К нашей платформе присоединились 15 новых проверенных продавцов. Все они прошли строгую верификацию и готовы предложить вам качественные услуги и товары.
+                    </div>
+                    <div class="news-tags">
+                        <span class="news-tag">Торговля</span>
+                        <span class="news-tag">Продавцы</span>
+                    </div>
+                </div>
+                
+                <div class="news-item card">
+                    <div class="news-header">
+                        <div>
+                            <div class="news-category">Технологии</div>
+                            <div class="news-title">Поддержка новых криптовалют</div>
+                        </div>
+                        <div class="news-date">1 день назад</div>
+                    </div>
+                    <div class="news-content">
+                        Теперь платформа поддерживает Monero (XMR), Zcash (ZEC) и другие приватные криптовалюты для еще большей анонимности транзакций.
+                    </div>
+                    <div class="news-tags">
+                        <span class="news-tag">Криптовалюты</span>
+                        <span class="news-tag">Технологии</span>
+                    </div>
+                </div>
+                
+                <div class="news-item card">
+                    <div class="news-header">
+                        <div>
+                            <div class="news-category">Сообщество</div>
+                            <div class="news-title">Запуск нового форума</div>
+                        </div>
+                        <div class="news-date">2 дня назад</div>
+                    </div>
+                    <div class="news-content">
+                        Мы запустили новый раздел форума, где вы можете обсуждать различные темы, задавать вопросы и делиться опытом с другими участниками сообщества.
+                    </div>
+                    <div class="news-tags">
+                        <span class="news-tag">Форум</span>
+                        <span class="news-tag">Сообщество</span>
+                    </div>
+                </div>
+                
+                <div class="news-item card">
+                    <div class="news-header">
+                        <div>
+                            <div class="news-category">Важно</div>
+                            <div class="news-title">Обновление правил сообщества</div>
+                        </div>
+                        <div class="news-date">3 дня назад</div>
+                    </div>
+                    <div class="news-content">
+                        Мы обновили правила сообщества. Пожалуйста, ознакомьтесь с новыми правилами, чтобы избежать нарушений и возможных блокировок.
+                    </div>
+                    <div class="news-tags">
+                        <span class="news-tag">Правила</span>
+                        <span class="news-tag">Важно</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('news');
+        });
+    </script>
+</body>
+</html>
+

@@ -1,91 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="autocomplete" content="off">
     <title>D A R K W E B</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/register.css">
+    <style>
+        .register-page-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .register-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-left: 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .register-content {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="body-map-bg"></div>
-    <div class="body-web-bg"></div>
-    <div class="bg-globe">
-        <img src="../images/world map.png" style="width:100%;height:100%;opacity:0.7;filter:blur(8px);pointer-events:none;">
-    </div>
-    <div class="bg-map"></div>
-    <div class="register-bg"></div>
-    <div class="register-glass">
-        <div class="register-title">D A R K W E B</div>
-        <div class="tab-switch">
-            <button class="tab-btn active" id="loginTab">Вход</button>
-            <button class="tab-btn" id="registerTab">Регистрация</button>
-        </div>
-        <div class="tab-content">
-            <form class="tab-form login-form" id="loginForm" autocomplete="off">
-                <div class="form-group">
-                    <input type="text" id="loginUsername" name="loginUsername" required autocomplete="new-password" placeholder="Имя пользователя">
-                    <div class="error-message" id="loginUsernameError"></div>
+    <div class="register-page-wrapper">
+        <!-- Main Content -->
+        <div class="register-content">
+            <div class="body-map-bg"></div>
+            <div class="body-web-bg"></div>
+            <div class="bg-globe">
+                <img src="../images/world map.png" style="width:100%;height:100%;opacity:0.7;filter:blur(8px);pointer-events:none;">
+            </div>
+            <div class="bg-map"></div>
+            <div class="register-bg"></div>
+            <div class="register-glass">
+                <div class="register-title">D A R K W E B</div>
+                <div class="tab-switch">
+                    <button class="tab-btn active" id="loginTab">Вход</button>
+                    <button class="tab-btn" id="registerTab">Регистрация</button>
                 </div>
-                <div class="form-group password-group">
-                    <input type="password" id="loginPassword" name="loginPassword" required autocomplete="new-password" placeholder="Пароль">
-                    <button type="button" class="eye-btn" id="loginEyeBtn">
-                        <span class="eye-icon">💀</span>
-                    </button>
-                    <div class="error-message" id="loginPasswordError"></div>
+                <div class="tab-content">
+                    <form class="tab-form login-form" id="loginForm" autocomplete="off">
+                        <div class="form-group">
+                            <input type="text" id="loginUsername" name="loginUsername" required autocomplete="new-password" placeholder="Имя пользователя">
+                            <div class="error-message" id="loginUsernameError"></div>
+                        </div>
+                        <div class="form-group password-group">
+                            <input type="password" id="loginPassword" name="loginPassword" required autocomplete="new-password" placeholder="Пароль">
+                            <button type="button" class="eye-btn" id="loginEyeBtn">
+                                <span class="eye-icon">💀</span>
+                            </button>
+                            <div class="error-message" id="loginPasswordError"></div>
+                        </div>
+                        <div class="forgot-password">
+                            <a href="#" id="forgotPasswordLink">Забыли пароль?</a>
+                        </div>
+                        <button type="submit" class="register-btn" id="loginBtn">
+                            <span class="btn-text">Войти</span>
+                            <span class="btn-loader" id="loginBtnLoader"></span>
+                        </button>
+                    </form>
+                    <form class="tab-form register-form" id="registerForm" autocomplete="off" style="display:none;">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" required autocomplete="new-password" minlength="3" placeholder="Имя пользователя">
+                            <div class="error-message" id="usernameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required autocomplete="new-password" placeholder="Электронная почта">
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group password-group">
+                            <input type="password" id="password" name="password" required autocomplete="new-password" minlength="8" placeholder="Пароль">
+                            <button type="button" class="eye-btn" id="passwordEyeBtn">
+                                <span class="eye-icon">💀</span>
+                            </button>
+                            <div class="error-message" id="passwordError"></div>
+                        </div>
+                        <div class="password-strength" id="passwordStrength" style="display: none;">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <div class="strength-text" id="strengthText">Слабый</div>
+                        </div>
+                        <div class="form-group password-group">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" minlength="8" placeholder="Повторите пароль">
+                            <button type="button" class="eye-btn" id="confirmEyeBtn">
+                                <span class="eye-icon">💀</span>
+                            </button>
+                            <div class="error-message" id="confirmPasswordError"></div>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span class="checkmark"></span>
+                                Я принимаю <a href="#" id="termsLink">условия использования</a>
+                            </label>
+                            <div class="error-message" id="termsError"></div>
+                        </div>
+                        <button type="submit" class="register-btn" id="registerBtn">
+                            <span class="btn-text">Создать аккаунт</span>
+                            <span class="btn-loader" id="registerBtnLoader"></span>
+                        </button>
+                        <div class="tab-link">Уже есть аккаунт? <a href="#" id="toLogin">Войти</a></div>
+                    </form>
                 </div>
-                <div class="forgot-password">
-                    <a href="#" id="forgotPasswordLink">Забыли пароль?</a>
-                </div>
-                <button type="submit" class="register-btn" id="loginBtn">
-                    <span class="btn-text">Войти</span>
-                    <span class="btn-loader" id="loginBtnLoader"></span>
-                </button>
-            </form>
-            <form class="tab-form register-form" id="registerForm" autocomplete="off" style="display:none;">
-                <div class="form-group">
-                    <input type="text" id="username" name="username" required autocomplete="new-password" minlength="3" placeholder="Имя пользователя">
-                    <div class="error-message" id="usernameError"></div>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" required autocomplete="new-password" placeholder="Электронная почта">
-                    <div class="error-message" id="emailError"></div>
-                </div>
-                <div class="form-group password-group">
-                    <input type="password" id="password" name="password" required autocomplete="new-password" minlength="8" placeholder="Пароль">
-                    <button type="button" class="eye-btn" id="passwordEyeBtn">
-                        <span class="eye-icon">💀</span>
-                    </button>
-                    <div class="error-message" id="passwordError"></div>
-                </div>
-                <div class="password-strength" id="passwordStrength" style="display: none;">
-                    <div class="strength-bar">
-                        <div class="strength-fill" id="strengthFill"></div>
-                    </div>
-                    <div class="strength-text" id="strengthText">Слабый</div>
-                </div>
-                <div class="form-group password-group">
-                    <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" minlength="8" placeholder="Повторите пароль">
-                    <button type="button" class="eye-btn" id="confirmEyeBtn">
-                        <span class="eye-icon">💀</span>
-                    </button>
-                    <div class="error-message" id="confirmPasswordError"></div>
-                </div>
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <span class="checkmark"></span>
-                        Я принимаю <a href="#" id="termsLink">условия использования</a>
-                    </label>
-                    <div class="error-message" id="termsError"></div>
-                </div>
-                <button type="submit" class="register-btn" id="registerBtn">
-                    <span class="btn-text">Создать аккаунт</span>
-                    <span class="btn-loader" id="registerBtnLoader"></span>
-                </button>
-                <div class="tab-link">Уже есть аккаунт? <a href="#" id="toLogin">Войти</a></div>
-            </form>
+            </div>
         </div>
     </div>
     

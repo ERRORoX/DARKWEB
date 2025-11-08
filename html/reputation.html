@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Репутация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .reputation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .reputation-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-card {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .top-users {
+            margin-top: 30px;
+        }
+        
+        .user-row {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .user-row:hover {
+            border-left-color: var(--accent-cyan);
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        .user-rank {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            min-width: 40px;
+        }
+        
+        .user-info {
+            flex: 1;
+            margin-left: 20px;
+        }
+        
+        .user-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+        
+        .user-badges {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .badge {
+            padding: 3px 8px;
+            background: rgba(0, 255, 255, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 11px;
+            color: var(--accent-cyan);
+        }
+        
+        .user-reputation {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            min-width: 80px;
+            text-align: right;
+        }
+        
+        .reputation-bar {
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .reputation-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            transition: width 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Репутация</h1>
+                <p class="content-subtitle">Топ пользователей и рейтинги</p>
+            </div>
+            
+            <div class="reputation-container">
+                <div class="reputation-stats">
+                    <div class="stat-card card">
+                        <div class="stat-value">1,234</div>
+                        <div class="stat-label">Всего пользователей</div>
+                    </div>
+                    <div class="stat-card card">
+                        <div class="stat-value">856</div>
+                        <div class="stat-label">Проверенных продавцов</div>
+                    </div>
+                    <div class="stat-card card">
+                        <div class="stat-value">12,456</div>
+                        <div class="stat-label">Успешных сделок</div>
+                    </div>
+                    <div class="stat-card card">
+                        <div class="stat-value">98.5%</div>
+                        <div class="stat-label">Уровень доверия</div>
+                    </div>
+                </div>
+                
+                <div class="top-users">
+                    <h2 class="card-title">Топ пользователей</h2>
+                    <div class="card">
+                        <div class="user-row">
+                            <div class="user-rank">1</div>
+                            <div class="user-info">
+                                <div class="user-name">@MasterHacker</div>
+                                <div class="user-badges">
+                                    <span class="badge">⭐ Проверенный</span>
+                                    <span class="badge">💎 Премиум</span>
+                                    <span class="badge">🛡️ Верифицирован</span>
+                                </div>
+                                <div class="reputation-bar">
+                                    <div class="reputation-fill" style="width: 98%"></div>
+                                </div>
+                            </div>
+                            <div class="user-reputation">98.5%</div>
+                        </div>
+                        
+                        <div class="user-row">
+                            <div class="user-rank">2</div>
+                            <div class="user-info">
+                                <div class="user-name">@CryptoKing</div>
+                                <div class="user-badges">
+                                    <span class="badge">⭐ Проверенный</span>
+                                    <span class="badge">💎 Премиум</span>
+                                </div>
+                                <div class="reputation-bar">
+                                    <div class="reputation-fill" style="width: 96%"></div>
+                                </div>
+                            </div>
+                            <div class="user-reputation">96.2%</div>
+                        </div>
+                        
+                        <div class="user-row">
+                            <div class="user-rank">3</div>
+                            <div class="user-info">
+                                <div class="user-name">@DarkDealer</div>
+                                <div class="user-badges">
+                                    <span class="badge">⭐ Проверенный</span>
+                                    <span class="badge">🛡️ Верифицирован</span>
+                                </div>
+                                <div class="reputation-bar">
+                                    <div class="reputation-fill" style="width: 94%"></div>
+                                </div>
+                            </div>
+                            <div class="user-reputation">94.8%</div>
+                        </div>
+                        
+                        <div class="user-row">
+                            <div class="user-rank">4</div>
+                            <div class="user-info">
+                                <div class="user-name">@ShadowSeller</div>
+                                <div class="user-badges">
+                                    <span class="badge">⭐ Проверенный</span>
+                                </div>
+                                <div class="reputation-bar">
+                                    <div class="reputation-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="user-reputation">92.1%</div>
+                        </div>
+                        
+                        <div class="user-row">
+                            <div class="user-rank">5</div>
+                            <div class="user-info">
+                                <div class="user-name">@AnonTrader</div>
+                                <div class="user-badges">
+                                    <span class="badge">⭐ Проверенный</span>
+                                </div>
+                                <div class="reputation-bar">
+                                    <div class="reputation-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="user-reputation">90.5%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('reputation');
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Группы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        /* Специфичные стили для страницы групп */
+        .groups-header {
+            margin-bottom: 30px;
+        }
+        
+        .groups-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .group-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .group-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .group-title {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .group-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .group-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .group-members {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        .join-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .join-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 1024px) {
+            /* Контейнер использует main-content из common.css */
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header groups-header">
+                <h1 class="content-title groups-title">Группы</h1>
+                <p class="content-subtitle">Присоединяйтесь к группам по интересам</p>
+            </div>
+            
+            <div class="groups-grid" id="groupsGrid">
+                <!-- Группы будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('groups');
+            
+            // Загрузка групп
+            const groups = [
+                { id: 1, title: 'Хакеры Elite', description: 'Элитное сообщество профессиональных хакеров', members: 1250 },
+                { id: 2, title: 'Кардеры', description: 'Группа для обмена опытом в кардинге', members: 890 },
+                { id: 3, title: 'Спамеры', description: 'Сообщество специалистов по массовой рассылке', members: 650 },
+                { id: 4, title: 'Фрикинги', description: 'Группа любителей телефонного фрикинга', members: 420 },
+                { id: 5, title: 'Вирусологи', description: 'Разработчики вредоносного ПО', members: 780 },
+                { id: 6, title: 'Анонимность', description: 'Обсуждение методов сохранения анонимности', members: 1500 }
+            ];
+            
+            const grid = document.getElementById('groupsGrid');
+            groups.forEach(group => {
+                const card = document.createElement('div');
+                card.className = 'group-card glass';
+                card.innerHTML = `
+                    <h3 class="group-title">${group.title}</h3>
+                    <p class="group-description">${group.description}</p>
+                    <div class="group-meta">
+                        <span class="group-members">👥 ${group.members} участников</span>
+                        <button class="join-btn" onclick="joinGroup(${group.id})">Присоединиться</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        });
+        
+        function joinGroup(id) {
+            alert(`Вы присоединились к группе #${id}`);
+        }
+    </script>
+</body>
+</html>
+

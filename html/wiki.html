@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Wiki</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .wiki-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+        
+        .wiki-sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+        
+        .wiki-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .wiki-menu-item {
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .wiki-menu-item:hover,
+        .wiki-menu-item.active {
+            border-left-color: var(--accent-cyan);
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--accent-cyan);
+        }
+        
+        .wiki-content {
+            min-height: 500px;
+        }
+        
+        .wiki-article {
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .wiki-article h2 {
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        
+        .wiki-article h3 {
+            color: var(--text-primary);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .wiki-article p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .wiki-article ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .wiki-article li {
+            margin-bottom: 8px;
+        }
+        
+        .wiki-code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-cyan);
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 1024px) {
+            .wiki-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .wiki-sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Wiki</h1>
+                <p class="content-subtitle">База знаний и документация</p>
+            </div>
+            
+            <div class="wiki-container">
+                <aside class="wiki-sidebar">
+                    <div class="card">
+                        <ul class="wiki-menu">
+                            <li class="wiki-menu-item active">Начало работы</li>
+                            <li class="wiki-menu-item">Безопасность</li>
+                            <li class="wiki-menu-item">Анонимность</li>
+                            <li class="wiki-menu-item">Криптовалюты</li>
+                            <li class="wiki-menu-item">Торговля</li>
+                            <li class="wiki-menu-item">FAQ</li>
+                            <li class="wiki-menu-item">Глоссарий</li>
+                        </ul>
+                    </div>
+                </aside>
+                
+                <div class="wiki-content">
+                    <div class="wiki-article card">
+                        <h2>Начало работы</h2>
+                        <h3>Добро пожаловать в DARKWEB</h3>
+                        <p>DARKWEB - это закрытая анонимная платформа для избранных. Здесь вы найдете все необходимое для безопасного и анонимного использования сети.</p>
+                        
+                        <h3>Первые шаги</h3>
+                        <ul>
+                            <li>Настройте VPN для дополнительной защиты</li>
+                            <li>Используйте Tor Browser для максимальной анонимности</li>
+                            <li>Изучите правила сообщества</li>
+                            <li>Настройте двухфакторную аутентификацию</li>
+                        </ul>
+                        
+                        <h3>Безопасность</h3>
+                        <p>Ваша безопасность - наш приоритет. Следуйте этим рекомендациям:</p>
+                        <div class="wiki-code">
+# Настройка Tor Browser
+1. Скачайте официальный Tor Browser
+2. Никогда не отключайте JavaScript полностью
+3. Используйте HTTPS везде, где возможно
+4. Не открывайте файлы, скачанные через Tor
+                        </div>
+                        
+                        <h3>Анонимность</h3>
+                        <p>Для сохранения анонимности:</p>
+                        <ul>
+                            <li>Не раскрывайте личную информацию</li>
+                            <li>Используйте криптовалюты для платежей</li>
+                            <li>Не используйте один и тот же псевдоним везде</li>
+                            <li>Регулярно меняйте пароли</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('wiki');
+            
+            // Обработка кликов по меню Wiki
+            const menuItems = document.querySelectorAll('.wiki-menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Отмывание</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .laundering-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .laundering-section {
+            padding: 25px;
+        }
+        
+        .laundering-section h3 {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .laundering-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .laundering-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .laundering-list li {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .laundering-list li::before {
+            content: '💰';
+            position: absolute;
+            left: 0;
+        }
+        
+        .warning-box {
+            background: rgba(255, 170, 68, 0.1);
+            border: 1px solid rgba(255, 170, 68, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .warning-box h4 {
+            color: #ffaa44;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Отмывание</h1>
+                <p class="content-subtitle">Легализация незаконных средств</p>
+            </div>
+            
+            <div class="laundering-content">
+                <div class="card laundering-section">
+                    <h3>Методы отмывания денег</h3>
+                    <p>Отмывание денег - это процесс придания незаконно полученным средствам видимости законного происхождения. Существует несколько основных методов:</p>
+                    <ul class="laundering-list">
+                        <li>Структурирование (смурфинг) - разбиение крупных сумм на мелкие транзакции</li>
+                        <li>Использование подставных компаний - создание фиктивных предприятий</li>
+                        <li>Криптовалюты - анонимные транзакции через блокчейн</li>
+                        <li>Оффшорные счета - использование оффшорных юрисдикций</li>
+                        <li>Торговое отмывание - использование международной торговли</li>
+                        <li>Недвижимость - инвестирование в недвижимость для легализации</li>
+                    </ul>
+                </div>
+                
+                <div class="card laundering-section">
+                    <h3>Этапы отмывания</h3>
+                    <p>Процесс отмывания денег обычно состоит из трех этапов:</p>
+                    <ul class="laundering-list">
+                        <li>Размещение (Placement) - внесение незаконных средств в финансовую систему</li>
+                        <li>Разделение (Layering) - проведение множественных транзакций для сокрытия источника</li>
+                        <li>Интеграция (Integration) - возврат "очищенных" средств в легальную экономику</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>⚠️ ВНИМАНИЕ</h4>
+                    <p>Отмывание денег является серьезным преступлением в большинстве стран. Информация предоставлена в образовательных целях. Платформа не несет ответственности за использование этой информации в незаконных целях.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('laundering');
+        });
+    </script>
+</body>
+</html>

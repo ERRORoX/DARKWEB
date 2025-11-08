@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Знакомства</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        /* Контейнер использует main-content из common.css */
+            /* margin-left теперь в common.css */
+            padding: 40px;
+        }
+        
+        .personals-header {
+            margin-bottom: 30px;
+        }
+        
+        .personals-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .personals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .person-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .person-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .person-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .person-name {
+            color: var(--accent-cyan);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .person-info {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .person-description {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .contact-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 1024px) {
+            /* Контейнер использует main-content из common.css */
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="personals-header">
+                <h1 class="personals-title">DW Personals</h1>
+                <p class="content-subtitle">Анонимные знакомства в темной сети</p>
+            </div>
+            
+            <div class="personals-grid" id="personalsGrid">
+                <!-- Профили будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('personals');
+            
+            const profiles = [
+                { id: 1, name: 'Shadow_User', avatar: 'S', age: 28, location: 'Анонимно', desc: 'Ищу единомышленников для совместных проектов' },
+                { id: 2, name: 'Dark_Hacker', avatar: 'D', age: 32, location: 'Скрыто', desc: 'Профессиональный хакер, открыт для сотрудничества' },
+                { id: 3, name: 'Anon_Girl', avatar: 'A', age: 25, location: 'Не указано', desc: 'Ищу интересных собеседников в темной сети' },
+                { id: 4, name: 'Cyber_Wolf', avatar: 'C', age: 30, location: 'Анонимно', desc: 'Специалист по кибербезопасности' },
+                { id: 5, name: 'Ghost_Rider', avatar: 'G', age: 27, location: 'Скрыто', desc: 'Любитель анонимности и приватности' },
+                { id: 6, name: 'Night_Crawler', avatar: 'N', age: 29, location: 'Анонимно', desc: 'Ищу партнеров для бизнес-проектов' }
+            ];
+            
+            const grid = document.getElementById('personalsGrid');
+            profiles.forEach(profile => {
+                const card = document.createElement('div');
+                card.className = 'person-card glass';
+                card.innerHTML = `
+                    <div class="person-avatar">${profile.avatar}</div>
+                    <h3 class="person-name">${profile.name}</h3>
+                    <div class="person-info">${profile.age} лет • ${profile.location}</div>
+                    <p class="person-description">${profile.desc}</p>
+                    <button class="contact-btn" onclick="contactPerson(${profile.id})">Связаться</button>
+                `;
+                grid.appendChild(card);
+            });
+        });
+        
+        function contactPerson(id) {
+            alert(`Связь с пользователем #${id} установлена`);
+        }
+    </script>
+</body>
+</html>
+

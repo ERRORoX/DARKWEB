@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Правила</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        /* Контейнер использует main-content из common.css */
+            /* margin-left теперь в common.css */
+            padding: 40px;
+            max-width: 900px;
+        }
+        
+        .rules-header {
+            margin-bottom: 30px;
+        }
+        
+        .rules-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .rules-section {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .rules-section-title {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .rules-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .rules-list li {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .rules-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-size: 10px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid #ff4444;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .warning-box h4 {
+            color: #ff4444;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box p {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 1024px) {
+            /* Контейнер использует main-content из common.css */
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="rules-header">
+                <h1 class="rules-title">Правила платформы</h1>
+                <p class="content-subtitle">Соблюдайте правила для безопасного использования</p>
+            </div>
+            
+            <div class="rules-section">
+                <h3 class="rules-section-title">1. Анонимность</h3>
+                <ul class="rules-list">
+                    <li>Никогда не раскрывайте свою личность другим пользователям</li>
+                    <li>Используйте VPN и средства защиты при доступе к платформе</li>
+                    <li>Не публикуйте личную информацию в публичных чатах</li>
+                    <li>Используйте криптовалюты для всех транзакций</li>
+                </ul>
+            </div>
+            
+            <div class="rules-section">
+                <h3 class="rules-section-title">2. Запрещено</h3>
+                <ul class="rules-list">
+                    <li>Скам и мошенничество в любом виде</li>
+                    <li>Раскрытие личной информации других пользователей</li>
+                    <li>Распространение вредоносного ПО без предупреждения</li>
+                    <li>Спам и реклама не по теме</li>
+                    <li>Попытки взлома платформы</li>
+                    <li>Нарушение анонимности других участников</li>
+                </ul>
+            </div>
+            
+            <div class="rules-section">
+                <h3 class="rules-section-title">3. Система репутации</h3>
+                <ul class="rules-list">
+                    <li>Обязательные отзывы после каждой сделки</li>
+                    <li>Блэклист для скамеров и мошенников</li>
+                    <li>Система верификации продавцов</li>
+                    <li>Автоматический расчет рейтинга доверия</li>
+                </ul>
+            </div>
+            
+            <div class="rules-section">
+                <h3 class="rules-section-title">4. Безопасность</h3>
+                <ul class="rules-list">
+                    <li>Проверяйте репутацию перед сделками</li>
+                    <li>Не доверяйте слепо новым пользователям</li>
+                    <li>Используйте эскроу для крупных сделок</li>
+                    <li>Сохраняйте все доказательства транзакций</li>
+                </ul>
+            </div>
+            
+            <div class="rules-section">
+                <h3 class="rules-section-title">5. Модерация</h3>
+                <ul class="rules-list">
+                    <li>Администрация оставляет за собой право банить нарушителей</li>
+                    <li>Жалобы рассматриваются в течение 48 часов</li>
+                    <li>Решение администрации окончательное</li>
+                    <li>Обжалование возможно только при наличии доказательств</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <h4>⚠️ ВНИМАНИЕ</h4>
+                <p>Нарушение правил может привести к перманентному бану. Соблюдайте правила и оставайтесь анонимными. Платформа не несет ответственности за действия пользователей.</p>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('rules');
+        });
+    </script>
+</body>
+</html>
+

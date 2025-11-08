@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Поддержка</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .support-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .support-section {
+            margin-bottom: 30px;
+        }
+        
+        .support-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .support-item:hover {
+            transform: translateX(5px);
+            border-left-color: var(--accent-cyan);
+        }
+        
+        .support-item-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .support-item-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .contact-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--accent-cyan);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 1024px) {
+            .support-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Поддержка</h1>
+                <p class="content-subtitle">Помощь и поддержка пользователей</p>
+            </div>
+            
+            <div class="support-container">
+                <div class="support-section">
+                    <h2 class="card-title">Часто задаваемые вопросы</h2>
+                    <div class="card">
+                        <div class="support-item">
+                            <div class="support-item-title">Как начать использовать платформу?</div>
+                            <div class="support-item-description">
+                                Зарегистрируйтесь на платформе, настройте VPN и Tor Browser для максимальной анонимности. Ознакомьтесь с правилами сообщества.
+                            </div>
+                        </div>
+                        
+                        <div class="support-item">
+                            <div class="support-item-title">Как обеспечить безопасность?</div>
+                            <div class="support-item-description">
+                                Используйте VPN, Tor Browser, двухфакторную аутентификацию. Никогда не раскрывайте личную информацию и используйте криптовалюты для платежей.
+                            </div>
+                        </div>
+                        
+                        <div class="support-item">
+                            <div class="support-item-title">Как совершить покупку?</div>
+                            <div class="support-item-description">
+                                Найдите нужный товар или услугу в маркетплейсе, ознакомьтесь с репутацией продавца, совершите оплату через криптовалюту.
+                            </div>
+                        </div>
+                        
+                        <div class="support-item">
+                            <div class="support-item-title">Как повысить репутацию?</div>
+                            <div class="support-item-description">
+                                Репутация повышается за успешные сделки, положительные отзывы и активность в сообществе. Будьте честны и надежны.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="support-section">
+                    <h2 class="card-title">Свяжитесь с нами</h2>
+                    <div class="contact-form card">
+                        <form id="supportForm">
+                            <div class="form-group">
+                                <label class="form-label" for="supportEmail">Email (опционально)</label>
+                                <input type="email" class="form-input" id="supportEmail" placeholder="your@email.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="supportSubject">Тема</label>
+                                <input type="text" class="form-input" id="supportSubject" placeholder="Опишите вашу проблему" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="supportMessage">Сообщение</label>
+                                <textarea class="form-textarea" id="supportMessage" placeholder="Подробно опишите вашу проблему или вопрос..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">Отправить запрос</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('support');
+            
+            // Обработка формы поддержки
+            const supportForm = document.getElementById('supportForm');
+            if (supportForm) {
+                supportForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const subject = document.getElementById('supportSubject').value;
+                    const message = document.getElementById('supportMessage').value;
+                    
+                    if (subject && message) {
+                        showNotification('Ваш запрос отправлен! Мы ответим в ближайшее время.', 'success');
+                        supportForm.reset();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

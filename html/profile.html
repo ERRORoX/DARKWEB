@@ -1,166 +1,503 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARKWEB - Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <title>DARKWEB - SYSTEM PROFILE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
     <div class="profile-container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="sidebar-title">Darkweb</h1>
-                <p class="sidebar-subtitle">Navigation Panel</p>
-            </div>
-            
-            <nav class="nav-menu">
-                <div class="menu-category">
-                    <div class="category-title">Community</div>
-                </div>
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">Family</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Chatroom</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Groups</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">DW Personals</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Rules</a>
-                </li>
-                
-                <div class="menu-category">
-                    <div class="category-title">Platforms</div>
-                </div>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Trojans</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">E-mail Lists</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Carding</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Spam</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Platforms</a>
-                </li>
-                
-                <div class="menu-category">
-                    <div class="category-title">Tools</div>
-                </div>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Hacking</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Cracking</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Phreaking</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Viruses</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Anarchy</a>
-                </li>
-                
-                <div class="menu-category">
-                    <div class="category-title">Services</div>
-                </div>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Counterfeit</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Forgery</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Laundering</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Assassination</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Conspiracy</a>
-                </li>
-            </nav>
-        </aside>
+        <!-- Sidebar будет загружен динамически -->
         
         <!-- Main Content -->
         <main class="main-content">
-            <div class="content-header">
-                <h1 class="content-title">User Profile</h1>
-                <p class="content-subtitle">Welcome to the Darkweb Network</p>
+            <!-- Terminal Header -->
+            <div class="terminal-header">
+                <div class="terminal-title">
+                    <span class="terminal-prompt">root@darkweb:~$</span>
+                    <span class="terminal-cursor">_</span>
+                </div>
+                <div class="terminal-controls">
+                    <span class="control-btn">─</span>
+                    <span class="control-btn">□</span>
+                    <span class="control-btn close-btn">×</span>
+                </div>
             </div>
             
-            <!-- Profile Card -->
-            <div class="profile-card glass">
-                <div class="profile-header">
-                    <div class="profile-avatar">D</div>
-                    <div class="profile-info">
-                        <h2>DarkUser_1337</h2>
-                        <p><span class="status-indicator status-online"></span>Online</p>
+            <!-- ASCII Art Header -->
+            <div class="ascii-art-container">
+                <pre class="ascii-art" id="asciiArt">
+╔═══════════════════════════════════════════════════════════╗
+║                                                           ║
+║          ███████╗██████╗ ██████╗  ██████╗ ██████╗        ║
+║          ██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗       ║
+║          █████╗  ██████╔╝██████╔╝██║   ██║██████╔╝       ║
+║          ██╔══╝  ██╔══██╗██╔══██╗██║   ██║██╔══██╗       ║
+║          ██║     ██║  ██║██║  ██║╚██████╔╝██║  ██║       ║
+║          ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝       ║
+║                                                           ║
+║              ╔═══╗╔═╗─╔╗╔═══╗╔═╗╔═╗                      ║
+║              ║╔═╗║║║╚╗║║║╔═╗║║║╚╝║║                      ║
+║              ║╚══╗║╔╗╚╝║║║─║║║╔╗╔╗║                      ║
+║              ╚══╗║║║╚╗║║║║─║║║║║║║║                      ║
+║              ║╚═╝║║║─║║║║╚═╝║║║║║║║                      ║
+║              ╚═══╝╚╝─╚═╝╚═══╝╚╝╚╝╚╝                      ║
+║                                                           ║
+║         SYSTEM PROFILE v2.4.7 - [ACCESS GRANTED]         ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+            
+            <!-- System Info Grid -->
+            <div class="system-grid">
+                <!-- User Identity Card -->
+                <div class="system-card terminal-card">
+                    <div class="card-header">
+                        <span class="card-title">[ИДЕНТИЧНОСТЬ ПОЛЬЗОВАТЕЛЯ]</span>
+                        <span class="card-status online">● ОНЛАЙН</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="terminal-line">
+                            <span class="prompt">root@darkweb:~$</span>
+                            <span class="command">whoami</span>
+                        </div>
+                        <div class="terminal-output" id="terminalUsername">darkuser_1337</div>
+                        <div class="terminal-line">
+                            <span class="prompt">root@darkweb:~$</span>
+                            <span class="command">id</span>
+                        </div>
+                        <div class="terminal-output">uid=1000(darkuser) gid=1000(hackers) groups=1000(hackers),27(sudo),999(admin)</div>
+                        <div class="terminal-line">
+                            <span class="prompt">root@darkweb:~$</span>
+                            <span class="command">groups</span>
+                        </div>
+                        <div class="terminal-output">hackers sudo admin root-access</div>
+                        <div class="terminal-line">
+                            <span class="prompt">root@darkweb:~$</span>
+                            <span class="command">cat /etc/passwd | grep darkuser</span>
+                        </div>
+                        <div class="terminal-output">darkuser:x:1000:1000:ERRORoX:/home/darkuser:/bin/bash</div>
                     </div>
                 </div>
                 
-                <div class="profile-details">
-                    <div class="details-section">
-                        <h3 class="details-title">Account Information</h3>
-                        <div class="detail-row">
-                            <span class="detail-label">Username</span>
-                            <span class="detail-value">DarkUser_1337</span>
+                <!-- Network Status -->
+                <div class="system-card terminal-card">
+                    <div class="card-header">
+                        <span class="card-title">[СТАТУС СЕТИ]</span>
+                        <span class="card-status connected">● ПОДКЛЮЧЕНО</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="info-row">
+                            <span class="info-label">IP Адрес:</span>
+                            <span class="info-value" id="userIP">192.168.1.xxx</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Email</span>
-                            <span class="detail-value">darkuser@darkweb.net</span>
+                        <div class="info-row">
+                            <span class="info-label">VPN:</span>
+                            <span class="info-value status-active">АКТИВЕН</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Member Since</span>
-                            <span class="detail-value">2024-01-15</span>
+                        <div class="info-row">
+                            <span class="info-label">TOR:</span>
+                            <span class="info-value status-active">ВКЛЮЧЕН</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Status</span>
-                            <span class="detail-value verified">Verified</span>
+                        <div class="info-row">
+                            <span class="info-label">Местоположение:</span>
+                            <span class="info-value">СКРЫТО</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Порт:</span>
+                            <span class="info-value">9050</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Протокол:</span>
+                            <span class="info-value">TCP/IP</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Прокси:</span>
+                            <span class="info-value status-active">АКТИВЕН</span>
                         </div>
                     </div>
-                    
-                    <div class="details-section">
-                        <h3 class="details-title">Network Stats</h3>
-                        <div class="detail-row">
-                            <span class="detail-label">Rank</span>
-                            <span class="detail-value rank">Elite Hacker</span>
+                </div>
+                
+                <!-- System Stats -->
+                <div class="system-card terminal-card">
+                    <div class="card-header">
+                        <span class="card-title">[СИСТЕМНЫЕ МЕТРИКИ]</span>
+                        <span class="card-status">● РАБОТАЕТ</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="metric-row">
+                            <span class="metric-label">Время работы:</span>
+                            <span class="metric-value" id="systemUptime">127д 14ч 23м</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Reputation</span>
-                            <span class="detail-value">98.7%</span>
+                        <div class="metric-row">
+                            <span class="metric-label">Последний вход:</span>
+                            <span class="metric-value" id="lastLogin">2 минуты назад</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Connections</span>
-                            <span class="detail-value">1,247</span>
+                        <div class="metric-row">
+                            <span class="metric-label">Уровень доступа:</span>
+                            <span class="metric-value level-elite">ЭЛИТНЫЙ</span>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">Last Activity</span>
-                            <span class="detail-value">2 minutes ago</span>
+                        <div class="metric-row">
+                            <span class="metric-label">Безопасность:</span>
+                            <span class="metric-value status-secure">ЗАЩИЩЕНО</span>
                         </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Шифрование:</span>
+                            <span class="metric-value">AES-256</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">2FA:</span>
+                            <span class="metric-value status-active">ВКЛЮЧЕН</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hacker Stats -->
+                <div class="system-card terminal-card">
+                    <div class="card-header">
+                        <span class="card-title">[СТАТИСТИКА ХАКЕРА]</span>
+                        <span class="card-status">● АКТИВНО</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="hacker-stat">
+                            <div class="stat-header">
+                                <span class="stat-name">Выполнено эксплойтов:</span>
+                                <span class="stat-value" id="statExploits">0</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-bar-fill" style="width: 0%" id="exploitsBar"></div>
+                            </div>
+                        </div>
+                        <div class="hacker-stat">
+                            <div class="stat-header">
+                                <span class="stat-name">Взломано серверов:</span>
+                                <span class="stat-value" id="statServers">0</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-bar-fill" style="width: 0%" id="serversBar"></div>
+                            </div>
+                        </div>
+                        <div class="hacker-stat">
+                            <div class="stat-header">
+                                <span class="stat-name">Взломано баз данных:</span>
+                                <span class="stat-value" id="statDatabases">0</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-bar-fill" style="width: 0%" id="databasesBar"></div>
+                            </div>
+                        </div>
+                        <div class="hacker-stat">
+                            <div class="stat-header">
+                                <span class="stat-name">Найдено Zero-Day:</span>
+                                <span class="stat-value" id="statZeroDays">0</span>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-bar-fill" style="width: 0%" id="zeroDaysBar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Logs -->
+            <div class="system-card terminal-card logs-card">
+                <div class="card-header">
+                    <span class="card-title">[SYSTEM LOGS]</span>
+                    <span class="card-status">● MONITORING</span>
+                    <button class="clear-logs-btn" id="clearLogsBtn">CLEAR</button>
+                </div>
+                <div class="terminal-content logs-content" id="systemLogs">
+                    <div class="log-entry log-info">
+                        <span class="log-time">[2024-01-15 14:23:45]</span>
+                        <span class="log-level">[INFO]</span>
+                        <span class="log-message">System initialized. Welcome back, darkuser_1337.</span>
+                    </div>
+                    <div class="log-entry log-success">
+                        <span class="log-time">[2024-01-15 14:23:46]</span>
+                        <span class="log-level">[SUCCESS]</span>
+                        <span class="log-message">VPN connection established. IP: 192.168.1.xxx</span>
+                    </div>
+                    <div class="log-entry log-warning">
+                        <span class="log-time">[2024-01-15 14:23:47]</span>
+                        <span class="log-level">[WARNING]</span>
+                        <span class="log-message">Multiple login attempts detected from unknown IP.</span>
+                    </div>
+                    <div class="log-entry log-info">
+                        <span class="log-time">[2024-01-15 14:23:48]</span>
+                        <span class="log-level">[INFO]</span>
+                        <span class="log-message">Security protocols activated. All systems secured.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Activity Timeline -->
+            <div class="system-card terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[ACTIVITY TIMELINE]</span>
+                    <span class="card-status">● TRACKING</span>
+                </div>
+                <div class="terminal-content" id="activityTimeline">
+                    <!-- Activity items will be added by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Reputation & Rank -->
+            <div class="system-card terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[REPUTATION & RANK]</span>
+                    <span class="card-status">● VERIFIED</span>
+                </div>
+                <div class="terminal-content">
+                    <div class="reputation-display">
+                        <div class="reputation-header">
+                            <span class="reputation-label">REPUTATION:</span>
+                            <span class="reputation-value" id="reputationValue">98.7%</span>
+                        </div>
+                        <div class="reputation-bar-container">
+                            <div class="reputation-bar">
+                                <div class="reputation-fill" id="reputationFill" style="width: 98.7%"></div>
+                            </div>
+                        </div>
+                        <div class="rank-display">
+                            <span class="rank-label">RANK:</span>
+                            <span class="rank-value level-elite" id="rankValue">ELITE HACKER</span>
+                        </div>
+                        <div class="connections-display">
+                            <span class="connections-label">ACTIVE CONNECTIONS:</span>
+                            <span class="connections-value" id="connectionsValue">1,247</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interactive Terminal -->
+            <div class="system-card terminal-card interactive-terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[INTERACTIVE TERMINAL]</span>
+                    <span class="card-status">● ACTIVE</span>
+                    <button class="clear-logs-btn" id="clearTerminalBtn">CLEAR</button>
+                </div>
+                <div class="terminal-content" id="interactiveTerminal">
+                    <div class="terminal-output-area" id="terminalOutput"></div>
+                    <div class="terminal-input-line">
+                        <span class="terminal-prompt">root@darkweb:~$</span>
+                        <input type="text" id="terminalInput" class="terminal-command-input" autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Monitor -->
+            <div class="system-card terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[SYSTEM MONITOR]</span>
+                    <span class="card-status">● RUNNING</span>
+                </div>
+                <div class="terminal-content">
+                    <div class="monitor-row">
+                        <span class="monitor-label">CPU:</span>
+                        <div class="monitor-bar">
+                            <div class="monitor-bar-fill" id="cpuBar" style="width: 0%"></div>
+                            <span class="monitor-value" id="cpuValue">0%</span>
+                        </div>
+                    </div>
+                    <div class="monitor-row">
+                        <span class="monitor-label">RAM:</span>
+                        <div class="monitor-bar">
+                            <div class="monitor-bar-fill" id="ramBar" style="width: 0%"></div>
+                            <span class="monitor-value" id="ramValue">0%</span>
+                        </div>
+                    </div>
+                    <div class="monitor-row">
+                        <span class="monitor-label">DISK:</span>
+                        <div class="monitor-bar">
+                            <div class="monitor-bar-fill" id="diskBar" style="width: 0%"></div>
+                            <span class="monitor-value" id="diskValue">0%</span>
+                        </div>
+                    </div>
+                    <div class="monitor-row">
+                        <span class="monitor-label">NETWORK:</span>
+                        <div class="monitor-bar">
+                            <div class="monitor-bar-fill" id="networkBar" style="width: 0%"></div>
+                            <span class="monitor-value" id="networkValue">0 MB/s</span>
+                        </div>
+                    </div>
+                    <div class="monitor-info">
+                        <div class="info-row">
+                            <span class="info-label">Active Processes:</span>
+                            <span class="info-value" id="processCount">0</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Uptime:</span>
+                            <span class="info-value" id="monitorUptime">0d 0h 0m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Active Connections -->
+            <div class="system-card terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[ACTIVE CONNECTIONS]</span>
+                    <span class="card-status">● MONITORING</span>
+                </div>
+                <div class="terminal-content">
+                    <div class="connections-list" id="activeConnections">
+                        <!-- Connections will be added by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hacker Tools -->
+            <div class="system-card terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[HACKER TOOLS]</span>
+                    <span class="card-status">● LOADED</span>
+                </div>
+                <div class="terminal-content">
+                    <div class="tools-grid">
+                        <div class="tool-item" data-tool="nmap">
+                            <span class="tool-icon">🔍</span>
+                            <span class="tool-name">NMAP</span>
+                            <span class="tool-desc">Network Scanner</span>
+                        </div>
+                        <div class="tool-item" data-tool="metasploit">
+                            <span class="tool-icon">💣</span>
+                            <span class="tool-name">Metasploit</span>
+                            <span class="tool-desc">Exploit Framework</span>
+                        </div>
+                        <div class="tool-item" data-tool="wireshark">
+                            <span class="tool-icon">📡</span>
+                            <span class="tool-name">Wireshark</span>
+                            <span class="tool-desc">Packet Analyzer</span>
+                        </div>
+                        <div class="tool-item" data-tool="john">
+                            <span class="tool-icon">🔑</span>
+                            <span class="tool-name">John The Ripper</span>
+                            <span class="tool-desc">Password Cracker</span>
+                        </div>
+                        <div class="tool-item" data-tool="sqlmap">
+                            <span class="tool-icon">🗄️</span>
+                            <span class="tool-name">SQLMap</span>
+                            <span class="tool-desc">SQL Injection</span>
+                        </div>
+                        <div class="tool-item" data-tool="burp">
+                            <span class="tool-icon">🕷️</span>
+                            <span class="tool-name">Burp Suite</span>
+                            <span class="tool-desc">Web Security</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cryptocurrency Wallets -->
+            <div class="system-card terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[CRYPTO WALLETS]</span>
+                    <span class="card-status">● SECURED</span>
+                </div>
+                <div class="terminal-content">
+                    <div class="wallet-item">
+                        <span class="wallet-label">Bitcoin (BTC):</span>
+                        <span class="wallet-value" id="btcBalance">0.00000000 BTC</span>
+                    </div>
+                    <div class="wallet-item">
+                        <span class="wallet-label">Monero (XMR):</span>
+                        <span class="wallet-value" id="xmrBalance">0.00000000 XMR</span>
+                    </div>
+                    <div class="wallet-item">
+                        <span class="wallet-label">Ethereum (ETH):</span>
+                        <span class="wallet-value" id="ethBalance">0.00000000 ETH</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Attack Statistics -->
+            <div class="system-card terminal-card">
+                <div class="card-header">
+                    <span class="card-title">[ATTACK STATISTICS]</span>
+                    <span class="card-status">● TRACKING</span>
+                </div>
+                <div class="terminal-content">
+                    <div class="attack-stat">
+                        <span class="attack-label">SQL Injection:</span>
+                        <span class="attack-value" id="statSQL">0</span>
+                    </div>
+                    <div class="attack-stat">
+                        <span class="attack-label">XSS Attacks:</span>
+                        <span class="attack-value" id="statXSS">0</span>
+                    </div>
+                    <div class="attack-stat">
+                        <span class="attack-label">DDoS:</span>
+                        <span class="attack-value" id="statDDoS">0</span>
+                    </div>
+                    <div class="attack-stat">
+                        <span class="attack-label">Brute Force:</span>
+                        <span class="attack-value" id="statBrute">0</span>
+                    </div>
+                    <div class="attack-stat">
+                        <span class="attack-label">Phishing:</span>
+                        <span class="attack-value" id="statPhishing">0</span>
                     </div>
                 </div>
             </div>
         </main>
     </div>
     
-    <div class="back-link">
-        <a href="../index.html">← Back to Login</a>
+    <!-- Edit Profile Modal (Hidden for now, can be accessed via terminal command) -->
+    <div class="modal" id="editProfileModal" style="display: none;">
+        <div class="modal-content terminal-modal">
+            <div class="modal-header">
+                <span class="terminal-prompt">root@darkweb:~$</span>
+                <span class="modal-title">EDIT PROFILE</span>
+                <button class="modal-close" id="closeEditModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm" class="terminal-form">
+                    <div class="form-group">
+                        <label class="terminal-label">USERNAME:</label>
+                        <input type="text" id="editUsername" class="terminal-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="terminal-label">EMAIL:</label>
+                        <input type="email" id="editEmail" class="terminal-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="terminal-label">RANK:</label>
+                        <select id="editRank" class="terminal-input">
+                            <option value="NEWBIE">NEWBIE</option>
+                            <option value="HACKER">HACKER</option>
+                            <option value="ADVANCED">ADVANCED</option>
+                            <option value="ELITE HACKER">ELITE HACKER</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="terminal-label">ASCII ART NAME:</label>
+                        <input type="text" id="editAsciiArt" class="terminal-input" placeholder="ERRORoX">
+                        <span class="terminal-hint">Имя, которое будет отображаться в ASCII арте</span>
+                    </div>
+                    <button type="submit" class="terminal-btn">SAVE</button>
+                </form>
+            </div>
+        </div>
     </div>
     
+    <div class="back-link">
+        <a href="../index.html">← EXIT SYSTEM</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
     <script src="../js/profile.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('profile');
+        });
+    </script>
 </body>
-</html> 
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Трещины</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .cracking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Трещины</h1>
+                <p class="content-subtitle">Взломанное ПО и ключи активации</p>
+            </div>
+            
+            <div class="cracking-grid" id="crackingGrid">
+                <!-- Программы будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('cracking');
+            
+            const programs = [
+                { id: 1, title: 'Windows 11 Pro', description: 'Активатор для Windows 11 Professional. Полная активация навсегда.', price: '0.05 BTC', version: 'v2024' },
+                { id: 2, title: 'Adobe Creative Suite', description: 'Полный пакет Adobe: Photoshop, Premiere, After Effects и другие.', price: '0.1 BTC', version: '2024' },
+                { id: 3, title: 'Microsoft Office', description: 'Microsoft Office 2024 с активатором. Все программы включены.', price: '0.08 BTC', version: '2024' },
+                { id: 4, title: 'Antivirus Keys', description: 'Ключи для антивирусов: Kaspersky, Norton, Bitdefender и другие.', price: '0.03 BTC', version: '2024' },
+                { id: 5, title: 'Игры Steam', description: 'Взломанные игры Steam. Полная библиотека популярных игр.', price: '0.15 BTC', version: 'Latest' },
+                { id: 6, title: 'VPN Premium', description: 'Аккаунты Premium VPN: NordVPN, ExpressVPN, Surfshark.', price: '0.06 BTC', version: '2024' }
+            ];
+            
+            const grid = document.getElementById('crackingGrid');
+            if (grid) {
+                programs.forEach(program => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <h3 style="color: var(--accent-cyan); font-size: 20px; font-weight: 700; margin-bottom: 10px;">${program.title}</h3>
+                        <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 10px;">📦 Версия: ${program.version}</div>
+                        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 15px;">${program.description}</p>
+                        <div style="color: var(--accent-cyan); font-size: 18px; font-weight: 900; margin-bottom: 15px;">${program.price}</div>
+                        <button class="buy-btn" onclick="buyCrack(${program.id})">Купить</button>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        });
+        
+        function buyCrack(id) {
+            if (confirm(`Добавить ${id} в корзину?`)) {
+                showNotification('Товар добавлен в корзину', 'success');
+            }
+        }
+    </script>
+</body>
+</html>

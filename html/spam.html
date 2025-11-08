@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Спам</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .spam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .spam-card {
+            transition: all 0.3s ease;
+        }
+        
+        .spam-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .spam-title-card {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .spam-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .spam-price {
+            color: var(--accent-cyan);
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Спам</h1>
+                <p class="content-subtitle">Массовая рассылка и спам-сервисы</p>
+            </div>
+            
+            <div class="spam-grid" id="spamGrid">
+                <!-- Услуги будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('spam');
+            
+            const services = [
+                { id: 1, title: 'Массовая Email рассылка', description: 'Отправка 100K+ писем за один заказ. Высокая доставляемость.', price: '0.05 BTC', volume: '100K+' },
+                { id: 2, title: 'СМС спам', description: 'Массовая рассылка SMS сообщений на мобильные номера', price: '0.08 BTC', volume: '50K+' },
+                { id: 3, title: 'Email бомбардировка', description: 'Наводнение почтового ящика целью большого количества писем', price: '0.1 BTC', volume: '1M+' },
+                { id: 4, title: 'Социальные сети', description: 'Спам в социальных сетях: комментарии, сообщения, репосты', price: '0.06 BTC', volume: '75K+' },
+                { id: 5, title: 'Форум спам', description: 'Массовая публикация сообщений на форумах и блогах', price: '0.07 BTC', volume: '200K+' },
+                { id: 6, title: 'Кастомный спам', description: 'Индивидуальная рассылка под ваши требования', price: '0.15 BTC', volume: 'Custom' }
+            ];
+            
+            const grid = document.getElementById('spamGrid');
+            if (grid) {
+                services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'card spam-card';
+                    card.innerHTML = `
+                        <h3 class="spam-title-card">${service.title}</h3>
+                        <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 10px;">📊 Объем: ${service.volume}</div>
+                        <p class="spam-description">${service.description}</p>
+                        <div class="spam-price">${service.price}</div>
+                        <button class="buy-btn" onclick="buySpamService(${service.id})">Заказать</button>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        });
+        
+        function buySpamService(id) {
+            if (confirm(`Заказать услугу спам #${id}?`)) {
+                showNotification('Услуга добавлена в корзину', 'success');
+            }
+        }
+    </script>
+</body>
+</html>

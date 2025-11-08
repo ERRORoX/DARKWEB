@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Блэклист</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .blacklist-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .blacklist-warning {
+            padding: 20px;
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid rgba(255, 68, 68, 0.5);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .blacklist-warning-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ff4444;
+            margin-bottom: 10px;
+        }
+        
+        .blacklist-warning-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .blacklist-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .blacklist-table th {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+        
+        .blacklist-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .blacklist-table tr:hover {
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        .username {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .reason {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .date {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .status-scammer {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid rgba(255, 68, 68, 0.5);
+        }
+        
+        .status-fraud {
+            background: rgba(255, 170, 68, 0.2);
+            color: #ffaa44;
+            border: 1px solid rgba(255, 170, 68, 0.5);
+        }
+        
+        .status-ban {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            border: 1px solid rgba(255, 68, 68, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Блэклист</h1>
+                <p class="content-subtitle">Заблокированные пользователи и мошенники</p>
+            </div>
+            
+            <div class="blacklist-container">
+                <div class="blacklist-warning card">
+                    <div class="blacklist-warning-title">⚠️ ВНИМАНИЕ</div>
+                    <div class="blacklist-warning-text">
+                        Этот список содержит пользователей, которые были заблокированы за мошенничество, обман или нарушение правил сообщества. 
+                        Никогда не совершайте сделки с этими пользователями. Если вы видите кого-то из этого списка, немедленно сообщите администрации.
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <table class="blacklist-table">
+                        <thead>
+                            <tr>
+                                <th>Псевдоним</th>
+                                <th>Причина</th>
+                                <th>Дата</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="username">@Scammer123</td>
+                                <td class="reason">Мошенничество при продаже товаров, обман покупателей</td>
+                                <td class="date">15.11.2024</td>
+                                <td><span class="status-badge status-scammer">Мошенник</span></td>
+                            </tr>
+                            <tr>
+                                <td class="username">@FakeDealer</td>
+                                <td class="reason">Продажа поддельных товаров, невыполнение обязательств</td>
+                                <td class="date">12.11.2024</td>
+                                <td><span class="status-badge status-fraud">Обман</span></td>
+                            </tr>
+                            <tr>
+                                <td class="username">@Thief456</td>
+                                <td class="reason">Кража средств, невыполнение сделок</td>
+                                <td class="date">10.11.2024</td>
+                                <td><span class="status-badge status-ban">Заблокирован</span></td>
+                            </tr>
+                            <tr>
+                                <td class="username">@BadSeller</td>
+                                <td class="reason">Множественные жалобы, низкое качество услуг</td>
+                                <td class="date">08.11.2024</td>
+                                <td><span class="status-badge status-fraud">Обман</span></td>
+                            </tr>
+                            <tr>
+                                <td class="username">@FraudUser</td>
+                                <td class="reason">Раскрытие личной информации других пользователей</td>
+                                <td class="date">05.11.2024</td>
+                                <td><span class="status-badge status-ban">Заблокирован</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('blacklist');
+        });
+    </script>
+</body>
+</html>
+

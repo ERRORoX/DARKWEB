@@ -1,0 +1,43 @@
+{
+  "name": "DARKWEB",
+  "short_name": "DARKWEB",
+  "description": "Анонимная платформа DARKWEB",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f1a",
+  "theme_color": "#00ffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/planet.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/planet.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Chat",
+      "short_name": "Chat",
+      "description": "Открыть чат",
+      "url": "/html/chat.html",
+      "icons": [{ "src": "images/planet.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Marketplace",
+      "short_name": "Market",
+      "description": "Открыть маркетплейс",
+      "url": "/html/marketplace.html",
+      "icons": [{ "src": "images/planet.png", "sizes": "96x96" }]
+    }
+  ]
+}
+

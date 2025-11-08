@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Убийство</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .assassination-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 68, 68, 0.2);
+            border: 2px solid rgba(255, 68, 68, 0.6);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .warning-box h2 {
+            color: #ff4444;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .warning-box p {
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .info-section {
+            padding: 25px;
+        }
+        
+        .info-section h3 {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .info-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Убийство</h1>
+                <p class="content-subtitle">Информация предоставлена в образовательных целях</p>
+            </div>
+            
+            <div class="assassination-content">
+                <div class="card warning-box">
+                    <h2>⚠️ ВНИМАНИЕ</h2>
+                    <p>Этот раздел содержит информацию об убийствах исключительно в образовательных и исторических целях. Платформа DARKWEB не предоставляет и не способствует предоставлению услуг по убийству или причинению вреда людям.</p>
+                    <p><strong>Убийство является тяжким преступлением во всех странах мира и карается максимально строгими наказаниями, включая пожизненное заключение и смертную казнь.</strong></p>
+                </div>
+                
+                <div class="card info-section">
+                    <h3>Историческая справка</h3>
+                    <p>Убийство - это умышленное лишение жизни другого человека. На протяжении истории убийства использовались в различных контекстах: политические убийства, войны, криминал, самозащита.</p>
+                    <p>В современном мире убийство рассматривается как одно из самых серьезных преступлений против личности и карается по всей строгости закона.</p>
+                </div>
+                
+                <div class="card info-section">
+                    <h3>Юридические аспекты</h3>
+                    <p>Убийство классифицируется по различным категориям в зависимости от обстоятельств и мотивов. Заказные убийства, убийства из корыстных побуждений, убийства при отягчающих обстоятельствах - все они влекут за собой серьезные правовые последствия.</p>
+                    <p>Любые попытки организации, заказа или совершения убийства преследуются по закону и могут привести к пожизненному заключению или смертной казни в некоторых юрисдикциях.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('assassination');
+        });
+    </script>
+</body>
+</html>

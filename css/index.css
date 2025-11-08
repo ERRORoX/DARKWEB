@@ -401,4 +401,79 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
     filter: blur(0) brightness(1);
+}
+
+/* Переключатель темы */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(10, 15, 26, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #1fc3ff;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.theme-toggle:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.theme-icon {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: rotate(20deg);
+}
+
+/* Светлая тема */
+body.light-theme {
+    background: radial-gradient(ellipse at 50% 40%, #e8f4f8 0%, #d0e8f0 60%, #b8dce8 100%);
+}
+
+body.light-theme .welcome {
+    color: #2c3e50;
+}
+
+body.light-theme .main-title {
+    color: #1a1a1a;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 8px rgba(31, 195, 255, 0.2));
+}
+
+body.light-theme .subtitle {
+    color: #34495e;
+}
+
+body.light-theme .enter-text {
+    color: #0066cc;
+    text-shadow: 0 0 8px #0066cc, 0 0 16px #0066cc55;
+}
+
+body.light-theme .footer {
+    color: #0066cc;
+}
+
+body.light-theme .bg-globe {
+    opacity: 0.3;
+}
+
+body.light-theme .body-map-bg {
+    opacity: 0.2;
+}
+
+body.light-theme .body-web-bg {
+    opacity: 0.15;
 } 

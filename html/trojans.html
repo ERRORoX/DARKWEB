@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Трояны</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        /* Контейнер использует main-content из common.css */
+            /* margin-left теперь в common.css */
+            padding: 40px;
+        }
+        
+        .trojans-header {
+            margin-bottom: 30px;
+        }
+        
+        .trojans-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .trojans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .trojan-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .trojan-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .trojan-title {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .trojan-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .trojan-price {
+            color: var(--accent-cyan);
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 1024px) {
+            /* Контейнер использует main-content из common.css */
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="trojans-header">
+                <h1 class="trojans-title">Трояны</h1>
+                <p class="content-subtitle">Троянские программы и бэкдоры</p>
+            </div>
+            
+            <div class="trojans-grid" id="trojansGrid">
+                <!-- Трояны будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('trojans');
+            
+            const trojans = [
+                { id: 1, title: 'Remote Access Trojan', description: 'Полный удаленный доступ к системе', price: '0.5 BTC' },
+                { id: 2, title: 'Keylogger Pro', description: 'Запись всех нажатий клавиш', price: '0.3 BTC' },
+                { id: 3, title: 'Backdoor Elite', description: 'Скрытый бэкдор с шифрованием', price: '0.4 BTC' },
+                { id: 4, title: 'Banking Trojan', description: 'Специализированный троян для банков', price: '0.6 BTC' },
+                { id: 5, title: 'Mobile Trojan', description: 'Троян для мобильных устройств', price: '0.35 BTC' },
+                { id: 6, title: 'Custom Trojan', description: 'Изготовление под заказ', price: '1.0 BTC' }
+            ];
+            
+            const grid = document.getElementById('trojansGrid');
+            trojans.forEach(trojan => {
+                const card = document.createElement('div');
+                card.className = 'trojan-card glass';
+                card.innerHTML = `
+                    <h3 class="trojan-title">${trojan.title}</h3>
+                    <p class="trojan-description">${trojan.description}</p>
+                    <div class="trojan-price">${trojan.price}</div>
+                    <button class="buy-btn" onclick="buyTrojan(${trojan.id})">Купить</button>
+                `;
+                grid.appendChild(card);
+            });
+        });
+        
+        function buyTrojan(id) {
+            alert(`Покупка трояна #${id} добавлена в корзину`);
+        }
+    </script>
+</body>
+</html>
+

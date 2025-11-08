@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Фальсификация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .forgery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Фальсификация</h1>
+                <p class="content-subtitle">Подделка подписей и документов</p>
+            </div>
+            
+            <div class="forgery-grid" id="forgeryGrid">
+                <!-- Услуги будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('forgery');
+            
+            const services = [
+                { id: 1, title: 'Подделка подписи', description: 'Точная копия любой подписи. Неотличимо от оригинала.', price: '0.2 BTC', accuracy: '99%' },
+                { id: 2, title: 'Фальсификация документов', description: 'Изменение данных в существующих документах. Печати, штампы, водяные знаки.', price: '0.4 BTC', accuracy: 'Высокая' },
+                { id: 3, title: 'Подделка печатей', description: 'Изготовление печатей и штампов. Любые организации, любые формы.', price: '0.3 BTC', accuracy: 'Точная' },
+                { id: 4, title: 'Копирование документов', description: 'Точная копия любого документа. Все защитные элементы сохранены.', price: '0.5 BTC', accuracy: 'Идеальная' },
+                { id: 5, title: 'Изменение дат', description: 'Изменение дат в документах. Незаметная модификация оригиналов.', price: '0.25 BTC', accuracy: 'Высокая' },
+                { id: 6, title: 'Кастомная фальсификация', description: 'Любые услуги по фальсификации документов под заказ.', price: '0.8 BTC', accuracy: 'Custom' }
+            ];
+            
+            const grid = document.getElementById('forgeryGrid');
+            if (grid) {
+                services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <h3 style="color: var(--accent-cyan); font-size: 20px; font-weight: 700; margin-bottom: 10px;">${service.title}</h3>
+                        <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 10px;">✔ Точность: ${service.accuracy}</div>
+                        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 15px;">${service.description}</p>
+                        <div style="color: var(--accent-cyan); font-size: 18px; font-weight: 900; margin-bottom: 15px;">${service.price}</div>
+                        <button class="buy-btn" onclick="buyForgery(${service.id})">Заказать</button>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        });
+        
+        function buyForgery(id) {
+            if (confirm(`Заказать услугу фальсификации #${id}?`)) {
+                showNotification('Заказ оформлен', 'success');
+            }
+        }
+    </script>
+</body>
+</html>

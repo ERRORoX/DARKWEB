@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Кардочесание</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .carding-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .carding-card {
+            transition: all 0.3s ease;
+        }
+        
+        .carding-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .carding-card-title {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .carding-card-number {
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+        
+        .carding-card-info {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .carding-card-balance {
+            color: #00ff88;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .carding-card-price {
+            color: var(--accent-cyan);
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Кардочесание</h1>
+                <p class="content-subtitle">Кредитные карты и банковские данные</p>
+            </div>
+            
+            <div class="carding-grid" id="cardingGrid">
+                <!-- Карты будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('carding');
+            
+            const cards = [
+                { id: 1, type: 'Visa', number: '**** **** **** 1234', balance: '$5,000', price: '0.15 BTC', cvv: '123', exp: '12/25', country: 'США' },
+                { id: 2, type: 'MasterCard', number: '**** **** **** 5678', balance: '$3,500', price: '0.12 BTC', cvv: '456', exp: '08/26', country: 'Европа' },
+                { id: 3, type: 'Amex', number: '**** **** **** 9012', balance: '$8,000', price: '0.2 BTC', cvv: '789', exp: '06/25', country: 'США' },
+                { id: 4, type: 'Discover', number: '**** **** **** 3456', balance: '$2,000', price: '0.1 BTC', cvv: '321', exp: '11/24', country: 'Канада' },
+                { id: 5, type: 'Visa Premium', number: '**** **** **** 7890', balance: '$12,000', price: '0.3 BTC', cvv: '654', exp: '03/27', country: 'Великобритания' },
+                { id: 6, type: 'MasterCard Gold', number: '**** **** **** 2468', balance: '$15,000', price: '0.35 BTC', cvv: '987', exp: '09/26', country: 'Австралия' }
+            ];
+            
+            const grid = document.getElementById('cardingGrid');
+            if (grid) {
+                cards.forEach(card => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'card carding-card';
+                    cardElement.innerHTML = `
+                        <h3 class="carding-card-title">${card.type}</h3>
+                        <div class="carding-card-number">${card.number}</div>
+                        <div class="carding-card-info">CVV: ${card.cvv} | EXP: ${card.exp} | ${card.country}</div>
+                        <div class="carding-card-balance">Баланс: ${card.balance}</div>
+                        <div class="carding-card-price">${card.price}</div>
+                        <button class="buy-btn" onclick="buyCard(${card.id})">Купить</button>
+                    `;
+                    grid.appendChild(cardElement);
+                });
+            }
+        });
+        
+        function buyCard(id) {
+            if (confirm(`Добавить карту #${id} в корзину?`)) {
+                showNotification('Карта добавлена в корзину', 'success');
+            }
+        }
+    </script>
+</body>
+</html>

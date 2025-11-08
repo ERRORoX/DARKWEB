@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Настройки</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        /* Специфичные стили для страницы настроек */
+        
+        .settings-section {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .settings-title {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-label {
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .setting-description {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--text-primary);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active::after {
+            left: 26px;
+        }
+        
+        .select-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 8px 15px;
+            color: var(--text-primary);
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .select-input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .save-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .save-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .action-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        .action-btn.danger {
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+        
+        .action-btn.danger:hover {
+            background: #ff4444;
+            color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(255, 68, 68, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .settings-container {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Настройки</h1>
+                <p class="content-subtitle">Управление вашими настройками</p>
+            </div>
+            
+            <div class="settings-section">
+                <h3 class="settings-title">Уведомления</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Email уведомления</div>
+                        <div class="setting-description">Получать уведомления на email</div>
+                    </div>
+                    <div class="toggle-switch" id="emailNotifications"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Push уведомления</div>
+                        <div class="setting-description">Получать push уведомления в браузере</div>
+                    </div>
+                    <div class="toggle-switch" id="pushNotifications"></div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 class="settings-title">Приватность</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Показывать профиль</div>
+                        <div class="setting-description">Разрешить другим пользователям видеть ваш профиль</div>
+                    </div>
+                    <div class="toggle-switch active" id="showProfile"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Анонимный режим</div>
+                        <div class="setting-description">Скрыть вашу активность от других</div>
+                    </div>
+                    <div class="toggle-switch" id="anonymousMode"></div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 class="settings-title">Интерфейс</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Язык</div>
+                        <div class="setting-description">Выберите язык интерфейса</div>
+                    </div>
+                    <select class="select-input" id="language">
+                        <option value="ru">Русский</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Тема</div>
+                        <div class="setting-description">Выберите тему оформления</div>
+                    </div>
+                    <select class="select-input" id="theme">
+                        <option value="dark">Темная</option>
+                        <option value="light">Светлая</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 class="settings-title">Безопасность</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Двухфакторная аутентификация</div>
+                        <div class="setting-description">Дополнительная защита аккаунта</div>
+                    </div>
+                    <div class="toggle-switch" id="twoFactorAuth"></div>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Автоматический выход</div>
+                        <div class="setting-description">Выход из системы при неактивности</div>
+                    </div>
+                    <div class="toggle-switch" id="autoLogout"></div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 class="settings-title">Данные</h3>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Экспорт данных</div>
+                        <div class="setting-description">Скачать все ваши данные</div>
+                    </div>
+                    <button class="action-btn" id="exportDataBtn">Экспорт</button>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Очистить данные</div>
+                        <div class="setting-description">Удалить все сохраненные данные</div>
+                    </div>
+                    <button class="action-btn danger" id="clearDataBtn">Очистить</button>
+                </div>
+            </div>
+            
+            <button class="save-btn" id="saveBtn">Сохранить настройки</button>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/settings.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('settings');
+        });
+    </script>
+</body>
+</html>
+

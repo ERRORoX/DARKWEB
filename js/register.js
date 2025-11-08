@@ -208,22 +208,50 @@ function setupEventListeners() {
     // Обработка формы регистрации
     if (registerForm) {
         registerForm.addEventListener('submit', handleFormSubmit);
+        
+        // Добавляем эффект разбития к кнопке регистрации
+        const registerBtn = registerForm.querySelector('.register-btn');
+        if (registerBtn) {
+            registerBtn.addEventListener('click', (e) => {
+                // Вызываем эффект только при валидной форме
+                if (registerForm.checkValidity()) {
+                    shatterEffect(registerBtn);
+                }
+            });
+        }
     }
     
     // Обработка формы входа
     if (loginForm) {
         loginForm.addEventListener('submit', handleLoginSubmit);
+        
+        // Добавляем эффект разбития к кнопке входа
+        const loginBtn = loginForm.querySelector('.register-btn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', (e) => {
+                // Вызываем эффект только при валидной форме
+                if (loginForm.checkValidity()) {
+                    shatterEffect(loginBtn);
+                }
+            });
+        }
     }
     
-    // Эффекты для полей ввода
-    const inputFields = document.querySelectorAll('.input-field');
+    // Эффекты для полей ввода (используем все input элементы, так как класс .input-field не используется)
+    const inputFields = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]');
     inputFields.forEach(input => {
         input.addEventListener('focus', () => {
-            input.parentElement.classList.add('focused');
+            const formGroup = input.closest('.form-group');
+            if (formGroup) {
+                formGroup.classList.add('focused');
+            }
         });
         
         input.addEventListener('blur', () => {
-            input.parentElement.classList.remove('focused');
+            const formGroup = input.closest('.form-group');
+            if (formGroup) {
+                formGroup.classList.remove('focused');
+            }
         });
         
         input.addEventListener('input', () => {
@@ -394,6 +422,18 @@ function handleFormSubmit(e) {
             connections: '1'
         }));
         
+        // Добавляем активность регистрации
+        const activities = JSON.parse(localStorage.getItem('user_activity') || '[]');
+        activities.push({
+            type: 'register',
+            text: `Регистрация в системе: ${username}`,
+            time: new Date().toISOString()
+        });
+        if (activities.length > 50) {
+            activities.shift();
+        }
+        localStorage.setItem('user_activity', JSON.stringify(activities));
+        
         showNotification('Регистрация успешна!', 'success');
         
         // Очищаем форму
@@ -460,6 +500,18 @@ function handleLoginSubmit(e) {
     };
     
     localStorage.setItem('darknet_user', JSON.stringify(sessionUser));
+    
+    // Добавляем активность входа
+    const activities = JSON.parse(localStorage.getItem('user_activity') || '[]');
+    activities.push({
+        type: 'login',
+        text: `Вход в систему: ${user.username}`,
+        time: new Date().toISOString()
+    });
+    if (activities.length > 50) {
+        activities.shift();
+    }
+    localStorage.setItem('user_activity', JSON.stringify(activities));
     
     // Имитация задержки
     setTimeout(() => {
@@ -533,35 +585,53 @@ function generateUserId() {
 
 // Показать ошибку поля
 function showFieldError(field, message) {
-    field.style.borderColor = 'var(--error-color)';
-    field.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.3)';
-    
-    // Удаляем существующее сообщение об ошибке
-    const existingError = field.parentElement.querySelector('.field-error');
-    if (existingError) {
-        existingError.remove();
+    // Применяем стили ошибки только для полей ввода (не для checkbox)
+    if (field.type !== 'checkbox') {
+        field.style.borderColor = 'var(--error-color)';
+        field.style.boxShadow = '0 0 10px rgba(255, 68, 68, 0.3)';
     }
     
-    // Создаем новое сообщение об ошибке
-    const errorElement = document.createElement('div');
-    errorElement.className = 'field-error';
-    errorElement.textContent = message;
-    errorElement.style.color = 'var(--error-color)';
-    errorElement.style.fontSize = '11px';
-    errorElement.style.marginTop = '5px';
-    errorElement.style.textShadow = '0 0 5px var(--error-color)';
+    // Находим элемент ошибки по ID (например, username -> usernameError)
+    const errorId = field.id + 'Error';
+    const errorElement = document.getElementById(errorId);
     
-    field.parentElement.appendChild(errorElement);
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    } else {
+        // Если элемент не найден, ищем по классу error-message
+        const existingError = field.parentElement?.querySelector('.error-message') || 
+                              field.parentElement?.parentElement?.querySelector('.error-message');
+        if (existingError) {
+            existingError.textContent = message;
+            existingError.style.display = 'block';
+        }
+    }
 }
 
 // Очистить ошибку поля
 function clearFieldError(field) {
-    field.style.borderColor = 'var(--border-color)';
-    field.style.boxShadow = 'none';
+    // Убираем стили ошибки только для полей ввода (не для checkbox)
+    if (field.type !== 'checkbox') {
+        field.style.borderColor = 'var(--border-color)';
+        field.style.boxShadow = 'none';
+    }
     
-    const errorElement = field.parentElement.querySelector('.field-error');
+    // Находим элемент ошибки по ID
+    const errorId = field.id + 'Error';
+    const errorElement = document.getElementById(errorId);
+    
     if (errorElement) {
-        errorElement.remove();
+        errorElement.textContent = '';
+        errorElement.style.display = 'none';
+    } else {
+        // Если элемент не найден, ищем по классу error-message
+        const existingError = field.parentElement?.querySelector('.error-message') || 
+                              field.parentElement?.parentElement?.querySelector('.error-message');
+        if (existingError) {
+            existingError.textContent = '';
+            existingError.style.display = 'none';
+        }
     }
 }
 
@@ -645,13 +715,8 @@ function shatterEffect(button) {
     }
 }
 
-// Добавляем эффект разбития к кнопке регистрации
-const registerBtn = document.querySelector('.register-btn');
-if (registerBtn) {
-    registerBtn.addEventListener('click', () => {
-        shatterEffect(registerBtn);
-    });
-}
+// Добавляем эффект разбития к кнопке регистрации (перенесено в setupEventListeners)
+// Удалено отсюда, чтобы избежать выполнения до загрузки DOM
 
 // === КЛАВИАТУРНЫЕ СОКРАЩЕНИЯ ===
 document.addEventListener('keydown', (e) => {
@@ -700,17 +765,8 @@ setInterval(autoSave, 5000);
 // Загрузка сохраненных данных при загрузке страницы
 window.addEventListener('load', loadAutoSave);
 
-// Синхронизация паутины с главной страницей
-window.addEventListener('DOMContentLoaded', () => {
-    const webBg = document.querySelector('.body-web-bg');
-    if (webBg) {
-        if (localStorage.getItem('darkweb_spider_web') === '1') {
-            webBg.style.opacity = '0.22';
-        } else {
-            webBg.style.opacity = '0';
-        }
-    }
-});
+// Синхронизация паутины с главной страницей (уже обрабатывается в initializeAnimations)
+// Удалено дублирование кода
 
 // Обработка восстановления пароля
 function handleForgotPassword(e) {

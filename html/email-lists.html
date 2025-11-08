@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Списки Email</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        /* Контейнер использует main-content из common.css */
+            /* margin-left теперь в common.css */
+            padding: 40px;
+        }
+        
+        .email-lists-header {
+            margin-bottom: 30px;
+        }
+        
+        .email-lists-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .email-lists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .email-list-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .email-list-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .email-list-title {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .email-list-info {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .email-list-description {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .email-list-price {
+            color: var(--accent-cyan);
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .buy-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        @media (max-width: 1024px) {
+            /* Контейнер использует main-content из common.css */
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="email-lists-header">
+                <h1 class="email-lists-title">Списки адресов электронной почты</h1>
+                <p class="content-subtitle">Базы данных email адресов для рассылки</p>
+            </div>
+            
+            <div class="email-lists-grid" id="emailListsGrid">
+                <!-- Списки будут добавлены через JavaScript -->
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('email-lists');
+            
+            
+            const lists = [
+                { id: 1, title: 'Email база 2024', count: '1M+', country: 'Международная', price: '0.2 BTC' },
+                { id: 2, title: 'Российские email', count: '500K+', country: 'Россия', price: '0.15 BTC' },
+                { id: 3, title: 'Банковские клиенты', count: '250K+', country: 'Европа', price: '0.3 BTC' },
+                { id: 4, title: 'Корпоративные email', count: '750K+', country: 'США', price: '0.25 BTC' },
+                { id: 5, title: 'Социальные сети', count: '2M+', country: 'Международная', price: '0.4 BTC' },
+                { id: 6, title: 'Игровые аккаунты', count: '1.5M+', country: 'Азия', price: '0.35 BTC' }
+            ];
+            
+            const grid = document.getElementById('emailListsGrid');
+            lists.forEach(list => {
+                const card = document.createElement('div');
+                card.className = 'email-list-card glass';
+                card.innerHTML = `
+                    <h3 class="email-list-title">${list.title}</h3>
+                    <div class="email-list-info">📧 ${list.count} адресов • ${list.country}</div>
+                    <p class="email-list-description">Проверенная база данных с актуальными email адресами</p>
+                    <div class="email-list-price">${list.price}</div>
+                    <button class="buy-btn" onclick="buyEmailList(${list.id})">Купить</button>
+                `;
+                grid.appendChild(card);
+            });
+        });
+        
+        function buyEmailList(id) {
+            alert(`Покупка списка email #${id} добавлена в корзину`);
+        }
+    </script>
+</body>
+</html>
+

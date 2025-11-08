@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Форум</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .forum-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .forum-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .forum-category {
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .forum-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            border-color: var(--accent-cyan);
+        }
+        
+        .category-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .category-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        
+        .category-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .recent-posts {
+            margin-top: 30px;
+        }
+        
+        .post-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .post-item:hover {
+            border-left-color: var(--accent-cyan);
+            background: rgba(0, 255, 255, 0.05);
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .post-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .post-author {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .post-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Форум</h1>
+                <p class="content-subtitle">Обсуждения и дискуссии сообщества</p>
+            </div>
+            
+            <div class="forum-container">
+                <div class="forum-categories">
+                    <div class="forum-category card">
+                        <div class="category-icon">💻</div>
+                        <div class="category-title">Технологии</div>
+                        <div class="category-description">Обсуждение технологий, программирования и безопасности</div>
+                        <div class="category-stats">
+                            <span>Тем: 234</span>
+                            <span>Сообщений: 1,234</span>
+                        </div>
+                    </div>
+                    
+                    <div class="forum-category card">
+                        <div class="category-icon">💰</div>
+                        <div class="category-title">Финансы</div>
+                        <div class="category-description">Криптовалюты, торговля, инвестиции</div>
+                        <div class="category-stats">
+                            <span>Тем: 156</span>
+                            <span>Сообщений: 892</span>
+                        </div>
+                    </div>
+                    
+                    <div class="forum-category card">
+                        <div class="category-icon">🔒</div>
+                        <div class="category-title">Безопасность</div>
+                        <div class="category-description">Анонимность, VPN, защита данных</div>
+                        <div class="category-stats">
+                            <span>Тем: 189</span>
+                            <span>Сообщений: 1,056</span>
+                        </div>
+                    </div>
+                    
+                    <div class="forum-category card">
+                        <div class="category-icon">🛒</div>
+                        <div class="category-title">Торговля</div>
+                        <div class="category-description">Отзывы о продавцах, сделки, услуги</div>
+                        <div class="category-stats">
+                            <span>Тем: 312</span>
+                            <span>Сообщений: 2,145</span>
+                        </div>
+                    </div>
+                    
+                    <div class="forum-category card">
+                        <div class="category-icon">📚</div>
+                        <div class="category-title">Обучение</div>
+                        <div class="category-description">Уроки, гайды, обучающие материалы</div>
+                        <div class="category-stats">
+                            <span>Тем: 278</span>
+                            <span>Сообщений: 1,567</span>
+                        </div>
+                    </div>
+                    
+                    <div class="forum-category card">
+                        <div class="category-icon">🎭</div>
+                        <div class="category-title">Оффтоп</div>
+                        <div class="category-description">Свободное общение и обсуждения</div>
+                        <div class="category-stats">
+                            <span>Тем: 445</span>
+                            <span>Сообщений: 3,234</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recent-posts">
+                    <h2 class="card-title">Последние сообщения</h2>
+                    <div class="card">
+                        <div class="post-item">
+                            <div class="post-header">
+                                <div class="post-title">Как настроить Tor Browser для максимальной анонимности</div>
+                                <div class="post-author">@AnonymousUser</div>
+                            </div>
+                            <div class="post-meta">
+                                <span>💬 24 ответа</span>
+                                <span>👁️ 1,234 просмотра</span>
+                                <span>🕒 2 часа назад</span>
+                            </div>
+                        </div>
+                        
+                        <div class="post-item">
+                            <div class="post-header">
+                                <div class="post-title">Лучшие криптовалюты для анонимных транзакций</div>
+                                <div class="post-author">@CryptoExpert</div>
+                            </div>
+                            <div class="post-meta">
+                                <span>💬 45 ответов</span>
+                                <span>👁️ 2,567 просмотров</span>
+                                <span>🕒 5 часов назад</span>
+                            </div>
+                        </div>
+                        
+                        <div class="post-item">
+                            <div class="post-header">
+                                <div class="post-title">Отзыв о продавце: проверенный и надежный</div>
+                                <div class="post-author">@Buyer123</div>
+                            </div>
+                            <div class="post-meta">
+                                <span>💬 12 ответов</span>
+                                <span>👁️ 856 просмотров</span>
+                                <span>🕒 1 день назад</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('forum');
+        });
+    </script>
+</body>
+</html>
+

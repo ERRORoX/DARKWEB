@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Заговор</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .conspiracy-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .conspiracy-section {
+            padding: 25px;
+        }
+        
+        .conspiracy-section h3 {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .conspiracy-section p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .conspiracy-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .conspiracy-list li {
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .conspiracy-list li::before {
+            content: '🔍';
+            position: absolute;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
+    <div class="page-container">
+        <!-- Sidebar будет загружен динамически -->
+        
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">Заговор</h1>
+                <p class="content-subtitle">Теории заговора и скрытая информация</p>
+            </div>
+            
+            <div class="conspiracy-content">
+                <div class="card conspiracy-section">
+                    <h3>Популярные теории заговора</h3>
+                    <p>Теории заговора - это убеждения о тайных заговорах влиятельных групп для достижения скрытых целей. Вот некоторые из наиболее известных:</p>
+                    <ul class="conspiracy-list">
+                        <li>Иллюминаты - тайное общество, контролирующее мировые события</li>
+                        <li>Рептилоиды - инопланетная раса, управляющая человечеством</li>
+                        <li>Плоская Земля - теория о том, что Земля плоская, а не круглая</li>
+                        <li>Луна - теория о том, что высадка на Луну была сфальсифицирована</li>
+                        <li>11 сентября - теории о причастности правительства к терактам</li>
+                        <li>COVID-19 - теории о создании вируса в лаборатории</li>
+                    </ul>
+                </div>
+                
+                <div class="card conspiracy-section">
+                    <h3>Заговор правительств</h3>
+                    <p>Многие верят в существование масштабных заговоров со стороны правительств и крупных корпораций:</p>
+                    <ul class="conspiracy-list">
+                        <li>Контроль над СМИ и манипуляция общественным мнением</li>
+                        <li>Скрытие информации об инопланетянах и НЛО</li>
+                        <li>Химиотрассы - распыление химических веществ с самолетов</li>
+                        <li>Контроль над погодой и климатом</li>
+                        <li>Скрытие технологий свободной энергии</li>
+                        <li>Манипуляция экономикой и финансовыми рынками</li>
+                    </ul>
+                </div>
+                
+                <div class="card conspiracy-section">
+                    <h3>Критика теорий заговора</h3>
+                    <p>Большинство ученых и экспертов критикуют теории заговора, указывая на отсутствие доказательств, логические несоответствия и психологические факторы, способствующие вере в заговоры.</p>
+                    <p>Важно критически оценивать информацию и искать надежные источники, прежде чем принимать теории заговора как истину.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <div class="back-link">
+        <a href="profile.html">← Вернуться к профилю</a>
+    </div>
+    
+    <script src="../js/common.js"></script>
+    <script src="../js/loadSidebar.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadSidebar('conspiracy');
+        });
+    </script>
+</body>
+</html>
