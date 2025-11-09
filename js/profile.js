@@ -1,130 +1,123 @@
-// Profile page functionality - Hacker Terminal Style
-document.addEventListener('DOMContentLoaded', () => {
-    // Загрузка данных пользователя
-    loadUserProfile();
-    
-    // Загрузка ASCII арта
-    loadAsciiArt();
-    
-    // Инициализация статистики
-    loadStatistics();
-    loadHackerStats();
-    
-    // Загрузка системных логов
-    loadSystemLogs();
-    
-    // Навигация
-    initializeNavigation();
-    
-    // Редактирование профиля
-    initializeEditProfile();
-    
-    // Очистка логов
-    initializeClearLogs();
-    
-    // Обновление системной информации
-    updateSystemInfo();
-    setInterval(updateSystemInfo, 60000); // Каждую минуту
-    
-    // Анимация терминала
-    startTerminalAnimation();
-});
+// GitHub-style Profile Page Functionality
 
-// Загрузка профиля пользователя
-function loadUserProfile() {
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is logged in
     const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-    
     if (!user.username) {
-        // Если пользователь не залогинен, перенаправляем на регистрацию
         window.location.href = 'register.html';
         return;
     }
-    
-    // Заполняем данные профиля в терминале
-    const terminalUsername = document.getElementById('terminalUsername');
-    if (terminalUsername) {
-        terminalUsername.textContent = user.username || 'user';
-    }
-    
-    // Генерируем IP адрес (псевдо-случайный для безопасности)
-    generateIPAddress();
-}
 
-// Генерация IP адреса
-function generateIPAddress() {
-    const userIP = document.getElementById('userIP');
-    if (userIP) {
-        // Генерируем псевдо-случайный IP для демонстрации
-        const storedIP = localStorage.getItem('user_ip_address');
-        if (storedIP) {
-            userIP.textContent = storedIP;
-        } else {
-            // Генерируем случайный IP в формате 192.168.x.x
-            const ip = `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
-            localStorage.setItem('user_ip_address', ip);
-            userIP.textContent = ip;
+    // Initialize profile
+    loadUserProfile();
+    generateUserAvatar();
+    loadStatistics();
+    loadHackerStats();
+    loadActivity();
+    loadAchievements();
+    initializeTabs();
+    initializeEditProfile();
+    initializeModals();
+});
+
+// Load user profile data
+function loadUserProfile() {
+    const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
+    
+    // Set username
+    const usernameEl = document.getElementById('profileUsername');
+    if (usernameEl) {
+        usernameEl.textContent = user.username || 'user';
+    }
+
+    // Set bio
+    const bioEl = document.getElementById('profileBio');
+    if (bioEl) {
+        bioEl.textContent = user.bio || 'Hacker • Security Researcher • Darknet Enthusiast';
+    }
+
+    // Set location
+    const locationEl = document.getElementById('profileLocation');
+    if (locationEl) {
+        locationEl.textContent = `📍 Location: ${user.location || 'Hidden'}`;
+    }
+
+    // Set email
+    const emailEl = document.getElementById('profileEmail');
+    if (emailEl) {
+        emailEl.textContent = `✉️ Email: ${user.email ? user.email.split('@')[0] + '@darkweb.local' : 'hidden@darkweb.local'}`;
+    }
+
+    // Set joined date
+    const joinedEl = document.getElementById('profileJoined');
+    if (joinedEl && user.joinDate) {
+        const date = new Date(user.joinDate);
+        joinedEl.textContent = `Joined on ${date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`;
+    } else if (joinedEl) {
+        joinedEl.textContent = 'Joined on Jan 2023';
+    }
+
+    // Set rank
+    const rankEl = document.getElementById('overviewRank');
+    if (rankEl) {
+        rankEl.textContent = user.rank || 'NEWBIE';
+    }
+
+    // Set skills
+    if (user.skills && user.skills.length > 0) {
+        const skillsList = document.getElementById('skillsList');
+        if (skillsList) {
+            skillsList.innerHTML = user.skills.map(skill => 
+                `<span class="skill-tag">${skill}</span>`
+            ).join('');
         }
     }
 }
 
-// Обновление системной информации
-function updateSystemInfo() {
-    // Обновляем время последнего входа
-    const lastLogin = document.getElementById('lastLogin');
-    if (lastLogin) {
-        const activities = JSON.parse(localStorage.getItem('user_activity') || '[]');
-        if (activities.length > 0) {
-            const lastActivity = activities[activities.length - 1];
-            const time = formatTime(lastActivity.time);
-            lastLogin.textContent = time + ' ago';
-        } else {
-            lastLogin.textContent = 'Just now';
+// Generate user avatar
+function generateUserAvatar() {
+    if (typeof HackerAvatarGenerator !== 'undefined') {
+        const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
+        const username = user.username || 'user';
+        const generator = new HackerAvatarGenerator();
+        
+        const avatarContainer = document.getElementById('profileAvatar');
+        if (avatarContainer) {
+            const avatarSVG = generator.generateMatrixAvatar(username, 160);
+            avatarContainer.innerHTML = avatarSVG;
         }
-    }
-    
-    // Обновляем uptime (симуляция)
-    const systemUptime = document.getElementById('systemUptime');
-    if (systemUptime) {
-        const storedUptime = localStorage.getItem('system_uptime');
-        if (storedUptime) {
-            systemUptime.textContent = storedUptime;
-        } else {
-            // Генерируем случайное время работы
-            const days = Math.floor(Math.random() * 365);
-            const hours = Math.floor(Math.random() * 24);
-            const minutes = Math.floor(Math.random() * 60);
-            const uptime = `${days}d ${hours}h ${minutes}m`;
-            localStorage.setItem('system_uptime', uptime);
-            systemUptime.textContent = uptime;
-        }
+    } else {
+        // Load avatar generator
+        const script = document.createElement('script');
+        script.src = '../js/avatar-generator.js';
+        script.onload = () => {
+            generateUserAvatar();
+        };
+        document.head.appendChild(script);
     }
 }
 
-// Загрузка статистики
+// Load statistics
 function loadStatistics() {
-    // Сообщения из чата
-    const messages = JSON.parse(localStorage.getItem('darkweb_chat_messages') || '[]');
-    const userMessages = messages.filter(msg => {
-        const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-        return msg.author === user.username;
-    }).length;
+    const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
     
-    // Покупки
-    const purchases = JSON.parse(localStorage.getItem('darkweb_purchases') || '[]');
-    const userPurchases = purchases.filter(p => {
-        const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-        return p.buyer === user.username;
-    }).length;
-    
-    // Репутация уже загружена в loadUserProfile
+    // Reputation
+    const reputation = user.reputation || 0;
+    updateStat('statReputation', reputation);
+    updateStat('overviewReputation', reputation);
+
+    // Activity (days since join)
+    const joinDate = user.joinDate ? new Date(user.joinDate) : new Date();
+    const daysActive = Math.floor((new Date() - joinDate) / (1000 * 60 * 60 * 24));
+    updateStat('statActivity', daysActive);
+    updateStat('overviewActivity', daysActive);
 }
 
-// Загрузка хакерской статистики
+// Load hacker stats
 function loadHackerStats() {
-    // Получаем или создаем хакерскую статистику
     let hackerStats = JSON.parse(localStorage.getItem('hacker_stats') || '{}');
     
-    // Инициализируем значения, если их нет
+    // Initialize if empty
     if (!hackerStats.exploits) hackerStats.exploits = Math.floor(Math.random() * 100) + 10;
     if (!hackerStats.servers) hackerStats.servers = Math.floor(Math.random() * 50) + 5;
     if (!hackerStats.databases) hackerStats.databases = Math.floor(Math.random() * 30) + 3;
@@ -132,210 +125,247 @@ function loadHackerStats() {
     
     localStorage.setItem('hacker_stats', JSON.stringify(hackerStats));
     
-    // Обновляем отображение
-    updateHackerStat('statExploits', 'exploitsBar', hackerStats.exploits, 200);
-    updateHackerStat('statServers', 'serversBar', hackerStats.servers, 100);
-    updateHackerStat('statDatabases', 'databasesBar', hackerStats.databases, 50);
-    updateHackerStat('statZeroDays', 'zeroDaysBar', hackerStats.zeroDays, 10);
+    // Update stats
+    updateStat('statExploits', hackerStats.exploits);
+    updateStat('statServers', hackerStats.servers);
+    updateStat('statDatabases', hackerStats.databases);
+    updateStat('statZeroDays', hackerStats.zeroDays);
 }
 
-// Обновление хакерской статистики
-function updateHackerStat(statId, barId, value, max) {
-    const statElement = document.getElementById(statId);
-    const barElement = document.getElementById(barId);
-    
-    if (statElement) {
-        statElement.textContent = value;
-    }
-    
-    if (barElement) {
-        const percentage = Math.min((value / max) * 100, 100);
-        barElement.style.width = percentage + '%';
-        
-        // Анимация заполнения
-        setTimeout(() => {
-            barElement.style.transition = 'width 1s ease';
-        }, 100);
+// Update stat element
+function updateStat(id, value) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.textContent = value;
     }
 }
 
-// Загрузка системных логов
-function loadSystemLogs() {
-    const systemLogs = document.getElementById('systemLogs');
-    if (!systemLogs) return;
+// Load activity
+function loadActivity() {
+    const activities = JSON.parse(localStorage.getItem('user_activity') || '[]');
+    const timeline = document.getElementById('activityTimeline');
+    const feed = document.getElementById('activityFeed');
     
-    // Получаем логи из localStorage или создаем начальные
-    let logs = JSON.parse(localStorage.getItem('system_logs') || '[]');
-    
-    // Получаем имя пользователя (может быть изменено в настройках)
-    const userAscii = localStorage.getItem('user_ascii_name') || 'ERRORoX';
-    const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-    
-    // Если логов нет, создаем начальные
-    if (logs.length === 0) {
-        logs = [
-            {
-                time: new Date().toISOString(),
-                level: 'info',
-                message: `Система инициализирована. Добро пожаловать, ${userAscii}.`
-            },
-            {
-                time: new Date().toISOString(),
-                level: 'success',
-                message: 'VPN соединение установлено. IP: ' + (localStorage.getItem('user_ip_address') || '192.168.1.xxx')
-            },
-            {
-                time: new Date().toISOString(),
-                level: 'warning',
-                message: 'Обнаружено множество попыток входа с неизвестного IP.'
-            },
-            {
-                time: new Date().toISOString(),
-                level: 'info',
-                message: 'Протоколы безопасности активированы. Все системы защищены.'
-            }
-        ];
-        localStorage.setItem('system_logs', JSON.stringify(logs));
+    if (timeline) {
+        // Show last 5 activities in timeline
+        const recentActivities = activities.slice(-5).reverse();
+        timeline.innerHTML = recentActivities.map(activity => {
+            const time = formatTime(activity.time);
+            const icon = getActivityIcon(activity.type);
+            return `
+                <div class="activity-item">
+                    <div class="activity-icon">${icon}</div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.message || activity.type}</div>
+                        <div class="activity-time">${time} ago</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
-    
-    // Отображаем логи
-    displayLogs(logs);
+
+    if (feed) {
+        // Show all activities in feed
+        feed.innerHTML = activities.slice().reverse().map(activity => {
+            const time = formatTime(activity.time);
+            const icon = getActivityIcon(activity.type);
+            return `
+                <div class="activity-item">
+                    <div class="activity-icon">${icon}</div>
+                    <div class="activity-content">
+                        <div class="activity-title">${activity.message || activity.type}</div>
+                        <div class="activity-time">${time} ago</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // Load contribution graph
+    loadContributionGraph();
 }
 
-// Отображение логов
-function displayLogs(logs) {
-    const systemLogs = document.getElementById('systemLogs');
-    if (!systemLogs) return;
+// Load contribution graph
+function loadContributionGraph() {
+    const graph = document.getElementById('contributionGraph');
+    if (!graph) return;
+
+    // Generate a simple contribution graph
+    const weeks = 52;
+    const daysPerWeek = 7;
+    let html = '<div style="display: flex; gap: 2px; flex-wrap: wrap; justify-content: center;">';
     
-    systemLogs.innerHTML = '';
+    for (let week = 0; week < weeks; week++) {
+        for (let day = 0; day < daysPerWeek; day++) {
+            const intensity = Math.floor(Math.random() * 4);
+            const color = intensity === 0 ? '#161b22' : 
+                         intensity === 1 ? '#0e4429' : 
+                         intensity === 2 ? '#006d32' : '#00ff41';
+            html += `<div style="width: 10px; height: 10px; background: ${color}; border-radius: 2px;" title="Contributions"></div>`;
+        }
+    }
     
-    // Переводы уровней логов
-    const levelTranslations = {
-        'info': 'ИНФО',
-        'success': 'УСПЕХ',
-        'warning': 'ПРЕДУПРЕЖДЕНИЕ',
-        'error': 'ОШИБКА'
+    html += '</div>';
+    graph.innerHTML = html;
+}
+
+// Get activity icon
+function getActivityIcon(type) {
+    const icons = {
+        'login': '🔐',
+        'logout': '🚪',
+        'purchase': '💳',
+        'sale': '💰',
+        'message': '💬',
+        'profile': '👤',
+        'settings': '⚙️',
+        'achievement': '🏆'
     };
-    
-    // Показываем последние 20 логов
-    logs.slice(-20).reverse().forEach(log => {
-        const logEntry = document.createElement('div');
-        logEntry.className = `log-entry log-${log.level}`;
-        
-        const time = new Date(log.time);
-        const timeStr = time.toISOString().replace('T', ' ').substring(0, 19);
-        const levelText = levelTranslations[log.level] || log.level.toUpperCase();
-        
-        logEntry.innerHTML = `
-            <span class="log-time">[${timeStr}]</span>
-            <span class="log-level">[${levelText}]</span>
-            <span class="log-message">${escapeHtml(log.message)}</span>
-        `;
-        
-        systemLogs.appendChild(logEntry);
-    });
-    
-    // Прокрутка вниз
-    systemLogs.scrollTop = systemLogs.scrollHeight;
+    return icons[type] || '📝';
 }
 
-// Добавление нового лога
-function addSystemLog(level, message) {
-    const logs = JSON.parse(localStorage.getItem('system_logs') || '[]');
-    logs.push({
-        time: new Date().toISOString(),
-        level: level,
-        message: message
-    });
+// Load achievements
+function loadAchievements() {
+    const achievements = JSON.parse(localStorage.getItem('user_achievements') || '[]');
+    const grid = document.getElementById('achievementsGrid');
     
-    // Ограничиваем количество логов до 100
-    if (logs.length > 100) {
-        logs.shift();
+    if (grid && achievements.length > 0) {
+        grid.innerHTML = achievements.map(achievement => `
+            <div class="achievement-item">
+                <div class="achievement-icon">${achievement.icon || '🏆'}</div>
+                <div class="achievement-name">${achievement.name}</div>
+            </div>
+        `).join('');
     }
-    
-    localStorage.setItem('system_logs', JSON.stringify(logs));
-    loadSystemLogs();
 }
 
-// Загрузка ASCII арта из настроек
-function loadAsciiArt() {
-    const asciiArt = document.getElementById('asciiArt');
-    if (!asciiArt) return;
-    
-    const userAscii = localStorage.getItem('user_ascii_name') || 'ERRORoX';
-    
-    // Создаем новый ASCII арт с именем пользователя
-    const newAsciiArt = createCustomAsciiArt(userAscii);
-    asciiArt.textContent = newAsciiArt;
-}
+// Initialize tabs
+function initializeTabs() {
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-// Создание кастомного ASCII арта
-function createCustomAsciiArt(name) {
-    // Простой ASCII арт для имени
-    const nameUpper = name.toUpperCase() || 'ERRORoX';
-    const border = '═'.repeat(55);
-    
-    // Вычисляем отступ для имени (центрирование)
-    const namePadding = Math.max(0, Math.floor((55 - nameUpper.length) / 2));
-    
-    // Вычисляем отступ для системной информации
-    const systemInfo = 'SYSTEM PROFILE v2.4.7 - [ACCESS GRANTED]';
-    const systemPadding = Math.max(0, Math.floor((55 - systemInfo.length) / 2));
-    
-    return `╔${border}╗
-║${' '.repeat(55)}║
-║${' '.repeat(namePadding)}${nameUpper}${' '.repeat(55 - namePadding - nameUpper.length)}║
-║${' '.repeat(55)}║
-║${' '.repeat(systemPadding)}${systemInfo}${' '.repeat(55 - systemPadding - systemInfo.length)}║
-║${' '.repeat(55)}║
-╚${border}╝`;
-}
-
-// Инициализация очистки логов
-function initializeClearLogs() {
-    const clearLogsBtn = document.getElementById('clearLogsBtn');
-    
-    if (clearLogsBtn) {
-        clearLogsBtn.addEventListener('click', () => {
-            if (confirm('Очистить все системные логи? Это действие нельзя отменить.')) {
-                localStorage.setItem('system_logs', JSON.stringify([]));
-                loadSystemLogs();
-                addSystemLog('info', 'Системные логи очищены пользователем.');
+    tabLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Remove active class from all tabs
+            tabLinks.forEach(l => l.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            link.classList.add('active');
+            const tabName = link.getAttribute('data-tab');
+            const tabContent = document.getElementById(tabName + 'Tab');
+            if (tabContent) {
+                tabContent.classList.add('active');
             }
         });
+    });
+
+    // Load tab content
+    loadRepositories();
+    loadProjects();
+    loadPackages();
+    loadStars();
+}
+
+// Load repositories
+function loadRepositories() {
+    const reposList = document.getElementById('repositoriesList');
+    if (!reposList) return;
+
+    const repos = JSON.parse(localStorage.getItem('user_repositories') || '[]');
+    
+    if (repos.length === 0) {
+        reposList.innerHTML = '<div style="text-align: center; padding: 40px; color: #8b949e;">No repositories yet</div>';
+    } else {
+        reposList.innerHTML = repos.map(repo => `
+            <div class="repository-item">
+                <div>
+                    <div class="repository-name">${repo.name}</div>
+                    <div class="repository-description">${repo.description || 'No description'}</div>
+                </div>
+            </div>
+        `).join('');
     }
 }
 
-// Инициализация навигации
-function initializeNavigation() {
-    // Навигация теперь обрабатывается через сайдбар
+// Load projects
+function loadProjects() {
+    const projectsGrid = document.getElementById('projectsGrid');
+    if (!projectsGrid) return;
+
+    const projects = JSON.parse(localStorage.getItem('user_projects') || '[]');
+    
+    if (projects.length === 0) {
+        projectsGrid.innerHTML = '<div style="text-align: center; padding: 40px; color: #8b949e; grid-column: 1 / -1;">No projects yet</div>';
+    } else {
+        projectsGrid.innerHTML = projects.map(project => `
+            <div class="project-card">
+                <div class="project-title">${project.name}</div>
+                <div class="project-description">${project.description || 'No description'}</div>
+            </div>
+        `).join('');
+    }
 }
 
-// Инициализация редактирования профиля
+// Load packages
+function loadPackages() {
+    const packagesList = document.getElementById('packagesList');
+    if (!packagesList) return;
+
+    packagesList.innerHTML = '<div style="text-align: center; padding: 40px; color: #8b949e;">No packages yet</div>';
+}
+
+// Load stars
+function loadStars() {
+    const starsList = document.getElementById('starsList');
+    if (!starsList) return;
+
+    starsList.innerHTML = '<div style="text-align: center; padding: 40px; color: #8b949e;">No stars yet</div>';
+}
+
+// Initialize edit profile
 function initializeEditProfile() {
+    const editBtn = document.getElementById('editProfileBtn');
     const modal = document.getElementById('editProfileModal');
-    const closeBtn = document.getElementById('closeEditModal');
     const form = document.getElementById('editProfileForm');
-    
-    // Модальное окно скрыто по умолчанию, можно открыть через консоль команду
-    // или добавить кнопку редактирования
-    
+    const closeBtn = document.getElementById('closeEditModal');
+    const cancelBtn = document.getElementById('cancelEditBtn');
+
+    if (editBtn && modal) {
+        editBtn.addEventListener('click', () => {
+            const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
+            
+            // Fill form with current data
+            const editUsername = document.getElementById('editUsername');
+            const editBio = document.getElementById('editBio');
+            const editLocation = document.getElementById('editLocation');
+            const editEmail = document.getElementById('editEmail');
+            const editSkills = document.getElementById('editSkills');
+            
+            if (editUsername) editUsername.value = user.username || '';
+            if (editBio) editBio.value = user.bio || '';
+            if (editLocation) editLocation.value = user.location || '';
+            if (editEmail) editEmail.value = user.email || '';
+            if (editSkills) editSkills.value = user.skills ? user.skills.join(', ') : '';
+            
+            modal.classList.add('active');
+        });
+    }
+
     if (closeBtn && modal) {
         closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
+            modal.classList.remove('active');
         });
     }
-    
-    // Закрытие по клику вне модального окна
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
+
+    if (cancelBtn && modal) {
+        cancelBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
         });
     }
-    
-    // Обработка формы
+
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -343,272 +373,93 @@ function initializeEditProfile() {
             const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
             
             const editUsername = document.getElementById('editUsername');
+            const editBio = document.getElementById('editBio');
+            const editLocation = document.getElementById('editLocation');
             const editEmail = document.getElementById('editEmail');
-            const editRank = document.getElementById('editRank');
+            const editSkills = document.getElementById('editSkills');
             
             if (editUsername) user.username = editUsername.value;
+            if (editBio) user.bio = editBio.value;
+            if (editLocation) user.location = editLocation.value;
             if (editEmail) user.email = editEmail.value;
-            if (editRank) user.rank = editRank.value;
-            
-            // Сохраняем ASCII арт имя, если указано
-            const asciiArtInput = document.getElementById('editAsciiArt');
-            if (asciiArtInput) {
-                const asciiName = asciiArtInput.value.trim() || 'ERRORoX';
-                localStorage.setItem('user_ascii_name', asciiName);
-                loadAsciiArt();
+            if (editSkills) {
+                user.skills = editSkills.value.split(',').map(s => s.trim()).filter(s => s);
             }
             
-            // Обновляем всех пользователей
+            // Update all users
             const allUsers = JSON.parse(localStorage.getItem('darknet_users') || '[]');
             const userIndex = allUsers.findIndex(u => u.id === user.id);
             if (userIndex !== -1) {
-                allUsers[userIndex].username = user.username;
-                allUsers[userIndex].email = user.email;
-                allUsers[userIndex].rank = user.rank;
+                allUsers[userIndex] = { ...allUsers[userIndex], ...user };
                 localStorage.setItem('darknet_users', JSON.stringify(allUsers));
             }
             
             localStorage.setItem('darknet_user', JSON.stringify(user));
             
-            // Обновляем отображение
+            // Reload profile
             loadUserProfile();
+            generateUserAvatar();
             
-            // Добавляем активность и лог
-            addActivity('profile', 'Профиль обновлен');
-            addSystemLog('info', 'Профиль пользователя успешно обновлен.');
+            // Add activity
+            addActivity('profile', 'Profile updated');
             
-            // Закрываем модальное окно
-            modal.style.display = 'none';
+            // Close modal
+            modal.classList.remove('active');
             
-            // Показываем уведомление
-            showNotification('Профиль успешно обновлен', 'success');
-        });
-    }
-}
-
-// Анимация терминала
-function startTerminalAnimation() {
-    // Анимация курсора
-    const cursor = document.querySelector('.terminal-cursor');
-    if (cursor) {
-        // Курсор уже анимируется через CSS
-    }
-    
-    // Периодическое обновление системных логов
-    setInterval(() => {
-        // Можно добавить автоматические логи (например, каждые 5 минут)
-    }, 300000); // 5 минут
-}
-
-// Добавление кнопки редактирования профиля (скрытая в терминале, можно добавить через консоль)
-function addEditButton() {
-    // Можно добавить кнопку редактирования в терминале
-    const terminalHeader = document.querySelector('.terminal-header');
-    if (terminalHeader && !document.getElementById('editProfileBtnTerminal')) {
-        const editBtn = document.createElement('button');
-        editBtn.id = 'editProfileBtnTerminal';
-        editBtn.className = 'terminal-edit-btn';
-        editBtn.textContent = 'EDIT';
-        editBtn.style.cssText = 'background: transparent; border: 1px solid #00ff41; color: #00ff41; padding: 5px 15px; margin-left: 10px; cursor: pointer; font-family: "JetBrains Mono", monospace; font-size: 11px;';
-        editBtn.addEventListener('click', () => {
-            const modal = document.getElementById('editProfileModal');
-            if (modal) {
-                const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-                const editUsername = document.getElementById('editUsername');
-                const editEmail = document.getElementById('editEmail');
-                const editRank = document.getElementById('editRank');
-                const editAsciiArt = document.getElementById('editAsciiArt');
-                
-                if (editUsername) editUsername.value = user.username || '';
-                if (editEmail) editEmail.value = user.email || '';
-                if (editRank) editRank.value = user.rank || 'НОВИЧОК';
-                if (editAsciiArt) {
-                    const asciiName = localStorage.getItem('user_ascii_name') || 'ERRORoX';
-                    editAsciiArt.value = asciiName;
-                }
-                modal.style.display = 'flex';
+            // Show notification
+            if (typeof showNotification === 'function') {
+                showNotification('Profile updated successfully', 'success');
             }
         });
-        terminalHeader.appendChild(editBtn);
     }
 }
 
-// Инициализация при загрузке страницы
-addActivity('login', 'Вход в систему выполнен успешно');
-addSystemLog('success', 'Аутентификация пользователя прошла успешно. Доступ предоставлен.');
-
-// Добавляем кнопку редактирования после загрузки
-setTimeout(() => {
-    addEditButton();
-}, 500);
-
-// Интерактивный терминал
-function initInteractiveTerminal() {
-    const terminalInput = document.getElementById('terminalInput');
-    const terminalOutput = document.getElementById('terminalOutput');
-    const clearTerminalBtn = document.getElementById('clearTerminalBtn');
+// Initialize modals
+function initializeModals() {
+    const modals = document.querySelectorAll('.modal');
     
-    if (!terminalInput || !terminalOutput) return;
-    
-    // История команд
-    let commandHistory = JSON.parse(localStorage.getItem('terminal_history') || '[]');
-    let historyIndex = -1;
-    
-    // Команды терминала
-    const commands = {
-        'help': () => {
-            return `Available commands:
-  help              - Show this help message
-  clear             - Clear terminal output
-  whoami            - Show current user
-  ls                - List files
-  pwd               - Show current directory
-  date              - Show current date and time
-  uptime            - Show system uptime
-  stats             - Show hacker statistics
-  edit              - Edit profile
-  exit              - Exit terminal`;
-        },
-        'clear': () => {
-            terminalOutput.innerHTML = '';
-            return '';
-        },
-        'whoami': () => {
-            const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-            return user.username || 'anonymous';
-        },
-        'ls': () => {
-            return `total 48
-drwxr-xr-x  2 root root 4096 Jan 15 14:23 exploits/
-drwxr-xr-x  2 root root 4096 Jan 15 14:23 scripts/
-drwxr-xr-x  2 root root 4096 Jan 15 14:23 tools/
--rw-r--r--  1 root root 2048 Jan 15 14:23 config.txt
--rw-r--r--  1 root root 1024 Jan 15 14:23 keys.txt`;
-        },
-        'pwd': () => {
-            return '/home/darkuser';
-        },
-        'date': () => {
-            return new Date().toLocaleString('ru-RU');
-        },
-        'uptime': () => {
-            const uptime = localStorage.getItem('system_uptime') || '0d 0h 0m';
-            return `System uptime: ${uptime}`;
-        },
-        'stats': () => {
-            const stats = JSON.parse(localStorage.getItem('hacker_stats') || '{}');
-            return `Hacker Statistics:
-  Exploits: ${stats.exploits || 0}
-  Servers: ${stats.servers || 0}
-  Databases: ${stats.databases || 0}
-  Zero-Days: ${stats.zeroDays || 0}`;
-        },
-        'edit': () => {
-            const modal = document.getElementById('editProfileModal');
-            if (modal) {
-                const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-                const editUsername = document.getElementById('editUsername');
-                const editEmail = document.getElementById('editEmail');
-                const editRank = document.getElementById('editRank');
-                const editAsciiArt = document.getElementById('editAsciiArt');
-                
-                if (editUsername) editUsername.value = user.username || '';
-                if (editEmail) editEmail.value = user.email || '';
-                if (editRank) editRank.value = user.rank || 'НОВИЧОК';
-                if (editAsciiArt) {
-                    const asciiName = localStorage.getItem('user_ascii_name') || 'ERRORoX';
-                    editAsciiArt.value = asciiName;
-                }
-                modal.style.display = 'flex';
+    modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
             }
-            return 'Profile edit modal opened';
-        },
-        'exit': () => {
-            return 'Terminal closed';
-        }
-    };
-    
-    // Обработка ввода команды
-    terminalInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const command = terminalInput.value.trim();
-            if (command === '') return;
-            
-            // Добавляем команду в историю
-            commandHistory.push(command);
-            if (commandHistory.length > 50) commandHistory.shift();
-            localStorage.setItem('terminal_history', JSON.stringify(commandHistory));
-            historyIndex = -1;
-            
-            // Отображаем команду
-            const commandLine = document.createElement('div');
-            commandLine.className = 'terminal-output-line';
-            commandLine.innerHTML = `<span class="prompt">root@darkweb:~$</span> <span class="command">${escapeHtml(command)}</span>`;
-            terminalOutput.appendChild(commandLine);
-            
-            // Выполняем команду
-            const cmd = command.split(' ')[0];
-            const args = command.split(' ').slice(1).join(' ');
-            let output = '';
-            
-            if (commands[cmd]) {
-                output = commands[cmd](args);
-            } else {
-                output = `Command not found: ${cmd}. Type 'help' for available commands.`;
-            }
-            
-            if (output) {
-                const outputLine = document.createElement('div');
-                outputLine.className = 'terminal-output-line';
-                outputLine.innerHTML = `<span class="output">${escapeHtml(output)}</span>`;
-                terminalOutput.appendChild(outputLine);
-            }
-            
-            // Очищаем ввод
-            terminalInput.value = '';
-            
-            // Прокрутка вниз
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;
-            
-            // Добавляем логи
-            addSystemLog('info', `Command executed: ${command}`);
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            if (commandHistory.length > 0) {
-                if (historyIndex === -1) {
-                    historyIndex = commandHistory.length - 1;
-                } else if (historyIndex > 0) {
-                    historyIndex--;
-                }
-                terminalInput.value = commandHistory[historyIndex];
-            }
-        } else if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            if (historyIndex !== -1) {
-                if (historyIndex < commandHistory.length - 1) {
-                    historyIndex++;
-                    terminalInput.value = commandHistory[historyIndex];
-                } else {
-                    historyIndex = -1;
-                    terminalInput.value = '';
-                }
-            }
-        }
+        });
     });
-    
-    // Очистка терминала
-    if (clearTerminalBtn) {
-        clearTerminalBtn.addEventListener('click', () => {
-            terminalOutput.innerHTML = '';
-            addSystemLog('info', 'Terminal cleared');
-        });
-    }
-    
-    // Начальное сообщение
-    const welcomeMsg = document.createElement('div');
-    welcomeMsg.className = 'terminal-output-line';
-    welcomeMsg.innerHTML = `<span class="output">Welcome to DARKWEB Terminal. Type 'help' for available commands.</span>`;
-    terminalOutput.appendChild(welcomeMsg);
 }
 
+// Format time
+function formatTime(timeString) {
+    const time = new Date(timeString);
+    const now = new Date();
+    const diff = now - time;
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    
+    if (days > 0) return `${days} day${days > 1 ? 's' : ''}`;
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''}`;
+    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''}`;
+    return 'just now';
+}
 
+// Add activity (if function exists in common.js)
+if (typeof addActivity === 'undefined') {
+    function addActivity(type, message) {
+        const activities = JSON.parse(localStorage.getItem('user_activity') || '[]');
+        activities.push({
+            type: type,
+            message: message,
+            time: new Date().toISOString()
+        });
+        
+        // Keep only last 100 activities
+        if (activities.length > 100) {
+            activities.shift();
+        }
+        
+        localStorage.setItem('user_activity', JSON.stringify(activities));
+        loadActivity();
+    }
+    window.addActivity = addActivity;
+}

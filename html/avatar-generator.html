@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DARKWEB - Avatar Generator</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ff41;
+            text-shadow: 0 0 10px #00ff41;
+            margin-bottom: 30px;
+        }
+        
+        .generator-section {
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #00ff41;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ff41;
+            border-radius: 3px;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+        }
+        
+        button {
+            background: transparent;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #00ff41;
+            color: #0a0a0a;
+            box-shadow: 0 0 10px #00ff41;
+        }
+        
+        .avatar-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .avatar-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #00ff41;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .avatar-card h3 {
+            margin-bottom: 15px;
+            color: #00ff41;
+        }
+        
+        .avatar-display {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .avatar-display svg {
+            border: 2px solid #00ff41;
+            border-radius: 5px;
+        }
+        
+        .ascii-avatar {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            line-height: 1.2;
+            color: #00ff41;
+            text-align: left;
+            background: #000;
+            padding: 10px;
+            border: 1px solid #00ff41;
+            border-radius: 3px;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        .css-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: bold;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+        
+        .css-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px currentColor;
+        }
+        
+        .download-btn {
+            margin-top: 10px;
+            background: transparent;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .scan-line {
+            animation: scan 2s linear infinite;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎭 ГЕНЕРАТОР АВАТАРОВ ХАКЕРА</h1>
+        
+        <div class="generator-section">
+            <div class="input-group">
+                <label for="username">ИМЯ ПОЛЬЗОВАТЕЛЯ:</label>
+                <input type="text" id="username" placeholder="Введите имя пользователя" value="darkuser_1337">
+            </div>
+            
+            <div class="input-group">
+                <label for="avatarSize">РАЗМЕР АВАТАРА:</label>
+                <input type="number" id="avatarSize" value="200" min="100" max="500">
+            </div>
+            
+            <button onclick="generateAvatars()">ГЕНЕРИРОВАТЬ АВАТАРЫ</button>
+        </div>
+        
+        <div class="avatar-preview" id="avatarPreview">
+            <!-- Аватары будут отображаться здесь -->
+        </div>
+    </div>
+    
+    <script src="../js/avatar-generator.js"></script>
+    <script>
+        const generator = new HackerAvatarGenerator();
+        
+        function generateAvatars() {
+            const username = document.getElementById('username').value || 'user';
+            const size = parseInt(document.getElementById('avatarSize').value) || 200;
+            
+            const preview = document.getElementById('avatarPreview');
+            preview.innerHTML = '';
+            
+            // Матричный аватар
+            const matrixAvatar = generator.generateMatrixAvatar(username, size);
+            createAvatarCard('Матричный Аватар', matrixAvatar, 'svg', username);
+            
+            // Аватар со сканированием
+            const scanAvatar = generator.generateScanAvatar(username, size);
+            createAvatarCard('Аватар со Сканированием', scanAvatar, 'svg', username);
+            
+            // Глитч аватар
+            const glitchAvatar = generator.generateGlitchAvatar(username, size);
+            createAvatarCard('Глитч Аватар', glitchAvatar, 'svg', username);
+            
+            // ASCII аватар
+            const asciiAvatar = generator.generateAsciiAvatar(username);
+            createAvatarCard('ASCII Аватар', asciiAvatar, 'ascii', username);
+            
+            // CSS аватар
+            const cssAvatar = generator.generateCSSAvatar(username);
+            createAvatarCard('CSS Аватар', cssAvatar, 'css', username);
+        }
+        
+        function createAvatarCard(title, content, type, username) {
+            const preview = document.getElementById('avatarPreview');
+            const card = document.createElement('div');
+            card.className = 'avatar-card';
+            
+            const titleEl = document.createElement('h3');
+            titleEl.textContent = title;
+            card.appendChild(titleEl);
+            
+            const display = document.createElement('div');
+            display.className = 'avatar-display';
+            
+            if (type === 'svg') {
+                display.innerHTML = content;
+            } else if (type === 'ascii') {
+                const pre = document.createElement('pre');
+                pre.className = 'ascii-avatar';
+                pre.textContent = content;
+                display.appendChild(pre);
+            } else if (type === 'css') {
+                const div = document.createElement('div');
+                div.className = 'css-avatar';
+                div.style.background = content.background;
+                div.style.color = content.color;
+                div.style.boxShadow = content.boxShadow;
+                div.style.border = content.border;
+                div.textContent = content.initial;
+                display.appendChild(div);
+            }
+            
+            card.appendChild(display);
+            
+            // Кнопка скачивания для SVG
+            if (type === 'svg') {
+                const downloadBtn = document.createElement('button');
+                downloadBtn.className = 'download-btn';
+                downloadBtn.textContent = 'СКАЧАТЬ SVG';
+                downloadBtn.onclick = () => downloadSVG(content, username);
+                card.appendChild(downloadBtn);
+            }
+            
+            preview.appendChild(card);
+        }
+        
+        function downloadSVG(svgContent, username) {
+            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${username}_avatar.svg`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Генерация при загрузке страницы
+        window.addEventListener('DOMContentLoaded', () => {
+            generateAvatars();
+        });
+    </script>
+</body>
+</html>
+
+

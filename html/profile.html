@@ -3,294 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARKWEB - SYSTEM PROFILE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Roboto+Condensed:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>DARKWEB - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/avatar.css">
 </head>
 <body>
     <button class="sidebar-toggle-btn" id="sidebarToggle">☰</button>
-    <div class="profile-container">
-        <!-- Sidebar будет загружен динамически -->
-        
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Terminal Header -->
-            <div class="terminal-header">
-                <div class="terminal-title">
-                    <span class="terminal-prompt">root@darkweb:~$</span>
-                    <span class="terminal-cursor">_</span>
-                </div>
-                <div class="terminal-controls">
-                    <span class="control-btn">─</span>
-                    <span class="control-btn">□</span>
-                    <span class="control-btn close-btn">×</span>
-                </div>
-            </div>
-            
-            <!-- ASCII Art Header -->
-            <div class="ascii-art-container">
-                <pre class="ascii-art" id="asciiArt">
-╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║          ███████╗██████╗ ██████╗  ██████╗ ██████╗        ║
-║          ██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗       ║
-║          █████╗  ██████╔╝██████╔╝██║   ██║██████╔╝       ║
-║          ██╔══╝  ██╔══██╗██╔══██╗██║   ██║██╔══██╗       ║
-║          ██║     ██║  ██║██║  ██║╚██████╔╝██║  ██║       ║
-║          ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝       ║
-║                                                           ║
-║              ╔═══╗╔═╗─╔╗╔═══╗╔═╗╔═╗                      ║
-║              ║╔═╗║║║╚╗║║║╔═╗║║║╚╝║║                      ║
-║              ║╚══╗║╔╗╚╝║║║─║║║╔╗╔╗║                      ║
-║              ╚══╗║║║╚╗║║║║─║║║║║║║║                      ║
-║              ║╚═╝║║║─║║║║╚═╝║║║║║║║                      ║
-║              ╚═══╝╚╝─╚═╝╚═══╝╚╝╚╝╚╝                      ║
-║                                                           ║
-║         SYSTEM PROFILE v2.4.7 - [ACCESS GRANTED]         ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝
-                </pre>
-            </div>
-            
-            <!-- System Info Grid -->
-            <div class="system-grid">
-                <!-- User Identity Card -->
-                <div class="system-card terminal-card">
-                    <div class="card-header">
-                        <span class="card-title">[ИДЕНТИЧНОСТЬ ПОЛЬЗОВАТЕЛЯ]</span>
-                        <span class="card-status online">● ОНЛАЙН</span>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="terminal-line">
-                            <span class="prompt">root@darkweb:~$</span>
-                            <span class="command">whoami</span>
-                        </div>
-                        <div class="terminal-output" id="terminalUsername">darkuser_1337</div>
-                        <div class="terminal-line">
-                            <span class="prompt">root@darkweb:~$</span>
-                            <span class="command">id</span>
-                        </div>
-                        <div class="terminal-output">uid=1000(darkuser) gid=1000(hackers) groups=1000(hackers),27(sudo),999(admin)</div>
-                        <div class="terminal-line">
-                            <span class="prompt">root@darkweb:~$</span>
-                            <span class="command">groups</span>
-                        </div>
-                        <div class="terminal-output">hackers sudo admin root-access</div>
-                        <div class="terminal-line">
-                            <span class="prompt">root@darkweb:~$</span>
-                            <span class="command">cat /etc/passwd | grep darkuser</span>
-                        </div>
-                        <div class="terminal-output">darkuser:x:1000:1000:ERRORoX:/home/darkuser:/bin/bash</div>
-                    </div>
-                </div>
-                
-                <!-- Network Status -->
-                <div class="system-card terminal-card">
-                    <div class="card-header">
-                        <span class="card-title">[СТАТУС СЕТИ]</span>
-                        <span class="card-status connected">● ПОДКЛЮЧЕНО</span>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="info-row">
-                            <span class="info-label">IP Адрес:</span>
-                            <span class="info-value" id="userIP">192.168.1.xxx</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">VPN:</span>
-                            <span class="info-value status-active">АКТИВЕН</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">TOR:</span>
-                            <span class="info-value status-active">ВКЛЮЧЕН</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Местоположение:</span>
-                            <span class="info-value">СКРЫТО</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Порт:</span>
-                            <span class="info-value">9050</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Протокол:</span>
-                            <span class="info-value">TCP/IP</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Прокси:</span>
-                            <span class="info-value status-active">АКТИВЕН</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- System Stats -->
-                <div class="system-card terminal-card">
-                    <div class="card-header">
-                        <span class="card-title">[СИСТЕМНЫЕ МЕТРИКИ]</span>
-                        <span class="card-status">● РАБОТАЕТ</span>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="metric-row">
-                            <span class="metric-label">Время работы:</span>
-                            <span class="metric-value" id="systemUptime">127д 14ч 23м</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Последний вход:</span>
-                            <span class="metric-value" id="lastLogin">2 минуты назад</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Уровень доступа:</span>
-                            <span class="metric-value level-elite">ЭЛИТНЫЙ</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Безопасность:</span>
-                            <span class="metric-value status-secure">ЗАЩИЩЕНО</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">Шифрование:</span>
-                            <span class="metric-value">AES-256</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-label">2FA:</span>
-                            <span class="metric-value status-active">ВКЛЮЧЕН</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Hacker Stats -->
-                <div class="system-card terminal-card">
-                    <div class="card-header">
-                        <span class="card-title">[СТАТИСТИКА ХАКЕРА]</span>
-                        <span class="card-status">● АКТИВНО</span>
-                    </div>
-                    <div class="terminal-content">
-                        <div class="hacker-stat">
-                            <div class="stat-header">
-                                <span class="stat-name">Выполнено эксплойтов:</span>
-                                <span class="stat-value" id="statExploits">0</span>
-                            </div>
-                            <div class="stat-bar">
-                                <div class="stat-bar-fill" style="width: 0%" id="exploitsBar"></div>
-                            </div>
-                        </div>
-                        <div class="hacker-stat">
-                            <div class="stat-header">
-                                <span class="stat-name">Взломано серверов:</span>
-                                <span class="stat-value" id="statServers">0</span>
-                            </div>
-                            <div class="stat-bar">
-                                <div class="stat-bar-fill" style="width: 0%" id="serversBar"></div>
-                            </div>
-                        </div>
-                        <div class="hacker-stat">
-                            <div class="stat-header">
-                                <span class="stat-name">Взломано баз данных:</span>
-                                <span class="stat-value" id="statDatabases">0</span>
-                            </div>
-                            <div class="stat-bar">
-                                <div class="stat-bar-fill" style="width: 0%" id="databasesBar"></div>
-                            </div>
-                        </div>
-                        <div class="hacker-stat">
-                            <div class="stat-header">
-                                <span class="stat-name">Найдено Zero-Day:</span>
-                                <span class="stat-value" id="statZeroDays">0</span>
-                            </div>
-                            <div class="stat-bar">
-                                <div class="stat-bar-fill" style="width: 0%" id="zeroDaysBar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- System Logs -->
-            <div class="system-card terminal-card logs-card">
-                <div class="card-header">
-                    <span class="card-title">[SYSTEM LOGS]</span>
-                    <span class="card-status">● MONITORING</span>
-                    <button class="clear-logs-btn" id="clearLogsBtn">CLEAR</button>
-                </div>
-                <div class="terminal-content logs-content" id="systemLogs">
-                    <div class="log-entry log-info">
-                        <span class="log-time">[2024-01-15 14:23:45]</span>
-                        <span class="log-level">[INFO]</span>
-                        <span class="log-message">System initialized. Welcome back, darkuser_1337.</span>
-                    </div>
-                    <div class="log-entry log-success">
-                        <span class="log-time">[2024-01-15 14:23:46]</span>
-                        <span class="log-level">[SUCCESS]</span>
-                        <span class="log-message">VPN connection established. IP: 192.168.1.xxx</span>
-                    </div>
-                    <div class="log-entry log-warning">
-                        <span class="log-time">[2024-01-15 14:23:47]</span>
-                        <span class="log-level">[WARNING]</span>
-                        <span class="log-message">Multiple login attempts detected from unknown IP.</span>
-                    </div>
-                    <div class="log-entry log-info">
-                        <span class="log-time">[2024-01-15 14:23:48]</span>
-                        <span class="log-level">[INFO]</span>
-                        <span class="log-message">Security protocols activated. All systems secured.</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Interactive Terminal -->
-            <div class="system-card terminal-card interactive-terminal-card">
-                <div class="card-header">
-                    <span class="card-title">[TERMINAL]</span>
-                    <span class="card-status">● ACTIVE</span>
-                    <button class="clear-logs-btn" id="clearTerminalBtn">CLEAR</button>
-                </div>
-                <div class="terminal-content" id="interactiveTerminal">
-                    <div class="terminal-output-area" id="terminalOutput"></div>
-                    <div class="terminal-input-line">
-                        <span class="terminal-prompt">root@darkweb:~$</span>
-                        <input type="text" id="terminalInput" class="terminal-command-input" autocomplete="off" spellcheck="false">
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
     
-    <!-- Edit Profile Modal (Hidden for now, can be accessed via terminal command) -->
-    <div class="modal" id="editProfileModal" style="display: none;">
-        <div class="modal-content terminal-modal">
+    <div class="profile-wrapper">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-header-bg"></div>
+            <div class="profile-header-content">
+                <div class="profile-avatar-container">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <!-- Avatar will be generated here -->
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-username" id="profileUsername">username</h1>
+                    <p class="profile-bio" id="profileBio">Hacker • Security Researcher • Darknet Enthusiast</p>
+                    <div class="profile-meta">
+                        <span class="profile-location" id="profileLocation">📍 Location: Hidden</span>
+                        <span class="profile-email" id="profileEmail">✉️ Email: hidden@darkweb.local</span>
+                        <span class="profile-joined" id="profileJoined">Joined on Jan 2023</span>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary" id="followBtn">Follow</button>
+                        <button class="btn btn-secondary" id="editProfileBtn">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Stats -->
+        <div class="profile-stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Reputation</span>
+                        <span class="stat-value" id="statReputation">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Exploits</span>
+                        <span class="stat-value" id="statExploits">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Servers</span>
+                        <span class="stat-value" id="statServers">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Databases</span>
+                        <span class="stat-value" id="statDatabases">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Zero-Days</span>
+                        <span class="stat-value" id="statZeroDays">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Activity</span>
+                        <span class="stat-value" id="statActivity">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Navigation Tabs -->
+        <div class="profile-nav">
+            <div class="container">
+                <nav class="profile-tabs">
+                    <a href="#overview" class="tab-link active" data-tab="overview">Overview</a>
+                    <a href="#repositories" class="tab-link" data-tab="repositories">Repositories</a>
+                    <a href="#projects" class="tab-link" data-tab="projects">Projects</a>
+                    <a href="#packages" class="tab-link" data-tab="packages">Packages</a>
+                    <a href="#stars" class="tab-link" data-tab="stars">Stars</a>
+                    <a href="#activity" class="tab-link" data-tab="activity">Activity</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="profile-main">
+            <div class="container">
+                <div class="profile-layout">
+                    <!-- Sidebar -->
+                    <aside class="profile-sidebar">
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Achievements</h3>
+                            <div class="achievements-grid" id="achievementsGrid">
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">🏆</div>
+                                    <div class="achievement-name">First Exploit</div>
+                                </div>
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">🔐</div>
+                                    <div class="achievement-name">Security Master</div>
+                                </div>
+                                <div class="achievement-item">
+                                    <div class="achievement-icon">⭐</div>
+                                    <div class="achievement-name">Elite Hacker</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Highlights</h3>
+                            <div class="highlights-list">
+                                <div class="highlight-item">
+                                    <span class="highlight-icon">🔒</span>
+                                    <span class="highlight-text">2FA Enabled</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <span class="highlight-icon">🛡️</span>
+                                    <span class="highlight-text">VPN Active</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <span class="highlight-icon">🔐</span>
+                                    <span class="highlight-text">AES-256 Encryption</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Skills</h3>
+                            <div class="skills-list" id="skillsList">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">C/C++</span>
+                                <span class="skill-tag">Bash</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">Kali Linux</span>
+                                <span class="skill-tag">Metasploit</span>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Security Status</h3>
+                            <div class="security-status">
+                                <div class="security-item">
+                                    <span class="security-label">VPN</span>
+                                    <span class="security-value active" id="vpnStatus">Active</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="security-label">TOR</span>
+                                    <span class="security-value active" id="torStatus">Enabled</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="security-label">2FA</span>
+                                    <span class="security-value active" id="twoFaStatus">Enabled</span>
+                                </div>
+                                <div class="security-item">
+                                    <span class="security-label">Encryption</span>
+                                    <span class="security-value">AES-256</span>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <main class="profile-content">
+                        <!-- Overview Tab -->
+                        <div class="tab-content active" id="overviewTab">
+                            <div class="content-section">
+                                <h2 class="section-title">Overview</h2>
+                                <div class="overview-stats">
+                                    <div class="overview-stat-card">
+                                        <div class="stat-card-icon">📊</div>
+                                        <div class="stat-card-content">
+                                            <div class="stat-card-value" id="overviewReputation">0</div>
+                                            <div class="stat-card-label">Reputation Points</div>
+                                        </div>
+                                    </div>
+                                    <div class="overview-stat-card">
+                                        <div class="stat-card-icon">⚡</div>
+                                        <div class="stat-card-content">
+                                            <div class="stat-card-value" id="overviewActivity">0</div>
+                                            <div class="stat-card-label">Days Active</div>
+                                        </div>
+                                    </div>
+                                    <div class="overview-stat-card">
+                                        <div class="stat-card-icon">🎯</div>
+                                        <div class="stat-card-content">
+                                            <div class="stat-card-value" id="overviewRank">NEWBIE</div>
+                                            <div class="stat-card-label">Current Rank</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="content-section">
+                                <h2 class="section-title">Recent Activity</h2>
+                                <div class="activity-timeline" id="activityTimeline">
+                                    <!-- Activity items will be loaded here -->
+                                </div>
+                            </div>
+
+                            <div class="content-section">
+                                <h2 class="section-title">Contribution Graph</h2>
+                                <div class="contribution-graph" id="contributionGraph">
+                                    <!-- Contribution graph will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Repositories Tab -->
+                        <div class="tab-content" id="repositoriesTab">
+                            <div class="content-section">
+                                <div class="section-header">
+                                    <h2 class="section-title">Repositories</h2>
+                                    <button class="btn btn-primary btn-sm">New</button>
+                                </div>
+                                <div class="repositories-list" id="repositoriesList">
+                                    <!-- Repositories will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projects Tab -->
+                        <div class="tab-content" id="projectsTab">
+                            <div class="content-section">
+                                <div class="section-header">
+                                    <h2 class="section-title">Projects</h2>
+                                    <button class="btn btn-primary btn-sm">New Project</button>
+                                </div>
+                                <div class="projects-grid" id="projectsGrid">
+                                    <!-- Projects will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Packages Tab -->
+                        <div class="tab-content" id="packagesTab">
+                            <div class="content-section">
+                                <h2 class="section-title">Packages</h2>
+                                <div class="packages-list" id="packagesList">
+                                    <!-- Packages will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stars Tab -->
+                        <div class="tab-content" id="starsTab">
+                            <div class="content-section">
+                                <h2 class="section-title">Stars</h2>
+                                <div class="stars-list" id="starsList">
+                                    <!-- Starred items will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity Tab -->
+                        <div class="tab-content" id="activityTab">
+                            <div class="content-section">
+                                <h2 class="section-title">Activity</h2>
+                                <div class="activity-feed" id="activityFeed">
+                                    <!-- Activity feed will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
             <div class="modal-header">
-                <span class="terminal-prompt">root@darkweb:~$</span>
-                <span class="modal-title">EDIT PROFILE</span>
+                <h3>Edit Profile</h3>
                 <button class="modal-close" id="closeEditModal">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="editProfileForm" class="terminal-form">
+                <form id="editProfileForm">
                     <div class="form-group">
-                        <label class="terminal-label">USERNAME:</label>
-                        <input type="text" id="editUsername" class="terminal-input" required>
+                        <label>Username</label>
+                        <input type="text" id="editUsername" class="form-input" required>
                     </div>
                     <div class="form-group">
-                        <label class="terminal-label">EMAIL:</label>
-                        <input type="email" id="editEmail" class="terminal-input" required>
+                        <label>Bio</label>
+                        <textarea id="editBio" class="form-input" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="terminal-label">RANK:</label>
-                        <select id="editRank" class="terminal-input">
-                            <option value="NEWBIE">NEWBIE</option>
-                            <option value="HACKER">HACKER</option>
-                            <option value="ADVANCED">ADVANCED</option>
-                            <option value="ELITE HACKER">ELITE HACKER</option>
-                        </select>
+                        <label>Location</label>
+                        <input type="text" id="editLocation" class="form-input">
                     </div>
                     <div class="form-group">
-                        <label class="terminal-label">ASCII ART NAME:</label>
-                        <input type="text" id="editAsciiArt" class="terminal-input" placeholder="ERRORoX">
-                        <span class="terminal-hint">Имя, которое будет отображаться в ASCII арте</span>
+                        <label>Email</label>
+                        <input type="email" id="editEmail" class="form-input">
                     </div>
-                    <button type="submit" class="terminal-btn">SAVE</button>
+                    <div class="form-group">
+                        <label>Skills</label>
+                        <input type="text" id="editSkills" class="form-input" placeholder="Python, C++, Bash, ...">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    
     
     <script src="../js/common.js"></script>
     <script src="../js/notifications.js"></script>
@@ -301,6 +315,7 @@
     <script src="../js/loadSidebar.js"></script>
     <script src="../js/sidebar.js"></script>
     <script src="../js/init.js"></script>
+    <script src="../js/avatar-generator.js"></script>
     <script src="../js/profile.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
