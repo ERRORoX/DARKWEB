@@ -17,7 +17,10 @@ function loadStats() {
     
     // Репутация
     const reputation = user.reputation || 0;
-    document.getElementById('reputationValue').textContent = reputation + '%';
+    const reputationValue = document.getElementById('reputationValue');
+    if (reputationValue) {
+        reputationValue.textContent = reputation + '%';
+    }
     const reputationProgress = document.getElementById('reputationProgress');
     if (reputationProgress) {
         reputationProgress.style.width = reputation + '%';
@@ -31,8 +34,12 @@ function loadStats() {
         const today = new Date();
         return msgDate.toDateString() === today.toDateString();
     });
-    document.getElementById('messagesCount').textContent = userMessages.length;
-    const messagesChange = document.querySelector('#messagesCount').parentElement.querySelector('.stat-change');
+    const messagesCount = document.getElementById('messagesCount');
+    if (messagesCount) {
+        messagesCount.textContent = userMessages.length;
+    }
+    const messagesCountParent = document.querySelector('#messagesCount')?.parentElement;
+    const messagesChange = messagesCountParent?.querySelector('.stat-change');
     if (messagesChange) {
         messagesChange.textContent = `+${todayMessages.length} сегодня`;
     }
@@ -44,8 +51,12 @@ function loadStats() {
         const today = new Date();
         return purchaseDate.toDateString() === today.toDateString();
     });
-    document.getElementById('purchasesCount').textContent = purchases.length;
-    const purchasesChange = document.querySelector('#purchasesCount').parentElement.querySelector('.stat-change');
+    const purchasesCount = document.getElementById('purchasesCount');
+    if (purchasesCount) {
+        purchasesCount.textContent = purchases.length;
+    }
+    const purchasesCountParent = document.querySelector('#purchasesCount')?.parentElement;
+    const purchasesChange = purchasesCountParent?.querySelector('.stat-change');
     if (purchasesChange) {
         purchasesChange.textContent = `+${todayPurchases.length} сегодня`;
     }
@@ -53,8 +64,12 @@ function loadStats() {
     // Достижения
     const achievements = JSON.parse(localStorage.getItem('user_achievements') || '[]');
     const unlockedCount = achievements.filter(a => a.unlocked).length;
-    document.getElementById('achievementsCount').textContent = unlockedCount;
-    const achievementsChange = document.querySelector('#achievementsCount').parentElement.querySelector('.stat-change');
+    const achievementsCount = document.getElementById('achievementsCount');
+    if (achievementsCount) {
+        achievementsCount.textContent = unlockedCount;
+    }
+    const achievementsCountParent = document.querySelector('#achievementsCount')?.parentElement;
+    const achievementsChange = achievementsCountParent?.querySelector('.stat-change');
     if (achievementsChange) {
         achievementsChange.textContent = `${unlockedCount}/10 разблокировано`;
     }

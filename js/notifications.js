@@ -63,9 +63,19 @@ function createNotificationCenter() {
         document.body.appendChild(center);
         
         // Обработчики событий
-        document.getElementById('closeNotificationCenter').addEventListener('click', toggleNotificationCenter);
-        document.getElementById('markAllReadBtn').addEventListener('click', markAllAsRead);
-        document.getElementById('clearAllBtn').addEventListener('click', clearAllNotifications);
+        const closeBtn = document.getElementById('closeNotificationCenter');
+        const markAllReadBtn = document.getElementById('markAllReadBtn');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', toggleNotificationCenter);
+        }
+        if (markAllReadBtn) {
+            markAllReadBtn.addEventListener('click', markAllAsRead);
+        }
+        if (clearAllBtn) {
+            clearAllBtn.addEventListener('click', clearAllNotifications);
+        }
         
         // Фильтры
         document.querySelectorAll('.notification-center-filters .filter-btn').forEach(btn => {

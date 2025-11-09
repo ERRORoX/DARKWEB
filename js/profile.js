@@ -342,9 +342,13 @@ function initializeEditProfile() {
             
             const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
             
-            user.username = document.getElementById('editUsername').value;
-            user.email = document.getElementById('editEmail').value;
-            user.rank = document.getElementById('editRank').value;
+            const editUsername = document.getElementById('editUsername');
+            const editEmail = document.getElementById('editEmail');
+            const editRank = document.getElementById('editRank');
+            
+            if (editUsername) user.username = editUsername.value;
+            if (editEmail) user.email = editEmail.value;
+            if (editRank) user.rank = editRank.value;
             
             // Сохраняем ASCII арт имя, если указано
             const asciiArtInput = document.getElementById('editAsciiArt');
@@ -410,11 +414,18 @@ function addEditButton() {
             const modal = document.getElementById('editProfileModal');
             if (modal) {
                 const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-                document.getElementById('editUsername').value = user.username || '';
-                document.getElementById('editEmail').value = user.email || '';
-                document.getElementById('editRank').value = user.rank || 'НОВИЧОК';
-                const asciiName = localStorage.getItem('user_ascii_name') || 'ERRORoX';
-                document.getElementById('editAsciiArt').value = asciiName;
+                const editUsername = document.getElementById('editUsername');
+                const editEmail = document.getElementById('editEmail');
+                const editRank = document.getElementById('editRank');
+                const editAsciiArt = document.getElementById('editAsciiArt');
+                
+                if (editUsername) editUsername.value = user.username || '';
+                if (editEmail) editEmail.value = user.email || '';
+                if (editRank) editRank.value = user.rank || 'НОВИЧОК';
+                if (editAsciiArt) {
+                    const asciiName = localStorage.getItem('user_ascii_name') || 'ERRORoX';
+                    editAsciiArt.value = asciiName;
+                }
                 modal.style.display = 'flex';
             }
         });
@@ -496,11 +507,18 @@ drwxr-xr-x  2 root root 4096 Jan 15 14:23 tools/
             const modal = document.getElementById('editProfileModal');
             if (modal) {
                 const user = JSON.parse(localStorage.getItem('darknet_user') || '{}');
-                document.getElementById('editUsername').value = user.username || '';
-                document.getElementById('editEmail').value = user.email || '';
-                document.getElementById('editRank').value = user.rank || 'НОВИЧОК';
-                const asciiName = localStorage.getItem('user_ascii_name') || 'ERRORoX';
-                document.getElementById('editAsciiArt').value = asciiName;
+                const editUsername = document.getElementById('editUsername');
+                const editEmail = document.getElementById('editEmail');
+                const editRank = document.getElementById('editRank');
+                const editAsciiArt = document.getElementById('editAsciiArt');
+                
+                if (editUsername) editUsername.value = user.username || '';
+                if (editEmail) editEmail.value = user.email || '';
+                if (editRank) editRank.value = user.rank || 'НОВИЧОК';
+                if (editAsciiArt) {
+                    const asciiName = localStorage.getItem('user_ascii_name') || 'ERRORoX';
+                    editAsciiArt.value = asciiName;
+                }
                 modal.style.display = 'flex';
             }
             return 'Profile edit modal opened';

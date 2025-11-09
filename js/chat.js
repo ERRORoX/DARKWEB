@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const clearChatBtn = document.getElementById('clearChatBtn');
     const refreshChatBtn = document.getElementById('refreshChatBtn');
     
+    // Проверка наличия необходимых элементов
+    if (!chatMessages || !chatInput || !sendBtn) {
+        console.error('Необходимые элементы чата не найдены');
+        return;
+    }
+    
     // Проверка авторизации
     const currentUser = JSON.parse(localStorage.getItem('darknet_user') || '{}');
     if (!currentUser.username) {
@@ -26,15 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Обновляем время
-    updateTime();
-    setInterval(updateTime, 1000);
+    if (typeof updateTime === 'function') {
+        updateTime();
+        setInterval(updateTime, 1000);
+    }
     
     // Обновляем счетчик онлайн (симуляция)
-    updateOnlineCount();
-    setInterval(updateOnlineCount, 5000);
+    if (typeof updateOnlineCount === 'function') {
+        updateOnlineCount();
+        setInterval(updateOnlineCount, 5000);
+    }
     
     // Функция отправки сообщения
     function sendMessage() {
+        if (!chatInput) return;
         const message = chatInput.value.trim();
         if (!message) return;
         

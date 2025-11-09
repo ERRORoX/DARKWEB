@@ -69,22 +69,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Переключатель темы
-    const themeToggle = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    
-    if (currentTheme === 'light') {
-        document.body.classList.add('light-theme');
-        themeToggle.querySelector('.theme-icon').textContent = '☀️';
-    }
-    
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        const isLight = document.body.classList.contains('light-theme');
-        themeToggle.querySelector('.theme-icon').textContent = isLight ? '☀️' : '🌙';
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-    
     // Регистрация Service Worker для PWA
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {

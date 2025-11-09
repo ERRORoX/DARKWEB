@@ -68,7 +68,19 @@ function openPMWindow(username) {
         </div>
     `;
     
-    document.getElementById('pmContainer').appendChild(pmWindow);
+    const pmContainer = document.getElementById('pmContainer');
+    if (!pmContainer) {
+        createPMContainer();
+        const newContainer = document.getElementById('pmContainer');
+        if (newContainer) {
+            newContainer.appendChild(pmWindow);
+        } else {
+            console.error('Не удалось создать контейнер для PM окон');
+            return;
+        }
+    } else {
+        pmContainer.appendChild(pmWindow);
+    }
     
     // Добавляем в массив окон
     const windowObj = {

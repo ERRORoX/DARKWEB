@@ -403,41 +403,6 @@ body {
     filter: blur(0) brightness(1);
 }
 
-/* Переключатель темы */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(10, 15, 26, 0.8);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    color: #1fc3ff;
-    cursor: pointer;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-}
-
-.theme-toggle:hover {
-    background: rgba(0, 255, 255, 0.2);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-    transform: scale(1.1);
-}
-
-.theme-icon {
-    font-size: 24px;
-    transition: transform 0.3s ease;
-}
-
-.theme-toggle:hover .theme-icon {
-    transform: rotate(20deg);
-}
 
 /* Светлая тема */
 body.light-theme {

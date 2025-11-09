@@ -163,10 +163,15 @@ function removeFromCart(productId) {
         const modal = document.getElementById('cartModal');
         if (modal) {
             const currentCart = getCart();
+            const cartModalBody = document.getElementById('cartModalBody');
             if (currentCart.length === 0) {
-                document.getElementById('cartModalBody').innerHTML = '<div class="marketplace-empty">Корзина пуста</div>';
-                document.querySelector('#cartModal .marketplace-btn-primary').disabled = true;
-                document.querySelector('#cartModal button[onclick="clearCart()"]').disabled = true;
+                if (cartModalBody) {
+                    cartModalBody.innerHTML = '<div class="marketplace-empty">Корзина пуста</div>';
+                }
+                const primaryBtn = document.querySelector('#cartModal .marketplace-btn-primary');
+                const clearBtn = document.querySelector('#cartModal button[onclick="clearCart()"]');
+                if (primaryBtn) primaryBtn.disabled = true;
+                if (clearBtn) clearBtn.disabled = true;
             } else {
                 displayCartItems(currentCart);
                 calculateCartTotal();
@@ -420,7 +425,10 @@ function removeFromFavorites(productId) {
         if (modal) {
             const currentFavorites = getFavorites();
             if (currentFavorites.length === 0) {
-                document.getElementById('favoritesModalBody').innerHTML = '<div class="marketplace-empty">Нет избранных товаров</div>';
+                const favoritesModalBody = document.getElementById('favoritesModalBody');
+                if (favoritesModalBody) {
+                    favoritesModalBody.innerHTML = '<div class="marketplace-empty">Нет избранных товаров</div>';
+                }
             } else {
                 displayFavoritesItems(currentFavorites);
             }
