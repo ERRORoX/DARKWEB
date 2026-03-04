@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="tg">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Презентация — Магазин ноутбуков</title>
+  <title>Пешниҳоди тиҷорӣ — Боти Telegram мағозаи ноутбук</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -34,13 +34,7 @@
       background:linear-gradient(90deg,var(--accent), #b8956a, var(--accent2));
       z-index:1000;
     }
-    .slide{
-      min-height:100vh;
-      padding: clamp(18px, 3vw, 40px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+    .slide{ min-height:100vh; padding: clamp(18px, 3vw, 40px); display:flex; align-items:center; justify-content:center; }
     .frame{
       width:min(1100px, 100%);
       background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 25%), var(--card);
@@ -51,393 +45,366 @@
       position:relative;
     }
     .frame::after{
-      content:'';
-      position:absolute;inset:0;
+      content:''; position:absolute; inset:0;
       background-image:
         linear-gradient(rgba(212,165,116,.06) 1px, transparent 1px),
         linear-gradient(90deg, rgba(212,165,116,.06) 1px, transparent 1px);
-      background-size:28px 28px;
-      pointer-events:none;
-      opacity:.5;
+      background-size:28px 28px; pointer-events:none; opacity:.5;
     }
     .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:16px 20px;
-      border-bottom:1px solid var(--border);
-      background:var(--card2);
-      position:relative;
-      z-index:2;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 20px; border-bottom:1px solid var(--border);
+      background:var(--card2); position:relative; z-index:2;
     }
-    .brand{
-      display:flex; gap:10px; align-items:center;
-      font-weight:700; letter-spacing:.02em;
-    }
-    .pill{
-      font-size:12px;
-      padding:6px 10px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      color:var(--muted);
-      background:rgba(255,255,255,.02);
-    }
+    .brand{ display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.02em; }
+    .pill{ font-size:12px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color:var(--muted); background:rgba(255,255,255,.02); }
     .content{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:22px;
-      padding:22px;
-      position:relative;
-      z-index:2;
+      display:grid; grid-template-columns: 1.25fr .75fr; gap:22px; padding:22px; position:relative; z-index:2;
     }
-    @media (max-width: 900px){
-      .content{ grid-template-columns:1fr; }
-    }
-    h1{
-      font-size:clamp(28px, 3.8vw, 44px);
-      line-height:1.15;
-      margin-bottom:10px;
-      color:var(--text);
-    }
-    h2{
-      font-size:clamp(18px, 2.2vw, 24px);
-      margin-bottom:12px;
-      color:var(--text);
-    }
-    .subtitle{
-      color:var(--muted);
-      font-size:clamp(14px, 1.5vw, 16px);
-      margin-bottom:14px;
-    }
-    .kpis{
-      display:flex; flex-wrap:wrap; gap:10px;
-      margin-top:10px;
-    }
-    .kpi{
-      padding:10px 12px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:rgba(255,255,255,.02);
-      color:var(--muted);
-      font-size:13px;
-    }
+    @media (max-width: 900px){ .content{ grid-template-columns:1fr; } }
+    h1{ font-size:clamp(28px, 3.8vw, 44px); line-height:1.15; margin-bottom:10px; color:var(--text); }
+    h2{ font-size:clamp(18px, 2.2vw, 24px); margin-bottom:12px; color:var(--text); }
+    .subtitle{ color:var(--muted); font-size:clamp(14px, 1.5vw, 16px); margin-bottom:14px; }
     ul{ list-style:none; }
-    li{
-      padding:8px 0;
-      padding-left:18px;
-      position:relative;
-      color:var(--muted);
-      font-size:15px;
-    }
-    li::before{
-      content:'';
-      position:absolute;
-      left:0; top:15px;
-      width:7px; height:7px;
-      background:var(--accent);
-      border-radius:50%;
-      box-shadow:0 0 0 3px rgba(212,165,116,.15);
-    }
+    li{ padding:6px 0; padding-left:18px; position:relative; color:var(--muted); font-size:14px; }
+    li::before{ content:''; position:absolute; left:0; top:12px; width:7px; height:7px; background:var(--accent); border-radius:50%; box-shadow:0 0 0 3px rgba(212,165,116,.15); }
     .heroImg, .img{
-      width:100%;
-      border-radius:14px;
-      border:1px solid var(--border);
-      box-shadow:0 12px 30px rgba(0,0,0,.35);
-      overflow:hidden;
-      background:linear-gradient(135deg, rgba(212,165,116,.16), rgba(0,229,204,.10));
-      min-height: 240px;
-      display:block;
-      object-fit:cover;
-      background-size:cover;
-      background-position:center;
+      width:100%; border-radius:14px; border:1px solid var(--border);
+      box-shadow:0 12px 30px rgba(0,0,0,.35); overflow:hidden;
+      background:linear-gradient(135deg, rgba(212,165,116,.16), rgba(0,229,204,.1));
+      min-height:220px; display:block; object-fit:cover; background-size:cover; background-position:center;
     }
-    .caption{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:12px;
-    }
-    .hint{
-      position:fixed;
-      bottom:14px; right:14px;
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--border);
-      background:rgba(17,21,32,.7);
-      border-radius:999px;
-      padding:8px 10px;
-      backdrop-filter: blur(10px);
-    }
-    a{ color:var(--accent2); text-decoration:none; }
-    code{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--border);
-      padding:1px 6px;
-      border-radius:8px;
-      color:var(--text);
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      font-size:.92em;
-    }
+    .price-block{ background:rgba(212,165,116,.08); border:1px solid var(--accent); border-radius:12px; padding:16px 20px; margin:12px 0; }
+    .price-block .sum{ font-size:1.8rem; font-weight:700; color:var(--accent); }
+    .price-row{ display:flex; justify-content:space-between; padding:6px 0; color:var(--muted); font-size:14px; }
+    .price-row strong{ color:var(--text); }
+    .hint{ position:fixed; bottom:14px; right:14px; font-size:12px; color:var(--muted); border:1px solid var(--border); background:rgba(17,21,32,.7); border-radius:999px; padding:8px 10px; backdrop-filter:blur(10px); }
+    table{ width:100%; border-collapse:collapse; font-size:14px; color:var(--muted); }
+    th, td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); }
+    th{ color:var(--text); font-weight:600; }
   </style>
 </head>
 <body>
 
-  <!-- 0. Титул -->
+  <!-- Титул -->
   <section class="slide">
     <div class="frame">
       <div class="topbar">
-        <div class="brand">Магазин ноутбуков</div>
-        <div class="pill">Telegram-бот + веб-админка</div>
+        <div class="brand">Пешниҳоди тиҷорӣ</div>
+        <div class="pill">Боти Telegram + панели админ</div>
       </div>
       <div class="content">
         <div>
-          <h1>Каталог • Заказы • Оплата • Чеки • AI‑консультант</h1>
-          <p class="subtitle">Единая система для клиентов и администратора. Поддержка русского и таджикского языка. Запуск через Docker на любой ОС.</p>
-          <div class="kpis">
-            <div class="kpi"><b style="color:var(--text)">Клиент:</b> Telegram</div>
-            <div class="kpi"><b style="color:var(--text)">Админка:</b> Web (порт 8080)</div>
-            <div class="kpi"><b style="color:var(--text)">БД:</b> SQLite</div>
-            <div class="kpi"><b style="color:var(--text)">Стек:</b> Python async</div>
+          <h1>Мағозаи ноутбук дар Telegram</h1>
+          <p class="subtitle">Боти комил барои каталог, фармоишҳо, пардохт ва машваратдиҳии AI. Веб-панели админ барои идоракунӣ. Минтақа: Тоҷикистон (забонҳои тоҷикӣ ва русӣ).</p>
+          <ul>
+            <li>Каталог, фармоишҳо, реквизитҳо, чекҳо, статусҳо</li>
+            <li>Интихоби ноутбук тавассути AI, зиёда забонӣ</li>
+            <li>Ҳуҷҷатҳо, Docker, супориши ба фармоишгар</li>
+          </ul>
+        </div>
+        <div>
+          <img class="heroImg" alt="Лоиҳа" src="presentation_images/slide_0.jpg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Тавсифи лоиҳа -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">Тавсифи лоиҳа</div>
+        <div class="pill">B2C e-commerce</div>
+      </div>
+      <div class="content">
+        <div>
+          <h2>Чи гуна система</h2>
+          <ul>
+            <li><strong>Навъ:</strong> Боти Telegram мағозаи интернетӣ (ноутбук) + веб-панели админ.</li>
+            <li><strong>Мизоҷон:</strong> харидор бо бот дар Telegram алоқа дорад — каталог, фармоиш, реквизитҳо, чек.</li>
+            <li><strong>Админ:</strong> шумо фармоишҳо ва маҳсулотро тавассути браузер идора мекунед (дашборд, филтрҳо, содирот, танзимот).</li>
+            <li><strong>Минтақа:</strong> Тоҷикистон; забонҳо — тоҷикӣ ва русӣ дар бот ва дар танзимот.</li>
+            <li><strong>Ҳаҷм:</strong> як мағоза, як бот, як панели админ; додаҳо назди шумо нигоҳ дошта мешаванд (SQLite, Docker).</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Тавсиф" src="presentation_images/slide_1.jpg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Вазифаҳо -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">Вазифаҳо</div>
+        <div class="pill">Бот + админ</div>
+      </div>
+      <div class="content">
+        <div>
+          <h2>Бот барои мизоҷон</h2>
+          <ul>
+            <li>Каталог бо категорияҳо (бозӣ, таҳсил, кор), акс/видео, ҷустуҷӯ, дӯстдошта.</li>
+            <li>Тартиб додани фармоиш: НАМ, телефон, шаҳр, суроға; рақами худкор.</li>
+            <li>Реквизитҳои пардохт, боргузории акси чек, таърихи фармоишҳо, статусҳо.</li>
+            <li>Машваратдиҳии AI: интихоб аз рӯи буҷа ва талабот, тоҷикӣ/русӣ/англисӣ.</li>
+            <li>Саволу ҷавоб, контактҳои дастгирӣ, ёддошт дар бораи чек (ҳар 6 соат).</li>
+          </ul>
+          <h2 style="margin-top:14px;">Веб-панели админ</h2>
+          <ul>
+            <li>Даромад бо логин ва калиди махфӣ; чанд администратор.</li>
+            <li>Фармоишҳо: филтрҳо, тағйири статус, дидани чек, содироти CSV.</li>
+            <li>Маҳсулот: CRUD, акс/видео, боқимонда, намуди ҷадвал/плитка.</li>
+            <li>Дашборд, огоҳиҳо (фармоишҳои нав, боқимондаи паст), танзимоти .env, нусхаи БД.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Вазифаҳо" src="presentation_images/slide_5.jpg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Технологияҳо -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">Технологияҳо</div>
+        <div class="pill">Стек</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li><strong>Backend:</strong> Python 3.11+, aiogram 3.x, aiohttp, aiosqlite, python-dotenv.</li>
+            <li><strong>БД:</strong> SQLite 3 (дастрасии асинхронӣ).</li>
+            <li><strong>Панели админ:</strong> HTML5, CSS модулӣ, Vanilla JavaScript (ES-модулҳо).</li>
+            <li><strong>API:</strong> Telegram Bot API, OpenRouter API (AI).</li>
+            <li><strong>Бехатарии:</strong> JWT, SHA256, филтри IP ихтиёрӣ.</li>
+            <li><strong>Сарпуниш:</strong> Docker, docker-compose; дастур барои Windows, Linux, macOS.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Технология" src="presentation_images/slide_6.jpg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Чи дар нарх дохил аст -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">Чи дар нарх дохил аст</div>
+        <div class="pill">Супориш</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Коди ибтидоии бот ва панели админ (дастрасии комил).</li>
+            <li>Пойгоҳи додаҳои омода (схема, миграсияҳо дар зарурат).</li>
+            <li>Тасвири Docker ва docker-compose барои оғоз дар компютери шумо ё сервер.</li>
+            <li>Дастури насби барои фармоишгар (Windows + Docker Desktop, қадам-ба-қадам).</li>
+            <li>Дастури барои барномасоз (соз, Docker Hub, такмил).</li>
+            <li>Ҳуҷҷатҳо: тавсифи лоиҳа, тавсиф барои арзёбӣ, README.</li>
+            <li>Супориши мавод: архиви лоиҳа ва/ё тасвир дар Docker Hub + дастурҳо.</li>
+            <li>Як машварат дар бораи оғоз (ҷавоб ба саволҳо то 7 рӯз пас аз супориш).</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Дохил" src="presentation_images/slide_7.jpg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ҳисоби нарх -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">Ҳисоби нарх</div>
+        <div class="pill">Ҳисоби комил</div>
+      </div>
+      <div class="content">
+        <div>
+          <h2>Заҳмати меҳнат (баҳодиҳӣ)</h2>
+          <table>
+            <tr><th>Блок</th><th>Соат</th></tr>
+            <tr><td>Backend (бот + REST API + БД)</td><td>80–120</td></tr>
+            <tr><td>Веб-панели админ (тарроҳӣ + мантиқ)</td><td>60–80</td></tr>
+            <tr><td>Интеграсияи AI, зиёда забонӣ</td><td>20–30</td></tr>
+            <tr><td>Санҷиш, такмил</td><td>40–60</td></tr>
+            <tr><td>Ҳуҷҷатҳо, Docker, дастурҳо</td><td>15–25</td></tr>
+            <tr><td><strong>Ҳамагӣ соат</strong></td><td><strong>215–315</strong></td></tr>
+          </table>
+          <div class="price-block" style="margin-top:16px;">
+            <div class="price-row">Ҳамагӣ ба сомонӣ (ТJS):</div>
+            <div class="price-row">Диапазон: <strong class="sum">5 000 – 7 000 сомонӣ</strong></div>
+            <div class="price-row" style="margin-top:8px; color:var(--muted);">Нархи ниҳоии дар шартнома муайян карда мешавад. Пардохт бо марҳала: 30% пешакӣ, 40% пас аз супориш, 30% пас аз супориши мавод ва имзои акт.</div>
           </div>
         </div>
         <div>
-          <img class="heroImg" alt="Ноутбуки" src="presentation_images/slide_0.jpg" />
-          <div class="caption">Визуальный стиль — тёмный «магазин», без слепящего белого.</div>
+          <img class="img" alt="Нарх" src="presentation_images/slide_2.jpg" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 1. Цель проекта -->
+  <!-- Чӣ тавр маҳсулотро ба фармоишгар супориш медиҳам -->
   <section class="slide">
     <div class="frame">
       <div class="topbar">
-        <div class="brand">1. Цель проекта</div>
-        <div class="pill">B2C продажи в Telegram</div>
+        <div class="brand">Супориши маҳсулот ба фармоишгар</div>
+        <div class="pill">Ду вариант</div>
+      </div>
+      <div class="content">
+        <div>
+          <h2>Варианти 1 — архив бо лоиҳа</h2>
+          <ul>
+            <li>Архив (ZIP) бо коди ибтидоии комил, Dockerfile, docker-compose.yml, .env.example.</li>
+            <li>Дастури «Насб барои фармоишгар» (Windows, Docker Desktop, қадам-ба-қадам).</li>
+            <li>Шумо распак мекунед, .env эҷод мекунед (токени бот, сирри админ), оғоз: <code>docker compose up -d</code>. Панели админ: http://localhost:8080.</li>
+          </ul>
+          <h2 style="margin-top:14px;">Варианти 2 — тасвири Docker Hub</h2>
+          <ul>
+            <li>Тасвир дар Docker Hub нашр мешавад. Номи тасвир + дастур ба шумо супорида мешавад.</li>
+            <li>Шумо ҷузвдор эҷод мекунед, файли .env ва як фармон иҷро мекунед: <code>docker run</code> ё <code>docker compose -f docker-compose.hub.yml up -d</code>.</li>
+            <li>Коди ибтидоӣ супорида намешавад (фақат тасвири омода барои оғоз).</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Супориш" src="presentation_images/slide_4.jpg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Пардохт чӣ гуна мегузарад -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">Пардохт</div>
+        <div class="pill">Шартҳо</div>
       </div>
       <div class="content">
         <div>
           <ul>
-            <li>Сделать удобный канал продаж ноутбуков через Telegram: каталог → заказ → оплата → чек.</li>
-            <li>Сократить ручную работу: статусы заказов, история, экспорт, уведомления и бэкап.</li>
-            <li>Дать администратору веб‑панель для управления товарами и заказами.</li>
+            <li><strong>Асъор:</strong> фақат сомонӣ (TJS) — Тоҷикистон.</li>
+            <li><strong>Усул:</strong> гузарониш ба ҳисоб/корт (реквизитҳо ҷудо мувофиқа мешаванд) ё платформаи пардохтӣ (масалан, PayPal) бо розигӣ.</li>
+            <li><strong>Марҳалаҳо (схемаи тавсияшуда):</strong></li>
+            <li>30% — пешакӣ пас аз имзои шартнома / тасдиқи ТЗ.</li>
+            <li>40% — пас аз супориши нусхаи корӣ (бот + админ, санҷиш аз тарафи шумо).</li>
+            <li>30% — пас аз супориши ҳамаи мавод (код/тасвир, дастурҳо, машварат) ва имзои акт.</li>
+            <li>Тақсимоти дигар бо дархости шумо имконпазир аст (масалан, 50/50).</li>
           </ul>
         </div>
         <div>
-          <img class="img" alt="Цель" src="presentation_images/slide_1.jpg"/>
+          <img class="img" alt="Пардохт" src="presentation_images/slide_8.jpg" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. Актуальность -->
+  <!-- Шартнома -->
   <section class="slide">
     <div class="frame">
       <div class="topbar">
-        <div class="brand">2. Актуальность</div>
-        <div class="pill">Таджикистан • RU/TG</div>
+        <div class="brand">Шартнома</div>
+        <div class="pill">Шартҳои ҳамкорӣ</div>
       </div>
       <div class="content">
         <div>
           <ul>
-            <li>Telegram — привычный канал коммуникации и продаж, без отдельного сайта.</li>
-            <li>Нужен единый процесс: каталог, реквизиты, чеки и история заказов в одном месте.</li>
-            <li>AI‑подбор помогает клиенту быстрее выбрать устройство по бюджету и требованиям.</li>
-            <li>Администратору нужна централизованная панель вместо таблиц и переписок.</li>
+            <li><strong>Мавзӯъ:</strong> таҳия ва супориши боти Telegram мағозаи интернетӣ ва веб-панели админ мувофиқи тавсифи мувофиқашуда.</li>
+            <li><strong>Мӯҳлат:</strong> ҷудо мувофиқа мешавад (ориентир: 2,5–4 моҳ дар ҳолати корои қисмӣ).</li>
+            <li><strong>Ҳуқуқ:</strong> пас аз пардохти комил фармоишгар ҳуқуқи истифодаи код/тасвири супоришашударо барои мақсадҳои худ (шумора тиҷорӣ) мегирад. Коди ибтидоӣ дар интихоби варианти архив супорида мешавад.</li>
+            <li><strong>Кафолат:</strong> рафъи хатоҳои муҳим (номеҳнатӣи функсионалитети тавсифшуда) то 14 рӯз пас аз супориш дар шарти риояи дастури насб.</li>
+            <li><strong>Махфият ва ТЗ:</strong> шартҳо дар шартнома равшан мешаванд (имзо ба тариқи электронӣ ё рӯи коғаз — бо розигӣ).</li>
           </ul>
         </div>
         <div>
-          <img class="img" alt="Актуальность" src="presentation_images/slide_2.jpg"/>
+          <img class="img" alt="Шартнома" src="presentation_images/slide_3.jpg" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. Задачи проекта -->
+  <!-- Талаботи аз тарафи шумо -->
   <section class="slide">
     <div class="frame">
       <div class="topbar">
-        <div class="brand">3. Задачи проекта</div>
-        <div class="pill">Каталог • Заказы • Админка</div>
+        <div class="brand">Талаботи аз тарафи шумо</div>
+        <div class="pill">Фармоишгар</div>
       </div>
       <div class="content">
         <div>
           <ul>
-            <li>Каталог: категории, карточка товара, поиск, избранное, медиа (фото/видео).</li>
-            <li>Оформление заказа (FSM): ФИО, телефон, город, адрес + авто‑номер заказа.</li>
-            <li>Приём оплаты: реквизиты, загрузка фото чека, напоминания клиенту.</li>
-            <li>Веб‑админка: CRUD товаров, заказы со статусами, фильтры, CSV‑экспорт, бэкап БД.</li>
+            <li>Пардохти бавақт бо марҳала (реквизитҳо ва мӯҳлатҳо мувофиқа мешаванд).</li>
+            <li>Эҷоди боти Telegram тавассути @BotFather ва супориши токен ба барномасоз (ё гузоштани худ дар .env мувофиқи дастур).</li>
+            <li>Компютери бо Windows 10/11 (64-bit) ва насбшудаи Docker Desktop — барои оғоз мувофиқи дастур (ё Linux/macOS дар оромӣ).</li>
+            <li>Оқибатдиҳӣ дар мӯҳлатҳои қарорёфта (қабули марҳалаҳо, ҷавоб ба саволҳо оид ба санҷиш — то 5–7 рӯзи корӣ).</li>
+            <li>Додани реквизитҳои пардохт барои мизоҷон, контактҳои дастгирӣ ва матнҳо (ё розигӣ ба истифодаи намуна аз лоиҳа).</li>
+            <li>То қабул тағйирот дар код ворид накардан (ё такмилҳоро ҷудо мувофиқа кардан).</li>
           </ul>
         </div>
         <div>
-          <img class="img" alt="Задачи" src="presentation_images/slide_3.jpg"/>
+          <img class="img" alt="Талабот" src="presentation_images/slide_9.jpg" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 4. Этапы разработки -->
+  <!-- Шумо аз ман чӣ мегиред -->
   <section class="slide">
     <div class="frame">
       <div class="topbar">
-        <div class="brand">4. Этапы разработки</div>
-        <div class="pill">От прототипа к релизу</div>
+        <div class="brand">Шумо аз ман чӣ мегиред</div>
+        <div class="pill">Натиҷаи супориш</div>
       </div>
       <div class="content">
         <div>
           <ul>
-            <li>Проектирование БД и API, базовая асинхронная серверная часть.</li>
-            <li>Каталог и сценарии заказов (FSM), статусы, хранение чеков.</li>
-            <li>Интеграция AI‑консультанта и многоязычность.</li>
-            <li>Админ‑панель: заказы, товары, уведомления, настройки, экспорт и бэкап.</li>
-            <li>Деплой: Docker + инструкция установки для Windows/Linux/macOS.</li>
+            <li>Боти Telegram коркунанда бо каталог, фармоишҳо, реквизитҳо, боргузории чекҳо, машваратдиҳии AI ва дастгирии тоҷикӣ/русӣ.</li>
+            <li>Веб-панели админ: фармоишҳо, маҳсулот, дашборд, огоҳиҳо, танзимот, содироти CSV, нусхаи БД.</li>
+            <li>Усули оғоз аз тарафи шумо: Docker + дастури қадам-ба-қадам барои Windows (ва дар зарурат Linux/macOS).</li>
+            <li>Ҳуҷҷатҳо: насб барои фармоишгар, тавсифи лоиҳа, дар зарурат — дастур барои барномасоз.</li>
+            <li>Супориш: архив бо лоиҳа ва/ё тасвир дар Docker Hub + файлҳои дастур.</li>
+            <li>Машварати мухтасар оид ба оғози аввал (ҷавоб ба саволҳо то 7 рӯз пас аз супориш).</li>
           </ul>
         </div>
         <div>
-          <img class="img" alt="Этапы" src="presentation_images/slide_4.jpg"/>
+          <img class="img" alt="Натиҷа" src="presentation_images/slide_10.jpg" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. Функциональность -->
+  <!-- Ҳамагӣ нарх -->
   <section class="slide">
     <div class="frame">
       <div class="topbar">
-        <div class="brand">5. Функциональность</div>
-        <div class="pill">Клиент + Админ</div>
+        <div class="brand">Ҳамагӣ нарх</div>
+        <div class="pill">Пешниҳоди тиҷорӣ</div>
       </div>
       <div class="content">
         <div>
-          <ul>
-            <li>Клиент: каталог, избранное, заказ, реквизиты, чек, история.</li>
-            <li>AI‑консультант: подбор по бюджету/задачам, ответы на вопросы, автоязык.</li>
-            <li>Админ: дашборд, управление заказами и товарами, остатки, фильтры, экспорт.</li>
-            <li>Настройки: управление .env, тексты бота (RU/TG), бэкап БД.</li>
-          </ul>
+          <h2>Хулоса оид ба нарх</h2>
+          <div class="price-block">
+            <div class="price-row">Асъор: <strong>сомонӣ (TJS)</strong></div>
+            <div class="price-row">Диапазони нарх: <strong class="sum">5 000 – 7 000 сомонӣ</strong></div>
+            <div class="price-row" style="margin-top:8px;">Нархи ниҳоии дар шартнома муайян карда мешавад.</div>
+            <div class="price-row" style="margin-top:6px;">Пардохт бо марҳала: <strong style="color:var(--accent);">30% пешакӣ, 40% пас аз супориш, 30% пас аз супориши мавод ва акт</strong>.</div>
+          </div>
+          <p class="subtitle" style="margin-top:14px;">Ҳамаи маблағҳо ба сомони (ТJS) ифода мешаванд. Пешниҳоди ниҳоӣ: аз 5 000 то 7 000 сомонӣ.</p>
         </div>
         <div>
-          <img class="img" alt="Функциональность" src="presentation_images/slide_5.jpg"/>
+          <img class="img" alt="Ҳамагӣ" src="presentation_images/slide_7.jpg" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. Технологии -->
-  <section class="slide">
-    <div class="frame">
-      <div class="topbar">
-        <div class="brand">6. Технологии</div>
-        <div class="pill">Async • Web • Docker</div>
-      </div>
-      <div class="content">
-        <div>
-          <ul>
-            <li>Backend: Python 3.11+, aiogram 3.x, aiohttp, SQLite (aiosqlite).</li>
-            <li>Админка: HTML5 + модульные CSS + модульный JS (ES Modules).</li>
-            <li>Интеграции: Telegram Bot API, OpenRouter API (AI).</li>
-            <li>Деплой: Docker / docker-compose, установка на любой ОС (включая Windows).</li>
-          </ul>
-        </div>
-        <div>
-          <img class="img" alt="Технологии" src="presentation_images/slide_6.jpg"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Ожидаемые результаты -->
-  <section class="slide">
-    <div class="frame">
-      <div class="topbar">
-        <div class="brand">7. Ожидаемые результаты</div>
-        <div class="pill">Готово к внедрению</div>
-      </div>
-      <div class="content">
-        <div>
-          <ul>
-            <li>Рабочий каталог и заказы для клиентов в Telegram.</li>
-            <li>Прозрачный контроль продаж: статусы, история, чеки, экспорт CSV.</li>
-            <li>Снижение ручной работы администратора за счёт панели и уведомлений.</li>
-            <li>Простая установка и переносимость через Docker.</li>
-          </ul>
-        </div>
-        <div>
-          <img class="img" alt="Результаты" src="presentation_images/slide_7.jpg"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. Риски и ограничения -->
-  <section class="slide">
-    <div class="frame">
-      <div class="topbar">
-        <div class="brand">8. Риски и ограничения</div>
-        <div class="pill">Управляемые риски</div>
-      </div>
-      <div class="content">
-        <div>
-          <ul>
-            <li>Зависимость от внешних API (AI) — лимиты и доступность сервиса.</li>
-            <li>Загрузка медиа и чеков — нужны ограничения размера и таймауты.</li>
-            <li>SQLite подходит для малого/среднего объёма; при росте — миграция на PostgreSQL.</li>
-            <li>Безопасность админки: ключ + JWT, при необходимости — ограничение по IP.</li>
-          </ul>
-        </div>
-        <div>
-          <img class="img" alt="Риски" src="presentation_images/slide_8.jpg"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9. Планы на будущее -->
-  <section class="slide">
-    <div class="frame">
-      <div class="topbar">
-        <div class="brand">9. Планы на будущее</div>
-        <div class="pill">Рост и улучшения</div>
-      </div>
-      <div class="content">
-        <div>
-          <ul>
-            <li>Расширение каталога: сравнение, фильтры, отзывы.</li>
-            <li>Авто‑уведомления клиенту о доставке и статусах.</li>
-            <li>Роли админов, аналитика и отчётность.</li>
-            <li>Переход на более мощную БД при росте нагрузки.</li>
-          </ul>
-        </div>
-        <div>
-          <img class="img" alt="Планы" src="presentation_images/slide_9.jpg"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. Участники -->
-  <section class="slide">
-    <div class="frame">
-      <div class="topbar">
-        <div class="brand">10. Участники проекта</div>
-        <div class="pill">Роли и ответственность</div>
-      </div>
-      <div class="content">
-        <div>
-          <ul>
-            <li>Backend/API: логика бота, БД, REST API, интеграции (AI).</li>
-            <li>Frontend админки: UI/UX, модули JS/CSS, работа с медиа.</li>
-            <li>Контент/оператор: заполнение каталога, обработка заказов и чеков.</li>
-            <li>Руководитель: постановка задач, приёмка, поддержка и развитие.</li>
-          </ul>
-        </div>
-        <div>
-          <img class="img" alt="Команда" src="presentation_images/slide_10.jpg"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="hint">↓ прокрутка вниз</div>
+  <div class="hint">↓ афрости поён</div>
 </body>
 </html>
-
