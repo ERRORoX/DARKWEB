@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Презентация — Магазин ноутбуков</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1115;
+      --card:#151923;
+      --card2:#111520;
+      --text:#e8e6e3;
+      --muted:#a1a1aa;
+      --border:#2a2f3a;
+      --accent:#d4a574;
+      --accent2:#00e5cc;
+      --shadow:0 16px 50px rgba(0,0,0,.45);
+      --radius:16px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:radial-gradient(900px 500px at 15% -10%, rgba(212,165,116,.18), transparent 60%),
+                 radial-gradient(900px 500px at 90% 10%, rgba(0,229,204,.12), transparent 55%),
+                 var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:'';
+      position:fixed;top:0;left:0;right:0;height:4px;
+      background:linear-gradient(90deg,var(--accent), #b8956a, var(--accent2));
+      z-index:1000;
+    }
+    .slide{
+      min-height:100vh;
+      padding: clamp(18px, 3vw, 40px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .frame{
+      width:min(1100px, 100%);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 25%), var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .frame::after{
+      content:'';
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(212,165,116,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,165,116,.06) 1px, transparent 1px);
+      background-size:28px 28px;
+      pointer-events:none;
+      opacity:.5;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 20px;
+      border-bottom:1px solid var(--border);
+      background:var(--card2);
+      position:relative;
+      z-index:2;
+    }
+    .brand{
+      display:flex; gap:10px; align-items:center;
+      font-weight:700; letter-spacing:.02em;
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      color:var(--muted);
+      background:rgba(255,255,255,.02);
+    }
+    .content{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:22px;
+      padding:22px;
+      position:relative;
+      z-index:2;
+    }
+    @media (max-width: 900px){
+      .content{ grid-template-columns:1fr; }
+    }
+    h1{
+      font-size:clamp(28px, 3.8vw, 44px);
+      line-height:1.15;
+      margin-bottom:10px;
+      color:var(--text);
+    }
+    h2{
+      font-size:clamp(18px, 2.2vw, 24px);
+      margin-bottom:12px;
+      color:var(--text);
+    }
+    .subtitle{
+      color:var(--muted);
+      font-size:clamp(14px, 1.5vw, 16px);
+      margin-bottom:14px;
+    }
+    .kpis{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:10px;
+    }
+    .kpi{
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:13px;
+    }
+    ul{ list-style:none; }
+    li{
+      padding:8px 0;
+      padding-left:18px;
+      position:relative;
+      color:var(--muted);
+      font-size:15px;
+    }
+    li::before{
+      content:'';
+      position:absolute;
+      left:0; top:15px;
+      width:7px; height:7px;
+      background:var(--accent);
+      border-radius:50%;
+      box-shadow:0 0 0 3px rgba(212,165,116,.15);
+    }
+    .heroImg, .img{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(212,165,116,.16), rgba(0,229,204,.10));
+      min-height: 240px;
+      display:block;
+      object-fit:cover;
+      background-size:cover;
+      background-position:center;
+    }
+    .caption{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .hint{
+      position:fixed;
+      bottom:14px; right:14px;
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      background:rgba(17,21,32,.7);
+      border-radius:999px;
+      padding:8px 10px;
+      backdrop-filter: blur(10px);
+    }
+    a{ color:var(--accent2); text-decoration:none; }
+    code{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border);
+      padding:1px 6px;
+      border-radius:8px;
+      color:var(--text);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      font-size:.92em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 0. Титул -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">Магазин ноутбуков</div>
+        <div class="pill">Telegram-бот + веб-админка</div>
+      </div>
+      <div class="content">
+        <div>
+          <h1>Каталог • Заказы • Оплата • Чеки • AI‑консультант</h1>
+          <p class="subtitle">Единая система для клиентов и администратора. Поддержка русского и таджикского языка. Запуск через Docker на любой ОС.</p>
+          <div class="kpis">
+            <div class="kpi"><b style="color:var(--text)">Клиент:</b> Telegram</div>
+            <div class="kpi"><b style="color:var(--text)">Админка:</b> Web (порт 8080)</div>
+            <div class="kpi"><b style="color:var(--text)">БД:</b> SQLite</div>
+            <div class="kpi"><b style="color:var(--text)">Стек:</b> Python async</div>
+          </div>
+        </div>
+        <div>
+          <img class="heroImg" alt="Ноутбуки" src="presentation_images/slide_0.jpg" />
+          <div class="caption">Визуальный стиль — тёмный «магазин», без слепящего белого.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. Цель проекта -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">1. Цель проекта</div>
+        <div class="pill">B2C продажи в Telegram</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Сделать удобный канал продаж ноутбуков через Telegram: каталог → заказ → оплата → чек.</li>
+            <li>Сократить ручную работу: статусы заказов, история, экспорт, уведомления и бэкап.</li>
+            <li>Дать администратору веб‑панель для управления товарами и заказами.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Цель" src="presentation_images/slide_1.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Актуальность -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">2. Актуальность</div>
+        <div class="pill">Таджикистан • RU/TG</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Telegram — привычный канал коммуникации и продаж, без отдельного сайта.</li>
+            <li>Нужен единый процесс: каталог, реквизиты, чеки и история заказов в одном месте.</li>
+            <li>AI‑подбор помогает клиенту быстрее выбрать устройство по бюджету и требованиям.</li>
+            <li>Администратору нужна централизованная панель вместо таблиц и переписок.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Актуальность" src="presentation_images/slide_2.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Задачи проекта -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">3. Задачи проекта</div>
+        <div class="pill">Каталог • Заказы • Админка</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Каталог: категории, карточка товара, поиск, избранное, медиа (фото/видео).</li>
+            <li>Оформление заказа (FSM): ФИО, телефон, город, адрес + авто‑номер заказа.</li>
+            <li>Приём оплаты: реквизиты, загрузка фото чека, напоминания клиенту.</li>
+            <li>Веб‑админка: CRUD товаров, заказы со статусами, фильтры, CSV‑экспорт, бэкап БД.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Задачи" src="presentation_images/slide_3.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Этапы разработки -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">4. Этапы разработки</div>
+        <div class="pill">От прототипа к релизу</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Проектирование БД и API, базовая асинхронная серверная часть.</li>
+            <li>Каталог и сценарии заказов (FSM), статусы, хранение чеков.</li>
+            <li>Интеграция AI‑консультанта и многоязычность.</li>
+            <li>Админ‑панель: заказы, товары, уведомления, настройки, экспорт и бэкап.</li>
+            <li>Деплой: Docker + инструкция установки для Windows/Linux/macOS.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Этапы" src="presentation_images/slide_4.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Функциональность -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">5. Функциональность</div>
+        <div class="pill">Клиент + Админ</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Клиент: каталог, избранное, заказ, реквизиты, чек, история.</li>
+            <li>AI‑консультант: подбор по бюджету/задачам, ответы на вопросы, автоязык.</li>
+            <li>Админ: дашборд, управление заказами и товарами, остатки, фильтры, экспорт.</li>
+            <li>Настройки: управление .env, тексты бота (RU/TG), бэкап БД.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Функциональность" src="presentation_images/slide_5.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Технологии -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">6. Технологии</div>
+        <div class="pill">Async • Web • Docker</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Backend: Python 3.11+, aiogram 3.x, aiohttp, SQLite (aiosqlite).</li>
+            <li>Админка: HTML5 + модульные CSS + модульный JS (ES Modules).</li>
+            <li>Интеграции: Telegram Bot API, OpenRouter API (AI).</li>
+            <li>Деплой: Docker / docker-compose, установка на любой ОС (включая Windows).</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Технологии" src="presentation_images/slide_6.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Ожидаемые результаты -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">7. Ожидаемые результаты</div>
+        <div class="pill">Готово к внедрению</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Рабочий каталог и заказы для клиентов в Telegram.</li>
+            <li>Прозрачный контроль продаж: статусы, история, чеки, экспорт CSV.</li>
+            <li>Снижение ручной работы администратора за счёт панели и уведомлений.</li>
+            <li>Простая установка и переносимость через Docker.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Результаты" src="presentation_images/slide_7.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Риски и ограничения -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">8. Риски и ограничения</div>
+        <div class="pill">Управляемые риски</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Зависимость от внешних API (AI) — лимиты и доступность сервиса.</li>
+            <li>Загрузка медиа и чеков — нужны ограничения размера и таймауты.</li>
+            <li>SQLite подходит для малого/среднего объёма; при росте — миграция на PostgreSQL.</li>
+            <li>Безопасность админки: ключ + JWT, при необходимости — ограничение по IP.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Риски" src="presentation_images/slide_8.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Планы на будущее -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">9. Планы на будущее</div>
+        <div class="pill">Рост и улучшения</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Расширение каталога: сравнение, фильтры, отзывы.</li>
+            <li>Авто‑уведомления клиенту о доставке и статусах.</li>
+            <li>Роли админов, аналитика и отчётность.</li>
+            <li>Переход на более мощную БД при росте нагрузки.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Планы" src="presentation_images/slide_9.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Участники -->
+  <section class="slide">
+    <div class="frame">
+      <div class="topbar">
+        <div class="brand">10. Участники проекта</div>
+        <div class="pill">Роли и ответственность</div>
+      </div>
+      <div class="content">
+        <div>
+          <ul>
+            <li>Backend/API: логика бота, БД, REST API, интеграции (AI).</li>
+            <li>Frontend админки: UI/UX, модули JS/CSS, работа с медиа.</li>
+            <li>Контент/оператор: заполнение каталога, обработка заказов и чеков.</li>
+            <li>Руководитель: постановка задач, приёмка, поддержка и развитие.</li>
+          </ul>
+        </div>
+        <div>
+          <img class="img" alt="Команда" src="presentation_images/slide_10.jpg"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hint">↓ прокрутка вниз</div>
+</body>
+</html>
+
